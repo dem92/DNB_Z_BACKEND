@@ -20,7 +20,7 @@ public class DBConnector {
         Properties properties = new Properties();
 
         try {
-            properties.load(new FileInputStream("src/main/resources/connectionConfig.properties"));
+            properties.load(new FileInputStream("src/main/connectionConfig.properties"));
 
             this.user = properties.getProperty("user");
             this.password = properties.getProperty("password");
