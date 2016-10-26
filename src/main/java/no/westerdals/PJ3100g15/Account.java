@@ -10,17 +10,17 @@ public class Account {
     private int kroner;
     private int oere;
 
-    public Account() {
+    /*public Account() {
         ID = 0;
         accountType = null;
-    }
+    }*/
 
     public Account(int id, AccountType accountType, double interestRate) {
         this.ID = id;
         this.accountType = accountType;
         this.interestRate = interestRate;
-        kroner = 0;
-        oere = 0;
+        kroner = 100;
+        oere = 40;
     }
 
     /**
