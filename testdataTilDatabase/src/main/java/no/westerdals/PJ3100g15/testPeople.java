@@ -1,5 +1,6 @@
 package no.westerdals.PJ3100g15;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -24,8 +25,11 @@ public class testPeople {
     public static ArrayList<Integer> accountBalance = new ArrayList<>();
     public static Random random = new Random();
 
+    public testPeople(){
 
-    public static void main(String[] args){
+    }
+
+    public void createData(){
 
         fillNameLists();
 
@@ -44,7 +48,7 @@ public class testPeople {
         }
         createMail();
 
-
+/*
         System.out.println("Personnummer: " + socialSecurityNo);
         System.out.println(socialSecurityNo.size());
         System.out.println("Navn: " + nameMale);
@@ -64,7 +68,7 @@ public class testPeople {
         System.out.println("Kontonr: " + bankAccount);
         System.out.println(bankAccount.size());
         System.out.println("Saldo: " + accountBalance);
-        System.out.println(accountBalance.size());
+        System.out.println(accountBalance.size());*/
     }
 
     private static void fillNameLists(){
@@ -160,8 +164,12 @@ public class testPeople {
         } else stringMonth += Integer.toString(mth);
 
         int day = ThreadLocalRandom.current().nextInt(1,30);
+        String stringDay = "";
+        if (day < 10){
+            stringDay += "0" + Integer.toString(day);
+        } else stringDay += Integer.toString(day);
 
-        socialSecurityNo.add(stringYear + stringMonth + day + ThreadLocalRandom.current().nextInt(10000, 99999));
+        socialSecurityNo.add(stringYear + stringMonth + stringDay + Integer.toString(ThreadLocalRandom.current().nextInt(10000, 99999)));
     }
 
     private static void createBalance(){
