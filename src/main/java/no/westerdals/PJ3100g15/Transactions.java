@@ -3,6 +3,7 @@ package no.westerdals.PJ3100g15;
 /**
  * Created by bakhen15 on 26.10.2016.
  */
+
 public class Transactions {
     private int kroner;
     private int oere;
