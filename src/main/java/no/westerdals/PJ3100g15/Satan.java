@@ -8,7 +8,7 @@ public class Satan {
     public Satan(){
 
     }
-
+/*
     public static void main(String[] args){
         //Dette er noe bullshit for å kunne teste Transactionsklassen hilsen Henrik 26.10.16(onsdag 2.sprint)
         Account Martin = new Account(1,AccountType.CHECKING,5.0);
@@ -20,4 +20,7 @@ public class Satan {
         new Customer(id, firstName, lastName, addressLine1, addressLine2, postalCode, eMailAddress, phoneNumber);
 
     }
+
+*/
+
 }
