@@ -8,13 +8,15 @@ import java.util.ArrayList;
 public class Customer extends User implements Log{
     private ArrayList<Account> accounts;
     private int logCount;
+    private int score;
     private ArrayList<LogItem> log;
 
-    public Customer(int id, String firstName, String lastName, String addressLine1, String addressLine2, int postalCode, String eMailAddress, int phoneNumber){
-        super(id, firstName, lastName, addressLine1, addressLine2, postalCode, eMailAddress, phoneNumber);
+    public Customer(int id, String firstName, String lastName, String addressLine1,/* String addressLine2, */ int postalCode, String eMailAddress, int phoneNumber, int score){
+        super(id, firstName, lastName, addressLine1, /* addressLine2, */ postalCode, eMailAddress, phoneNumber);
         accounts = new ArrayList<Account>();
         logCount = 0;
         log = new ArrayList<LogItem>();
+        this.score = score;
     }
 
     public boolean addAccount(Account account){

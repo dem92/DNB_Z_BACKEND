@@ -8,7 +8,9 @@ public abstract class User {
     private String firstName;
     private String lastName;
     private String addressLine1;
-    private String addressLine2;
+    /*
+    private String addressLine2; TODO - Check if we really want to have this second address line
+    */
     private int postalCode;
     private String eMailAddress;
     private int phoneNumber;
@@ -17,12 +19,12 @@ public abstract class User {
         foedselsnummer = 0;
     }
 
-    public User(int id, String firstName, String lastName, String addressLine1, String addressLine2, int postalCode, String eMailAddress, int phoneNumber) {
+    public User(int id, String firstName, String lastName, String addressLine1, /* String addressLine2, */ int postalCode, String eMailAddress, int phoneNumber) {
         this.foedselsnummer = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.addressLine1 = addressLine1;
-        this.addressLine2 = addressLine2;
+    //    this.addressLine2 = addressLine2;
         this.postalCode = postalCode;
         this.eMailAddress = eMailAddress;
         this.phoneNumber = phoneNumber;
@@ -57,6 +59,7 @@ public abstract class User {
         this.addressLine1 = addressLine1;
     }
 
+    /*
     public String getAddressLine2() {
         return addressLine2;
     }
@@ -64,6 +67,7 @@ public abstract class User {
     public void setAddressLine2(String addressLine2) {
         this.addressLine2 = addressLine2;
     }
+    */
 
     public int getPostalCode() {
         return postalCode;
@@ -94,7 +98,7 @@ public abstract class User {
                 firstName + " " +
                 lastName + " " +
                 addressLine1 + " " +
-                addressLine2 + " " +
+            /*    addressLine2 + " " + */
                 postalCode + " " +
                 eMailAddress + " " +
                 phoneNumber;
