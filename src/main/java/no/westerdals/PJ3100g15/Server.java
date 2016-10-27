@@ -12,27 +12,39 @@ import java.util.concurrent.Executors;
  */
 public class Server {
     public static void main(String[] args) {
-        try (
-            ServerSocket server = new ServerSocket(8000, 50)){
-                ExecutorService executor;
-                int threadNumber = 0;
-                boolean done = false;
+            new Server().runServer();
+        }
 
-                while (!done) {
-                    threadNumber++;
-                    Socket clientConnection = server.accept();
-                    executor = Executors.newCachedThreadPool();
-                    executor.execute(new ServerThread(clientConnection, threadNumber));
-                    if (threadNumber == 10) {
-                        executor.shutdown();
-                        done = true;
-                    }
-                }
-            }catch(IOException e){
-                System.out.println("Error!");
+        public void runServer(){try (
+                ServerSocket server = new ServerSocket(8080, 50)){
+            //ExecutorService executor;
+            int threadNumber = 0;
+            //boolean done = false;
+
+            while (true) {
+                threadNumber++;
+                Socket clientConnection = server.accept();
+                //executor = Executors.newCachedThreadPool();
+                //executor.execute(new ServerThread(clientConnection, threadNumber));
+                ServerThread serverThread = new ServerThread(clientConnection, threadNumber);
+                //if (threadNumber == 10) {//TODO: lage en metode som gjør at man kan skru av serveren
+                    //executor.shutdown(); //Denne tilnærmingen gjør at serveren bare skrur seg av etterhvert.
+                    //done = true;
+                //}
+
+                stopServer();
+
             }
+        }catch(IOException e){
+            System.out.println("Error!");
+        }
 
             System.out.println("Server closing .....");
+
+        }
+
+        public boolean stopServer(){
+            return false;
         }
     }
 
