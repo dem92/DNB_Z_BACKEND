@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 @Controller
 @RequestMapping("/customers")
@@ -25,14 +26,9 @@ public class CustomerResource {
     public Customer getCustomerById(
             @PathVariable("id") final Long id
     ) {
-        for (Customer customer : database.getAllCustomers()) {
-            if (customer.getFoedselsnummer() == id) {
-                return customer;
-            }
-        }
-
-        throw new CustomerNotFoundException(
-                "No user found with id '" + id + "'"
-        );
+        return database.getAllCustomers().stream()
+                .filter(customer -> customer.getFoedselsnummer() == id)
+                .findAny()
+                .orElseThrow(() -> new CustomerNotFoundException("No user found with id '" + id + "'"));
     }
 }
