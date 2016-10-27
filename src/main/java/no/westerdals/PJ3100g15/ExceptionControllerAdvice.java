@@ -11,4 +11,9 @@ public class ExceptionControllerAdvice {
     public ResponseEntity handleCustomerNotFoundException(final CustomerNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
+
+    @ExceptionHandler
+    public ResponseEntity handleException(final Exception exception) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong!");
+    }
 }
