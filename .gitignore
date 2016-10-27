@@ -1,5 +1,8 @@
 # Created by https://www.gitignore.io/api/os,osx,windows,xcode,visualstudio,visualstudiocode,phpstorm,bluej,eclipse,intellij,macos
 
+# Maven
+target/
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -105,7 +108,7 @@ fabric.properties
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
-# *.iml
+*.iml
 # modules.xml
 # .idea/misc.xml 
 # *.ipr
