@@ -22,16 +22,17 @@ public class CustomerResource {
 
     @RequestMapping("{id}")
     @ResponseBody
-    public ResponseEntity getCustomerById(
+    public Customer getCustomerById(
             @PathVariable("id") final Long id
     ) {
         for (Customer customer : database.getAllCustomers()) {
             if (customer.getFoedselsnummer() == id) {
-                return ResponseEntity.ok(customer);
+                return customer;
             }
         }
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body("No user found with id '" + id + "'");
+        throw new CustomerNotFoundException(
+                "No user found with id '" + id + "'"
+        );
     }
 }
