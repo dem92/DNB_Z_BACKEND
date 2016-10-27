@@ -21,7 +21,7 @@ public class CustomerResource {
     @RequestMapping("{id}")
     @ResponseBody
     public Customer getCustomerById(
-            @PathVariable("id") final Long id
+            @PathVariable("id") final Integer id
     ) {
         return database.getAllCustomers().stream()
                 .filter(customer -> customer.getFoedselsnummer() == id)
