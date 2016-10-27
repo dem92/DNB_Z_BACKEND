@@ -1,5 +1,6 @@
 package no.westerdals.PJ3100g15;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +11,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/customers")
 public class CustomerResource {
-    private final Database database = new Database();
+    private final Database database;
+
+    @Autowired
+    public CustomerResource(final Database database) {
+        this.database = database;
+    }
 
     @RequestMapping
     @ResponseBody

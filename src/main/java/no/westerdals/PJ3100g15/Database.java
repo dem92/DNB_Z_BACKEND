@@ -1,14 +1,14 @@
 package no.westerdals.PJ3100g15;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.sql2o.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by labbetuss on 10/27/16.
- */
+@Repository
 public class Database {
     // We create a DB connection for further use. TODO - Move the username/password out of this file
     Sql2o sql2o;
