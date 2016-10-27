@@ -10,7 +10,7 @@ public class Account {
     private final Customer customer;
 
     /*public Account() {
-        ID = 0;
+        foedselsnummer = 0;
         accountType = null;
     }*/
 
