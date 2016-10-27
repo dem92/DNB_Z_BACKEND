@@ -1,6 +1,5 @@
 package no.westerdals.PJ3100g15;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -31,7 +30,7 @@ public class Customer extends User implements Log{
 
     public void logTransfer(int fromAccount, int toAccount, int kroner, int oere){
         logCount++;
-        TransferItem item = new TransferItem(logCount, super.ID, fromAccount, toAccount, kroner, oere);
+        TransferItem item = new TransferItem(logCount, super.foedselsnummer, fromAccount, toAccount, kroner, oere);
         log.add(item);
     }
 

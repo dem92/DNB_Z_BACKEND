@@ -4,7 +4,7 @@ package no.westerdals.PJ3100g15;
  * Created by Eva Dahlo on 29/09/2016.
  */
 public abstract class User {
-    protected final int ID;
+    protected final int foedselsnummer;
     private String firstName;
     private String lastName;
     private String addressLine1;
@@ -14,11 +14,11 @@ public abstract class User {
     private int phoneNumber;
 
     public User() {
-        ID = 0;
+        foedselsnummer = 0;
     }
 
     public User(int id, String firstName, String lastName, String addressLine1, String addressLine2, int postalCode, String eMailAddress, int phoneNumber) {
-        this.ID = id;
+        this.foedselsnummer = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.addressLine1 = addressLine1;
@@ -29,8 +29,8 @@ public abstract class User {
     }
 
     // Get and set.
-    public int getID() {
-        return ID;
+    public int getFoedselsnummer() {
+        return foedselsnummer;
     }
 
     public String getFirstName() {
@@ -87,5 +87,16 @@ public abstract class User {
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String toString(){
+        return foedselsnummer + " " +
+                firstName + " " +
+                lastName + " " +
+                addressLine1 + " " +
+                addressLine2 + " " +
+                postalCode + " " +
+                eMailAddress + " " +
+                phoneNumber;
     }
 }
