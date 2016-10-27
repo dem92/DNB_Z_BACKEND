@@ -12,13 +12,14 @@ import java.util.Map;
 public class Database {
     // We create a DB connection for further use. TODO - Move the username/password out of this file
     Sql2o sql2o;
-    // Name of columns in the database doesn't match fields in customer class
+
     public Map<String, String> colMaps = new HashMap<>();
     public List<Customer> testList;
 
     public Database() {
         sql2o = new Sql2o("mysql://tek.westerdals.no:3306/davdan15_pj15", "davdan15_root", "Evaerbest!");
 
+        // Name of columns in the database doesn't match fields in customer class
         colMaps.put("FOEDSELNUMMER", "id");
         colMaps.put("FORNAVN", "firstName");
         colMaps.put("ETTERNAVN", "lastName");
@@ -31,7 +32,7 @@ public class Database {
         sql2o.setDefaultColumnMappings(colMaps);
     }
 
-    //TODO COMMENT THE SHIT OUT OF THIS
+
     public static void main(String[] args)
     {
         Database testDB = new Database();
