@@ -46,7 +46,9 @@ public class Transactions {
         // Benytter subtractAmount og addAmount-metodene i Account-klassen
         if (isCoverage()) {
             sending.subtractAmount(getKroner(),getOere());
+            sending.logTransfer(sending.getID(), receiving.getID(), kroner, oere);
             receiving.addAmount(getKroner(), getOere());
+            receiving.logTransfer(sending.getID(), receiving.getID(), kroner, oere);
             System.out.println("Overføringen ble gjennomført.");
         } else {
             System.out.println("Overføringen ble ikke godkjent.");

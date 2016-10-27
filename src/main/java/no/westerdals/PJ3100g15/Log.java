@@ -6,8 +6,10 @@ import java.text.SimpleDateFormat;
 /**
  * Created by Eva Dahlo on 29/09/2016.
  */
-public abstract class Log {
-    int logCount;
+public interface Log {
+    void logTransfer(int fromAccount, int toAccount, int kroner, int oere);
 
-    abstract LogItem logEvent();
+    void logWithdrawal();
+
+    void logDeposit();
 }

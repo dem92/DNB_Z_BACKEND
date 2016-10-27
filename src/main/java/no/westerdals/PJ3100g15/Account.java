@@ -1,18 +1,22 @@
 package no.westerdals.PJ3100g15;
 
+import java.util.HashMap;
+
 /**
  * Created by Eva Dahlo on 29/09/2016.
  */
 public class Account {
     private final int ID;
+    private final Customer customer;
 
     /*public Account() {
         ID = 0;
         accountType = null;
     }*/
 
-    public Account(int id) {
+    public Account(int id, Customer customer) {
         this.ID = id;
+        this.customer = customer;
     }
 
     /**
@@ -62,6 +66,10 @@ public class Account {
         setKroner(existingKroner);
         setOere(existingOere);
         return true;
+    }
+
+    public void logTransfer(int fromAccount, int toAccount, int kroner, int oere){
+        customer.logTransfer(fromAccount, toAccount, kroner, oere);
     }
 
     // Get and set.
