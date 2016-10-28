@@ -2,6 +2,9 @@ package no.westerdals.PJ3100g15;
 
 
 import no.westerdals.PJ3100g15.users.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.xml.crypto.Data;
 
 /**
  * Created by Eva Dahlo on 29/09/2016.
