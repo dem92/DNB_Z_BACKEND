@@ -10,8 +10,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class CustomerResourceTest {
-    private static final int UNKNOWN_ID = -1;
-    private static final int KNOWN_ID = 1286608621;
+    private static final String UNKNOWN_ID = "-1";
+    private static final String KNOWN_ID = "1286608621";
 
     private final Database database = mock(Database.class);
     private final CustomerResource customerResource = new CustomerResource(database);
@@ -20,7 +20,7 @@ public class CustomerResourceTest {
     public void setUp() throws Exception {
         when(database.getAllCustomers()).thenReturn(Arrays.asList(
                 new Customer(KNOWN_ID, "hei", "der", "blah", 1234, "hello@gmail.com", 12345687, 123),
-                new Customer(54321, "hei", "der", "blah", 1234, "hello@gmail.com", 12345687, 123)));
+                new Customer("54321", "hei", "der", "blah", 1234, "hello@gmail.com", 12345687, 123)));
     }
 
     @Test
