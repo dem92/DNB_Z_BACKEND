@@ -50,7 +50,11 @@ public class Database {
 
 
     public Integer returnInteger(String sql) {
-        return null;
+        try(Connection con = sql2o.open()){
+            return con.createQuery(sql).executeScalar(Integer.class);
+        }
+        // TODO - Eva må implementere noe her
+
     }
 
     public List<Customer> getAllCustomers()
