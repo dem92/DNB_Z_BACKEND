@@ -10,6 +10,8 @@ public class Account {
     private final int ID;
     private final Customer customer;
 
+    private final Database database = new Database();
+
     /*public Account() {
         foedselsnummer = 0;
         accountType = null;
@@ -79,9 +81,9 @@ public class Account {
     }
 
     public String getAccountType() {
-        // TODO: Daniel, se her!!!
+        // TODO: Daniel, se her!!! - EVA må fikse dette
         String query = "SELECT Kontotype FROM Bankkonto WHERE Kundenummer = " + ID;
-        String accountType = ""; // = resultatet av spørringen.
+        String accountType = database.returnString(query);
 
         return accountType;
     }

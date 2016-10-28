@@ -53,9 +53,18 @@ public class Database {
     public Integer returnInteger(String sql) {
         try(Connection con = sql2o.open()){
             return con.createQuery(sql).executeScalar(Integer.class);
+        } catch (Exception e){
+            return null;
         }
-        // TODO - Eva må implementere noe her
 
+    }
+
+    public String returnString(String sql) {
+        try(Connection con = sql2o.open()){
+            return con.createQuery(sql).executeScalar(String.class);
+        } catch (Exception e){
+            return null;
+        }
     }
 
     public List<Customer> getAllCustomers()
