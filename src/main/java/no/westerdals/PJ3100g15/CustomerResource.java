@@ -31,7 +31,7 @@ public class CustomerResource {
             @PathVariable("id") final String id
     ) {
         return database.getAllCustomers().stream()
-                .filter(customer -> customer.getFoedselsnummer() == id)
+                .filter(customer -> customer.getFoedselsnummer().equals(id))
                 .findAny()
                 .orElseThrow(() -> new CustomerNotFoundException("No user found with id '" + id + "'"));
     }
