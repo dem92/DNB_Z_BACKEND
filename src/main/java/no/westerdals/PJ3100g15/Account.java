@@ -94,7 +94,7 @@ public class Account {
     }
 
     public void setInterestRate(double interestRate) {
-        // TODO: Daniel, se her!!!
+        // TODO: Daniel, se her!!
         String query = "Update Bankkonto SET Rente = " + interestRate + " WHERE Kundenummer = " + ID;
     }
 
