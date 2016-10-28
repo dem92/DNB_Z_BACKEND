@@ -2,6 +2,9 @@ package no.westerdals.PJ3100g15;
 
 
 import no.westerdals.PJ3100g15.users.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.xml.crypto.Data;
 
 /**
  * Created by Eva Dahlo on 29/09/2016.
@@ -9,6 +12,8 @@ import no.westerdals.PJ3100g15.users.Customer;
 public class Account {
     private final int ID;
     private final Customer customer;
+
+    private final Database database = new Database();
 
     /*public Account() {
         foedselsnummer = 0;
@@ -79,9 +84,8 @@ public class Account {
     }
 
     public String getAccountType() {
-        // TODO: Daniel, se her!!!
         String query = "SELECT Kontotype FROM Bankkonto WHERE Kundenummer = " + ID;
-        String accountType = ""; // = resultatet av spørringen.
+        String accountType = database.returnString(query);
 
         return accountType;
     }
@@ -89,7 +93,7 @@ public class Account {
     public double getInterestRate() {
         // TODO: Daniel, se her!!!
         String query = "SELECT Rente FROM Bankkonto WHERE Kundenummer = " + ID;
-        double interestRate = 0; // = resultatet av spørringen.
+        double interestRate = database.returnDouble(query);
 
         return interestRate;
     }
