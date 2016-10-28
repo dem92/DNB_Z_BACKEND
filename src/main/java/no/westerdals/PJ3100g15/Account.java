@@ -84,7 +84,6 @@ public class Account {
     }
 
     public String getAccountType() {
-        // TODO: Daniel, se her!!! - EVA må fikse dette
         String query = "SELECT Kontotype FROM Bankkonto WHERE Kundenummer = " + ID;
         String accountType = database.returnString(query);
 

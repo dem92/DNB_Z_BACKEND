@@ -2,7 +2,6 @@ package no.westerdals.PJ3100g15;
 
 import no.westerdals.PJ3100g15.users.Customer;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
