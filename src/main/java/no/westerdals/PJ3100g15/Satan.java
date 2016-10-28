@@ -11,8 +11,8 @@ public class Satan {
 /*
     public static void main(String[] args){
         //Dette er noe bullshit for å kunne teste Transactionsklassen hilsen Henrik 26.10.16(onsdag 2.sprint)
-        Account Martin = new Account(1,AccountType.CHECKING,5.0);
-        Account Fredrik = new Account(2,AccountType.CHECKING,5.0);
+        Account Martin = new Account(1,5.0);
+        Account Fredrik = new Account(2,5.0);
         new Transactions(50,20,Martin,Fredrik);
     }
 
