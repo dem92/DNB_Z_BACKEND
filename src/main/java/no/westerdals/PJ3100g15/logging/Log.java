@@ -1,7 +1,4 @@
-package no.westerdals.PJ3100g15;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+package no.westerdals.PJ3100g15.logging;
 
 /**
  * Created by Eva Dahlo on 29/09/2016.

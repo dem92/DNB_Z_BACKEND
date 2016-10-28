@@ -1,4 +1,6 @@
-package no.westerdals.PJ3100g15;
+package no.westerdals.PJ3100g15.logging;
+
+import no.westerdals.PJ3100g15.logging.LogItem;
 
 import java.util.Date;
 
@@ -10,7 +12,7 @@ public class WithdrawalItem extends LogItem {
     private final int kroner;
     private final int oere;
 
-    public WithdrawalItem(int logCount, int customerID, int fromAccount, int kroner, int oere){
+    public WithdrawalItem(int logCount, String customerID, int fromAccount, int kroner, int oere){
         super(logCount, customerID);
         this.fromAccount = fromAccount;
         this.kroner = kroner;

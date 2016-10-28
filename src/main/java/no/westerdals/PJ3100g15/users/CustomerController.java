@@ -1,4 +1,6 @@
-package no.westerdals.PJ3100g15;
+package no.westerdals.PJ3100g15.users;
+
+import no.westerdals.PJ3100g15.users.Customer;
 
 import java.util.HashMap;
 

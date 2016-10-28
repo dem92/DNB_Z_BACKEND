@@ -1,19 +1,19 @@
-package no.westerdals.PJ3100g15;
+package no.westerdals.PJ3100g15.logging;
+
+import no.westerdals.PJ3100g15.logging.LogItem;
 
 import java.util.Date;
 
 /**
  * Created by Eva Dahlo on 26/10/2016.
  */
-public class TransferItem extends LogItem {
-    private final int fromAccount;
+public class DepositItem extends LogItem {
     private final int toAccount;
     private final int kroner;
     private final int oere;
 
-    public TransferItem(int logCount, int customerID, int fromAccount, int toAccount, int kroner, int oere){
+    public DepositItem(int logCount, String customerID, int toAccount, int kroner, int oere){
         super(logCount, customerID);
-        this.fromAccount = fromAccount;
         this.toAccount = toAccount;
         this.kroner = kroner;
         this.oere = oere;
@@ -29,10 +29,6 @@ public class TransferItem extends LogItem {
 
     public String getId() {
         return id;
-    }
-
-    public int getFromAccount() {
-        return fromAccount;
     }
 
     public int getToAccount() {

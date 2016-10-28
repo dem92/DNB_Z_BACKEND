@@ -1,17 +1,22 @@
-package no.westerdals.PJ3100g15;
+package no.westerdals.PJ3100g15.users;
+
+import no.westerdals.PJ3100g15.Account;
+import no.westerdals.PJ3100g15.logging.Log;
+import no.westerdals.PJ3100g15.logging.LogItem;
+import no.westerdals.PJ3100g15.logging.TransferItem;
 
 import java.util.ArrayList;
 
 /**
  * Created by Eva Dahlo on 29/09/2016.
  */
-public class Customer extends User implements Log{
+public class Customer extends User implements Log {
     private ArrayList<Account> accounts;
     private int logCount;
     private int score;
     private ArrayList<LogItem> log;
 
-    public Customer(int id, String firstName, String lastName, String addressLine1,/* String addressLine2, */ int postalCode, String eMailAddress, int phoneNumber, int score){
+    public Customer(String id, String firstName, String lastName, String addressLine1,/* String addressLine2, */ int postalCode, String eMailAddress, int phoneNumber, int score){
         super(id, firstName, lastName, addressLine1, /* addressLine2, */ postalCode, eMailAddress, phoneNumber);
         accounts = new ArrayList<Account>();
         logCount = 0;

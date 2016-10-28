@@ -1,4 +1,4 @@
-package no.westerdals.PJ3100g15;
+package no.westerdals.PJ3100g15.logging;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,7 +13,7 @@ public abstract class LogItem {
     final String timeString;
     final String id;
 
-    protected LogItem(int logCount, int customerID){
+    protected LogItem(int logCount, String customerID){
         time = new Date();
         id = customerID + " " + logCount;
         timeString = dateFormat.format(time);

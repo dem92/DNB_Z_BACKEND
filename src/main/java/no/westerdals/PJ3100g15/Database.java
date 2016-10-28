@@ -1,8 +1,9 @@
 package no.westerdals.PJ3100g15;
 
-import org.springframework.stereotype.Component;
+import no.westerdals.PJ3100g15.users.Customer;
 import org.springframework.stereotype.Repository;
-import org.sql2o.*;
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +49,14 @@ public class Database {
         }
     }
 
+
+    public Integer returnInteger(String sql) {
+        try(Connection con = sql2o.open()){
+            return con.createQuery(sql).executeScalar(Integer.class);
+        }
+        // TODO - Eva må implementere noe her
+
+    }
 
     public List<Customer> getAllCustomers()
     {

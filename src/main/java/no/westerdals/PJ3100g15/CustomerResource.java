@@ -1,5 +1,6 @@
 package no.westerdals.PJ3100g15;
 
+import no.westerdals.PJ3100g15.users.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,7 @@ public class CustomerResource {
     @RequestMapping("{id}")
     @ResponseBody
     public Customer getCustomerById(
-            @PathVariable("id") final Integer id
+            @PathVariable("id") final String id
     ) {
         return database.getAllCustomers().stream()
                 .filter(customer -> customer.getFoedselsnummer() == id)
