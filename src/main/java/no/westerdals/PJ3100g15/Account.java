@@ -26,7 +26,7 @@ public class Account {
      * @param oere
      * @return
      */
-    public boolean addAmount(int kroner, int oere){
+    public boolean addAmount(int kroner, int oere) {
         int existingKroner = getKroner();
         int existingOere = getOere();
 
@@ -34,7 +34,7 @@ public class Account {
             return false;
 
         existingOere += oere;
-        if (existingOere >= 100){
+        if (existingOere >= 100) {
             existingOere -= 100;
             existingKroner++;
         }
@@ -50,7 +50,7 @@ public class Account {
      * @param oere
      * @return
      */
-    public boolean subtractAmount(int kroner, int oere){ // TODO exception handling
+    public boolean subtractAmount(int kroner, int oere) { // TODO exception handling
         int existingKroner = getKroner();
         int existingOere = getOere();
 
@@ -58,7 +58,7 @@ public class Account {
             return false;
 
         existingOere -= oere;
-        if (existingOere < 0){
+        if (existingOere < 0) {
             existingOere += 100;
             existingKroner--;
         }
@@ -68,7 +68,7 @@ public class Account {
         return true;
     }
 
-    public void logTransfer(int fromAccount, int toAccount, int kroner, int oere){
+    public void logTransfer(int fromAccount, int toAccount, int kroner, int oere) {
         customer.logTransfer(fromAccount, toAccount, kroner, oere);
     }
 
