@@ -10,7 +10,7 @@ import javax.xml.crypto.Data;
  * Created by Eva Dahlo on 29/09/2016.
  */
 public class Account {
-    private final int ID;
+    private final int accountNumber;
     private final Customer customer;
 
     private final Database database = new Database();
@@ -20,8 +20,8 @@ public class Account {
         accountType = null;
     }*/
 
-    public Account(int id, Customer customer) {
-        this.ID = id;
+    public Account(int accountNumber, Customer customer) {
+        this.accountNumber = accountNumber;
         this.customer = customer;
     }
 
@@ -79,33 +79,36 @@ public class Account {
     }
 
     // Get and set.
-    public int getID() {
-        return ID;
+    public int getAccountNumber() {
+        return accountNumber;
     }
 
     public String getAccountType() {
+<<<<<<< HEAD
         String query = "SELECT Kontotype FROM Bankkonto WHERE Kundenummer = " + ID;
         String accountType = database.returnString(query);
-
+=======
         return accountType;
     }
 
     public double getInterestRate() {
         // TODO: Daniel, se her!!!
+<<<<<<< HEAD
         String query = "SELECT Rente FROM Bankkonto WHERE Kundenummer = " + ID;
         double interestRate = database.returnDouble(query);
+=======
 
         return interestRate;
     }
 
     public void setInterestRate(double interestRate) {
         // TODO: Daniel, se her!!!
-        String query = "Update Bankkonto SET Rente = " + interestRate + " WHERE Kundenummer = " + ID;
+        String query = "Update Bankkonto SET Rente = " + interestRate + " WHERE Kontonummer = " + accountNumber;
     }
 
     public int getKroner() {
         // TODO: Daniel, se her!!!
-        String query = "SELECT Kroner FROM Bankkonto WHERE Kundenummer = " + ID;
+        String query = "SELECT Kroner FROM Bankkonto WHERE Kontonummer = " + accountNumber;
         int kroner = 0; // = resultatet av spørringen.
 
         return kroner;
@@ -113,12 +116,12 @@ public class Account {
 
     public void setKroner(int kroner) {
         // TODO: Daniel, se her!!!
-        String query = "Update Bankkonto SET Kroner = " + kroner + " WHERE Kundenummer = " + ID;
+        String query = "Update Bankkonto SET Kroner = " + kroner + " WHERE Kontonummer = " + accountNumber;
     }
 
     public int getOere() {
         // TODO: Daniel, se her!!!
-        String query = "SELECT Oere FROM Bankkonto WHERE Kundenummer = " + ID;
+        String query = "SELECT Oere FROM Bankkonto WHERE Kontonummer = " + accountNumber;
         int oere = 0; // = resultatet av spørringen.
 
         return oere;
@@ -126,6 +129,6 @@ public class Account {
 
     public void setOere(int oere) {
         // TODO: Daniel, se her!!!
-        String query = "Update Bankkonto SET Oere = " + oere + " WHERE Kundenummer = " + ID;
+        String query = "Update Bankkonto SET Oere = " + oere + " WHERE Kontonummer = " + accountNumber;
     }
 }
