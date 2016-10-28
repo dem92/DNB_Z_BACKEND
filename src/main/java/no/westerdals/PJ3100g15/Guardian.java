@@ -8,7 +8,7 @@ package no.westerdals.PJ3100g15;
 public class Guardian extends User {
 
 
-    public Guardian(int id, String firstName, String lastName, String addressLine1,/* String addressLine2,*/ int postalCode, String eMailAddress, int phoneNumber) {
+    public Guardian(String id, String firstName, String lastName, String addressLine1,/* String addressLine2,*/ int postalCode, String eMailAddress, int phoneNumber) {
         super(id, firstName, lastName, addressLine1,/* addressLine2, */postalCode, eMailAddress, phoneNumber);
     }
 }

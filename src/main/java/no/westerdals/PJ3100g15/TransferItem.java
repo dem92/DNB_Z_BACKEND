@@ -11,7 +11,7 @@ public class TransferItem extends LogItem {
     private final int kroner;
     private final int oere;
 
-    public TransferItem(int logCount, int customerID, int fromAccount, int toAccount, int kroner, int oere){
+    public TransferItem(int logCount, String customerID, int fromAccount, int toAccount, int kroner, int oere){
         super(logCount, customerID);
         this.fromAccount = fromAccount;
         this.toAccount = toAccount;

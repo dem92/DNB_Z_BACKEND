@@ -49,6 +49,10 @@ public class Database {
     }
 
 
+    public Integer returnInteger(String sql) {
+        return null;
+    }
+
     public List<Customer> getAllCustomers()
     {
         String sql = "SELECT Foedselsnummer, Fornavn, Etternavn, Adresse, Postnummer, Mail, Telefon, Score\n" +

@@ -11,7 +11,7 @@ public class Customer extends User implements Log{
     private int score;
     private ArrayList<LogItem> log;
 
-    public Customer(int id, String firstName, String lastName, String addressLine1,/* String addressLine2, */ int postalCode, String eMailAddress, int phoneNumber, int score){
+    public Customer(String id, String firstName, String lastName, String addressLine1,/* String addressLine2, */ int postalCode, String eMailAddress, int phoneNumber, int score){
         super(id, firstName, lastName, addressLine1, /* addressLine2, */ postalCode, eMailAddress, phoneNumber);
         accounts = new ArrayList<Account>();
         logCount = 0;
