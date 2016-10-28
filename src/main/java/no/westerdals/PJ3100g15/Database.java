@@ -67,6 +67,14 @@ public class Database {
         }
     }
 
+    public Double returnDouble(String sql) {
+        try(Connection con = sql2o.open()){
+            return con.createQuery(sql).executeScalar(Double.class);
+        } catch (Exception e){
+            return null;
+        }
+    }
+
     public List<Customer> getAllCustomers()
     {
         String sql = "SELECT Foedselsnummer, Fornavn, Etternavn, Adresse, Postnummer, Mail, Telefon, Score\n" +

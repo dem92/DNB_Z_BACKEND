@@ -94,7 +94,7 @@ public class Account {
     public double getInterestRate() {
         // TODO: Daniel, se her!!!
         String query = "SELECT Rente FROM Bankkonto WHERE Kundenummer = " + ID;
-        double interestRate = 0; // = resultatet av spørringen.
+        double interestRate = database.returnDouble(query);
 
         return interestRate;
     }

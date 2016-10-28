@@ -12,10 +12,18 @@ public class TestingShit {
 
     Account testAccountObject = new Account(5, new Customer("54321", "hei", "der", "blah", 1234, "hello@gmail.com", 12345687, 123));
 
-    @RequestMapping
+    /*@RequestMapping
+    @ResponseBody
+    public String testFindingInterestRate(){
+        return "" + testAccountObject.getInterestRate();
+    }
+*/
+
+    @RequestMapping("/accounttype")
     @ResponseBody
     public String testFindingAccountType(){
         return testAccountObject.getAccountType();
     }
+
 
 }
