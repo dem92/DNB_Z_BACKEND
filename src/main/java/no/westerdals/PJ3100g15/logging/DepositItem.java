@@ -1,4 +1,6 @@
-package no.westerdals.PJ3100g15;
+package no.westerdals.PJ3100g15.logging;
+
+import no.westerdals.PJ3100g15.logging.LogItem;
 
 import java.util.Date;
 

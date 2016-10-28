@@ -1,4 +1,6 @@
-package no.westerdals.PJ3100g15;
+package no.westerdals.PJ3100g15.users;
+
+import no.westerdals.PJ3100g15.users.User;
 
 /**
  * Created by Eva Dahlo on 29/09/2016.

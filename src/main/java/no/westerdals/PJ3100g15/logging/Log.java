@@ -1,4 +1,4 @@
-package no.westerdals.PJ3100g15;
+package no.westerdals.PJ3100g15.logging;
 
 /**
  * Created by Eva Dahlo on 29/09/2016.

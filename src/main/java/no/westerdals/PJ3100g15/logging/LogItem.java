@@ -1,4 +1,4 @@
-package no.westerdals.PJ3100g15;
+package no.westerdals.PJ3100g15.logging;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

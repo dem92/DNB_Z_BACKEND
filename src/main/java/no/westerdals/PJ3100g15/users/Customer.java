@@ -1,11 +1,16 @@
-package no.westerdals.PJ3100g15;
+package no.westerdals.PJ3100g15.users;
+
+import no.westerdals.PJ3100g15.Account;
+import no.westerdals.PJ3100g15.logging.Log;
+import no.westerdals.PJ3100g15.logging.LogItem;
+import no.westerdals.PJ3100g15.logging.TransferItem;
 
 import java.util.ArrayList;
 
 /**
  * Created by Eva Dahlo on 29/09/2016.
  */
-public class Customer extends User implements Log{
+public class Customer extends User implements Log {
     private ArrayList<Account> accounts;
     private int logCount;
     private int score;

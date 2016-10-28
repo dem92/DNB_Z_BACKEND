@@ -1,5 +1,6 @@
 package no.westerdals.PJ3100g15;
 
+import no.westerdals.PJ3100g15.users.Customer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,5 +1,6 @@
 package no.westerdals.PJ3100g15;
 
+import no.westerdals.PJ3100g15.users.Customer;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
