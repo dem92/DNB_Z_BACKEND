@@ -1,18 +1,11 @@
 package no.westerdals.PJ3100g15.ORM;
 
-import com.j256.ormlite.jdbc.JdbcConnectionSource;
-import com.j256.ormlite.support.ConnectionSource;
-
-import java.io.FileReader;
-import java.sql.SQLException;
-import java.util.Properties;
-
 public class DBConnector {
     public DBConnector() {
 
     }
 
-
+/* TODO
     public ConnectionSource makeConnection() {
 
         String userName = "";
@@ -45,4 +38,6 @@ public class DBConnector {
             e.printStackTrace();
         }
         return null;
-    }}
+    }*/
+
+    }

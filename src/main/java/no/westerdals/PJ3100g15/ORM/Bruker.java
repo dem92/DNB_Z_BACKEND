@@ -1,11 +1,10 @@
 package no.westerdals.PJ3100g15.ORM;
 
-import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable
 public class Bruker {
-
+/*TODO
     @DatabaseField(columnName = "Kundenummer",id = true)
     private int userNumber;
     @DatabaseField(columnName = "Foedselsnummer")
@@ -27,6 +26,6 @@ public class Bruker {
 
     public Bruker() {
         //Empty constructor
-    }
+    }*/
 
 }
