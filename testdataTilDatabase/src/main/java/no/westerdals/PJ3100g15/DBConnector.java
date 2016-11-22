@@ -1,45 +1,49 @@
 package no.westerdals.PJ3100g15;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
 
 import java.io.FileInputStream;
-import java.sql.Connection;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 
 /**
- * Created by Eva Dahlo on 26/10/2016.
+ * Class for creating a connection to a database.
+ *
+ * Created by Eva Dahlo on 07/11/2016.
  */
 public class DBConnector {
-    private String user;
-    private String password;
-    private String database;
-    private String server;
 
-    public DBConnector(){
-        Properties properties = new Properties();
-
+    /**
+     * Method that creates a connection to a database,
+     * using information from a .properties file.
+     *
+     * @return A connection to a database
+     */
+    public static ConnectionSource makeConnection(){
         try {
-            properties.load(new FileInputStream("src/main/connectionConfig.properties"));
+            ConnectionSource connectionSource = new JdbcConnectionSource("jdbc:mysql://tek.westerdals.no:3306/daheva15_PJ3100_gruppe15", "daheva15_MainUsr", "PJ3100gruppe15!");
 
-            this.user = properties.getProperty("user");
-            this.password = properties.getProperty("password");
-            this.database = properties.getProperty("database");
-            this.server = properties.getProperty("server");
+            return connectionSource;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        catch (Exception e){
-            System.out.println("Could not read properties from properties file.");
-        }
+        return null;
     }
 
-    public Connection makeConnection() throws SQLException {
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setDatabaseName(database);
-        dataSource.setServerName(server);
-        dataSource.setUser(user);
-        dataSource.setPassword(password);
+    public static List<Bankkonto> getAccounts(){
+        try {
+            Dao<Bankkonto, String> bankkontoDao = DaoManager.createDao(makeConnection(), Bankkonto.class);
 
-        Connection con = dataSource.getConnection();
-        return con;
+            List<Bankkonto> accounts = bankkontoDao.queryForAll();
+            return accounts;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

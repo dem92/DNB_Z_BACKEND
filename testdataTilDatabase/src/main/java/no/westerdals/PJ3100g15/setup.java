@@ -28,12 +28,12 @@ public class setup {
             else
                 insertString += ", ";
         }
-        try (Connection connection = dbConnector.makeConnection(); java.sql.Statement statement = connection.createStatement()) {
+       /* try (Connection connection = dbConnector.makeConnection(); java.sql.Statement statement = connection.createStatement()) {
 
             statement.executeUpdate(insertString);
         }
         catch (Exception e){
             System.out.println("ERROR!!!!");
-        }
+        }*/
     }
 }
