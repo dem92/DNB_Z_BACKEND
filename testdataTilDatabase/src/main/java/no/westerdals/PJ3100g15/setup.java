@@ -14,7 +14,7 @@ public class setup {
         test.createData();
         DBConnector dbConnector = new DBConnector();
 
-        String insertString = "INSERT INTO Bankkonto VALUES ";
+        String insertString = "INSERT INTO Account VALUES ";
         for (int i = 0; i < 200; i++) {
             insertString += "(" + new BigInteger("" + test.bankAccount.get(i)) + ", "
                     + i + ", '";

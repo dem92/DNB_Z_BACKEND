@@ -82,7 +82,7 @@ public class Account {
 
     public String getAccountType() {
         // TODO: Daniel, se her!!!
-        String query = "SELECT Kontotype FROM Bankkonto WHERE Kontonummer = " + accountNumber;
+        String query = "SELECT Kontotype FROM Account WHERE Kontonummer = " + accountNumber;
         String accountType = database.returnString(query); // = resultatet av spørringen.
 
 
@@ -91,7 +91,7 @@ public class Account {
 
     public double getInterestRate() {
         // TODO: Daniel, se her!!!
-        String query = "SELECT Rente FROM Bankkonto WHERE Kontonummer = " + accountNumber;
+        String query = "SELECT Rente FROM Account WHERE Kontonummer = " + accountNumber;
         double interestRate = 0; // = resultatet av spørringen.
 
 
@@ -101,12 +101,12 @@ public class Account {
     public void setInterestRate(double interestRate) {
 
         // TODO: Daniel, se her!!!
-        String query = "Update Bankkonto SET Rente = " + interestRate + " WHERE Kontonummer = " + accountNumber;
+        String query = "Update Account SET Rente = " + interestRate + " WHERE Kontonummer = " + accountNumber;
     }
 
     public int getKroner() {
         // TODO: Daniel, se her!!!
-        String query = "SELECT Kroner FROM Bankkonto WHERE Kontonummer = " + accountNumber;
+        String query = "SELECT Kroner FROM Account WHERE Kontonummer = " + accountNumber;
         int kroner = 0; // = resultatet av spørringen.
 
         return kroner;
@@ -114,12 +114,12 @@ public class Account {
 
     public void setKroner(int kroner) {
         // TODO: Daniel, se her!!!
-        String query = "Update Bankkonto SET Kroner = " + kroner + " WHERE Kontonummer = " + accountNumber;
+        String query = "Update Account SET Kroner = " + kroner + " WHERE Kontonummer = " + accountNumber;
     }
 
     public int getOere() {
         // TODO: Daniel, se her!!!
-        String query = "SELECT Oere FROM Bankkonto WHERE Kontonummer = " + accountNumber;
+        String query = "SELECT Oere FROM Account WHERE Kontonummer = " + accountNumber;
         int oere = 0; // = resultatet av spørringen.
 
         return oere;
@@ -127,6 +127,6 @@ public class Account {
 
     public void setOere(int oere) {
         // TODO: Daniel, se her!!!
-        String query = "Update Bankkonto SET Oere = " + oere + " WHERE Kontonummer = " + accountNumber;
+        String query = "Update Account SET Oere = " + oere + " WHERE Kontonummer = " + accountNumber;
     }
 }
