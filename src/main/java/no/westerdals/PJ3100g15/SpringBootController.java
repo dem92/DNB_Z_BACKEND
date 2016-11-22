@@ -6,17 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/test")
-public class TestingShit {
+public class SpringBootController {
 
     Account testAccountObject = new Account(5, new Customer("54321", "hei", "der", "blah", 1234, "hello@gmail.com", 12345687, 123));
 
-    /*@RequestMapping
+    @RequestMapping
     @ResponseBody
     public String testFindingInterestRate(){
         return "" + testAccountObject.getInterestRate();
     }
-*/
+
 
     @RequestMapping("/accounttype")
     @ResponseBody
@@ -24,5 +23,10 @@ public class TestingShit {
         return testAccountObject.getAccountType();
     }
 
-
+    /*TODO henrik
+    @RequestMapping("/authentication")
+    @ResponseBody
+    public Authentication authentication(@RequestParam(value="birthNumber", defaultValue = "null") long birthNumber){
+        return new Authentication()
+    }*/
 }
