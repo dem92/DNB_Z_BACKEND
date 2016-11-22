@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class DBConnector {
     public DBConnector() {
-        makeConnection();
+
     }
 
 
@@ -45,10 +45,4 @@ public class DBConnector {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        new DBConnector();
-    }
-
-}
+    }}
