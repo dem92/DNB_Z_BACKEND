@@ -29,6 +29,6 @@ public class PaymentController {
     public String newPayment(
             @RequestBody final Payment payment
     ) {
-        return payment.toString();
+        return payment.toString() + "\n\n \t\t Sven er jättekul";
     }
 }
