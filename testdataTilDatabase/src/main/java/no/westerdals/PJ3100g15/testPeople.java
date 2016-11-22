@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Created by Sven Craehn on 26.10.2016.
  */
-public class testPeople {
+public class TestPeople {
     public static ArrayList<String> firstNameMale = new ArrayList<>();
     public static ArrayList<String> firstNameFemale = new ArrayList<>();
     public static ArrayList<String> lastName = new ArrayList<>();
@@ -25,7 +25,7 @@ public class testPeople {
     public static ArrayList<Integer> accountBalance = new ArrayList<>();
     public static Random random = new Random();
 
-    public testPeople(){
+    public TestPeople(){
 
     }
 

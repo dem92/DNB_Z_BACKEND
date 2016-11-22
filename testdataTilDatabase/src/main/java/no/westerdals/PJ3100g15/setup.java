@@ -2,7 +2,6 @@ package no.westerdals.PJ3100g15;
 
 import java.math.BigInteger;
 import java.sql.Connection;
-import java.sql.Statement;
 
 /**
  * Created by Sven Craehn on 26.10.2016.
@@ -10,7 +9,7 @@ import java.sql.Statement;
 public class setup {
 
     public static void main(String[] args){
-        testPeople test = new testPeople();
+        TestPeople test = new TestPeople();
         test.createData();
         DBConnector dbConnector = new DBConnector();
 
