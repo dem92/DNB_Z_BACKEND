@@ -267,7 +267,7 @@ INSERT INTO `Bankkonto` (`Kontonummer`, `Kundenummer`, `Kontotype`, `Kroner`, `O
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Bruker`
+-- Table structure for table `Customer`
 --
 
 CREATE TABLE IF NOT EXISTS `Bruker` (
@@ -285,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `Bruker` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=203 ;
 
 --
--- Dumping data for table `Bruker`
+-- Dumping data for table `Customer`
 --
 
 INSERT INTO `Bruker` (`Kundenummer`, `Foedselsnummer`, `Fornavn`, `Etternavn`, `Adresse`, `Postnummer`, `Mail`, `Telefon`, `Score`) VALUES
