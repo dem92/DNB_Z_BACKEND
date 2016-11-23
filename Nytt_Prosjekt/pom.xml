@@ -5,7 +5,7 @@
 
 	<groupId>no.westerdals.PJ3100g15</groupId>
 	<artifactId>dnb_z_backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>2.0</version>
 	<packaging>jar</packaging>
 
 	<name>DNB_Z_BACKEND</name>
@@ -35,6 +35,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -48,6 +49,12 @@
 			<version>1.5.4</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core -->
 		<dependency>

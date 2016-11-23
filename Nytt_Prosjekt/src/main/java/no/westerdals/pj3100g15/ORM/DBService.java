@@ -25,8 +25,8 @@ public class DBService {
         makeConnection();
 
         try {
-            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
 
+            Dao<Customer, String> customerDao = DaoManager.createDao(connectionSource, Customer.class);
             List<Customer> customers = customerDao.queryForAll();
             return customers;
         } catch (SQLException e) {
