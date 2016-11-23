@@ -8,7 +8,5 @@ public class DnbZBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DnbZBackendApplication.class, args);
-		Database testDB = new Database();
-		testDB.testMethod();
 	}
 }

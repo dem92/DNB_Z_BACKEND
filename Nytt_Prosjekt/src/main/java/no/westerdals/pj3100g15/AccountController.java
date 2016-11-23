@@ -6,13 +6,13 @@ import java.util.HashMap;
  * Created by Eva Dahlo on 27/10/2016.
  */
 public class AccountController {
-    private HashMap<Integer, Account> accounts;
+    private HashMap<Integer, BankAccount> accounts;
 
     public AccountController(){
-        accounts = new HashMap<Integer, Account>();
+        accounts = new HashMap<Integer, BankAccount>();
     }
 
-    public boolean addAccount(int accountID, Account account){
+    public boolean addAccount(int accountID, BankAccount account){
         if (accounts.containsKey(accountID))
             return false;
 
@@ -29,4 +29,6 @@ public class AccountController {
     public int getNumberOfAccounts(){
         return accounts.size();
     }
+
+
 }

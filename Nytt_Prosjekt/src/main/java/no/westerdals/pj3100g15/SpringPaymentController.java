@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/payments")
-public class PaymentController {
+public class SpringPaymentController {
     private final Database database;
 
     @Autowired
-    public PaymentController(final Database database) {
+    public SpringPaymentController(final Database database) {
         this.database = database;
     }
 

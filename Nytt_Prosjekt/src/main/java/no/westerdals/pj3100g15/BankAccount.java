@@ -6,7 +6,7 @@ import no.westerdals.pj3100g15.users.Customer;
 /**
  * Created by Eva Dahlo on 29/09/2016.
  */
-public class Account {
+public class BankAccount {
     private final int accountNumber;
     private final Customer customer;
 
@@ -17,7 +17,7 @@ public class Account {
         accountType = null;
     }*/
 
-    public Account(int accountNumber, Customer customer) {
+    public BankAccount(int accountNumber, Customer customer) {
         this.accountNumber = accountNumber;
         this.customer = customer;
     }

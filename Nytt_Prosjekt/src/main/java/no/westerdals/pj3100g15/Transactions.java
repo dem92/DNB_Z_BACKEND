@@ -4,10 +4,10 @@ public class Transactions {
     private int kroner;
     private int oere;
     private boolean coverage;
-    private Account sending;
-    private Account receiving;
+    private BankAccount sending;
+    private BankAccount receiving;
 
-    public Transactions(int kroner, int oere, Account sending, Account receiving) {
+    public Transactions(int kroner, int oere, BankAccount sending, BankAccount receiving) {
 
         //Initialiserer og deklarerer variabler
         this.kroner = kroner;
@@ -78,19 +78,19 @@ public class Transactions {
         this.coverage = coverage;
     }
 
-    public Account getSending() {
+    public BankAccount getSending() {
         return sending;
     }
 
-    public Account getReceiving() {
+    public BankAccount getReceiving() {
         return receiving;
     }
 
-    public void setReceiving(Account receiving) {
+    public void setReceiving(BankAccount receiving) {
         this.receiving = receiving;
     }
 
-    public void setSending(Account sending) {
+    public void setSending(BankAccount sending) {
         this.sending = sending;
     }
 }

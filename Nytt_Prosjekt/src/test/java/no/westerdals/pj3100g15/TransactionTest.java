@@ -30,8 +30,8 @@ public class TransactionTest {
         int oere = 1;
         final Customer customer1 = customerResource.getCustomerById("1");
         final Customer customer2 = customerResource.getCustomerById("2");
-        Account account1 = new Account(1,customer1);
-        Account account2 = new Account(2,customer2);
+        BankAccount account1 = new BankAccount(1,customer1);
+        BankAccount account2 = new BankAccount(2,customer2);
 
         Transactions transaction = new Transactions(kroner, oere, account1,account2);
 
