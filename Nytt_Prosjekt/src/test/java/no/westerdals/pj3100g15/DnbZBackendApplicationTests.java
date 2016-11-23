@@ -1,4 +1,4 @@
-package no.westerdals.pg3100.gruppe15;
+package no.westerdals.pj3100g15;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

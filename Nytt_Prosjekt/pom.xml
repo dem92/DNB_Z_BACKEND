@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>no.westerdals.PG3100.Gruppe15</groupId>
+	<groupId>no.westerdals.PJ3100g15</groupId>
 	<artifactId>dnb_z_backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>DNB_Z_BACKEND</name>
-	<description>This is the project of group 15(backend)</description>
+	<description>Group 15 backend solution for asignment DNB Z</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -40,6 +40,29 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.sql2o/sql2o -->
+		<dependency>
+			<groupId>org.sql2o</groupId>
+			<artifactId>sql2o</artifactId>
+			<version>1.5.4</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core -->
+		<dependency>
+			<groupId>com.j256.ormlite</groupId>
+			<artifactId>ormlite-core</artifactId>
+			<version>5.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-jdbc -->
+		<dependency>
+			<groupId>com.j256.ormlite</groupId>
+			<artifactId>ormlite-jdbc</artifactId>
+			<version>5.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
