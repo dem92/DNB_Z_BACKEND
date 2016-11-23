@@ -9,12 +9,10 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.math.BigInteger;
 
-@DatabaseTable(
-        tableName = "Bankkonto"
-)
+@DatabaseTable(tableName = "Bankkonto")
 public class Account {
-    @DatabaseField(columnName = "Kontonummer")
-    private BigInteger accountNumber;
+    @DatabaseField(columnName = "Kontonummer", id = true)
+    private String accountNumber;
     @DatabaseField(columnName = "Kundenummer")
     private int customerNumber;
     @DatabaseField
@@ -22,27 +20,23 @@ public class Account {
     @DatabaseField
     private BigInteger kroner;
     @DatabaseField(columnName = "Kontotype")
-    private accountTypeEnum accountType;
-
-    private enum accountTypeEnum {
-        BRUKSKONTO, SPAREKONTO
-    }
+    private String accountType;
 
     public Account() {
     }
 
-    public Account(BigInteger accountNumber, int kundenummer, BigInteger kroner, int oere) {
+    public Account(String accountNumber, int kundenummer, BigInteger kroner, int oere) {
         this.accountNumber = accountNumber;
         this.customerNumber = kundenummer;
         this.kroner = kroner;
         this.oere = oere;
     }
 
-    public BigInteger getAccountNumber() {
+    public String getAccountNumber() {
         return this.accountNumber;
     }
 
-    public void setAccountNumber(BigInteger accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -70,8 +64,11 @@ public class Account {
         this.kroner = kroner;
     }
 
-    public accountTypeEnum getAccountType() { return accountType; }
+    public String getAccountType() {
+        return accountType;
+    }
 
-    public void setAccountType(accountTypeEnum accountType) { this.accountType = accountType;
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 }
