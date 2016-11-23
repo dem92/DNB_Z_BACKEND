@@ -2,6 +2,8 @@ package no.westerdals.pj3100g15.ORM;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 
 import java.math.BigInteger;
@@ -49,6 +51,40 @@ public class DBService {
             balance[1] = BigInteger.valueOf(account.getOere());
 
             return balance;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<Account> getCustomerAccounts(String birthNumber){
+        makeConnection();
+
+        try {
+            Dao<Customer, String> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            List<Customer> customer = customerDao.queryForEq("Foedselsnummer", birthNumber);
+
+            if (customer.size() != 1)
+                return null;
+
+            Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
+            List<Account> accounts = accountDao.queryForEq("Kundenummer", customer.get(0).getCustomerID());
+
+            return accounts;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Account getAccount(String accountNumber){
+        makeConnection();
+
+        try {
+            Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
+            Account account = accountDao.queryForId(accountNumber);
+
+            return account;
         } catch (SQLException e) {
             e.printStackTrace();
         }
