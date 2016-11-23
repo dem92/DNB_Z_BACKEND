@@ -3,7 +3,7 @@ package no.westerdals.PJ3100g15.ORM;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable (tableName = "Customer")
+@DatabaseTable (tableName = "Bruker")
 public class Customer {
 
     @DatabaseField(columnName = "Kundenummer",id = true)
