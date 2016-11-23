@@ -1,4 +1,5 @@
-package no.westerdals.PJ3100g15;
+package no.westerdals.PJ3100g15.users;
+
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Created by Sven Craehn on 26.10.2016.
  */
-public class testPeople {
+public class MakePeople {
     public static ArrayList<String> firstNameMale = new ArrayList<>();
     public static ArrayList<String> firstNameFemale = new ArrayList<>();
     public static ArrayList<String> lastName = new ArrayList<>();
@@ -25,8 +26,8 @@ public class testPeople {
     public static ArrayList<Integer> accountBalance = new ArrayList<>();
     public static Random random = new Random();
 
-    public testPeople(){
-
+    public void main(String[] args){
+        createData();
     }
 
     public void createData(){
@@ -48,7 +49,7 @@ public class testPeople {
         }
         createMail();
 
-
+/*
         System.out.println("Personnummer: " + socialSecurityNo);
         System.out.println(socialSecurityNo.size());
         System.out.println("Navn: " + nameMale);
@@ -69,6 +70,11 @@ public class testPeople {
         System.out.println(bankAccount.size());
         System.out.println("Saldo: " + accountBalance);
         System.out.println(accountBalance.size());
+        */
+
+        for(int i = 180; i < 200; i++){
+            System.out.println("UPDATE Bruker SET Foedselsnr = '" + socialSecurityNo.get(i) + "' WHERE Kundenummer = " + i + ";");
+        }
     }
 
     private static void fillNameLists(){
