@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class DBServiceTest {
     @Test
     public void getAccountBalance() throws Exception {
-        BigInteger[] balance = DBService.getAccountBalance("80766645136");
+        BigInteger[] balance = DBService.getAccountBalance("80766645136"); // Has to be a valid accountNumber
         assertNotNull(balance);
         assertNotNull(balance[0]);
         assertNotNull(balance[1]);

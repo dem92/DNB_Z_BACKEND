@@ -14,7 +14,7 @@ import java.util.List;
 public class DBService {
     private static ConnectionSource connectionSource;
 
-    //Should be called in every method in this class that requires a working connection to the database.
+    //Should be called first thing in every method in this class that requires a working connection to the database.
     private static void makeConnection(){
         if (connectionSource == null)
             connectionSource = DBConnector.makeConnection();
