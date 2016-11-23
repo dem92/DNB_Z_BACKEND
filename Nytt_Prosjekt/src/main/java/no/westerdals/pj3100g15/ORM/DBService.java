@@ -1,4 +1,4 @@
-package no.westerdals.PJ3100g15.ORM;
+package no.westerdals.pj3100g15.ORM;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;

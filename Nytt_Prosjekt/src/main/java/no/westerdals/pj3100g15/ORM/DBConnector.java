@@ -1,4 +1,4 @@
-package no.westerdals.PJ3100g15.ORM;
+package no.westerdals.pj3100g15.ORM;
 
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
