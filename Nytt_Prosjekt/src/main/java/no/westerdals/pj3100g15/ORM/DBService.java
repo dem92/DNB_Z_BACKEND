@@ -16,7 +16,6 @@ public class DBService {
 
         try {
             Dao<Customer, String> customerDao = DaoManager.createDao(connectionSource, Customer.class);
-
             List<Customer> customers = customerDao.queryForAll();
             return customers;
         } catch (SQLException e) {

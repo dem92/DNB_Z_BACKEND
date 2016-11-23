@@ -4,7 +4,6 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 
 import java.io.FileReader;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class DBConnector {
@@ -25,19 +24,18 @@ public class DBConnector {
             password = properties.getProperty("db.password");
             databaseUrl = properties.getProperty("db.databaseUrl");
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
         //Kaller på privat metode
         return connectToDatabase(userName,password,databaseUrl);
         }
 
-        private static ConnectionSource connectToDatabase(String user, String password, String databaseUrl){
-            //lager
+        public static ConnectionSource connectToDatabase(String user, String password, String databaseUrl){
             try {
             ConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl, user, password);
             return connectionSource;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
