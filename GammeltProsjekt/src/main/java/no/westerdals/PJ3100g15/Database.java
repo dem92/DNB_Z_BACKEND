@@ -14,7 +14,7 @@ public class Database {
     // We create a DB connection for further use. TODO - Move the username/password out of this file
     Sql2o sql2o;
 
-    public Map<String, String> colMaps = new HashMap<>();
+    public Map<String, String> colMaps = new HashMap<String, String>();
     public List<Customer> testList;
 
     public Database() {
