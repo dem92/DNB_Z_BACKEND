@@ -14,13 +14,13 @@ public class SpringAccountRetrievalController {
 
     @RequestMapping(value = "/user/{userID}/account/{accountID}", method = RequestMethod.GET)
     @ResponseBody
-    public Account getAccount(@PathVariable(value = "accountID") String string){
+    public Account getAccount(@PathVariable(value = "accountID") String string) {
         return DBService.getAccount(string);
     }
 
     @RequestMapping(value = "/user/{id}/accounts", method = RequestMethod.GET)
     @ResponseBody
-    public List<Account> getAccounts(@PathVariable(value = "id") String string){
+    public List<Account> getAccounts(@PathVariable(value = "id") String string) {
         return DBService.getCustomerAccounts(string);
     }
 /* TODO endre URL

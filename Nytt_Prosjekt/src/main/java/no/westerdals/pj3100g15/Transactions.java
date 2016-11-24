@@ -41,7 +41,7 @@ public class Transactions {
         //både kroner og øre-feltet må oppdateres for begge kontoene.
         // Benytter subtractAmount og addAmount-metodene i Account-klassen
         if (isCoverage()) {
-            sending.subtractAmount(getKroner(),getOere());
+            sending.subtractAmount(getKroner(), getOere());
             sending.logTransfer(sending.getAccountNumber(), receiving.getAccountNumber(), kroner, oere);
             receiving.addAmount(getKroner(), getOere());
             receiving.logTransfer(sending.getAccountNumber(), receiving.getAccountNumber(), kroner, oere);
@@ -49,8 +49,8 @@ public class Transactions {
         } else {
             System.out.println("Overføringen ble ikke godkjent.");
         }
-        System.out.println("Saldo på avsender: "+sending.getKroner()+", "+sending.getOere());
-        System.out.println("Saldo på mottaker: "+receiving.getKroner()+", "+receiving.getOere());
+        System.out.println("Saldo på avsender: " + sending.getKroner() + ", " + sending.getOere());
+        System.out.println("Saldo på mottaker: " + receiving.getKroner() + ", " + receiving.getOere());
     }
 
     //Gettere og settere

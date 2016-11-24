@@ -10,7 +10,7 @@ public class WithdrawalItem extends LogItem {
     private final int kroner;
     private final int oere;
 
-    public WithdrawalItem(int logCount, String customerID, int fromAccount, int kroner, int oere){
+    public WithdrawalItem(int logCount, String customerID, int fromAccount, int kroner, int oere) {
         super(logCount, customerID);
         this.fromAccount = fromAccount;
         this.kroner = kroner;

@@ -6,12 +6,12 @@ import com.j256.ormlite.table.DatabaseTable;
 /**
  * Created by Eva Dahlo on 22/11/2016.
  */
-@DatabaseTable (tableName = "Passord_Bruker")
+@DatabaseTable(tableName = "Passord_Bruker")
 public class UserPassword {
 
-    @DatabaseField (columnName = "Kundenummer", id = true)
+    @DatabaseField(columnName = "Kundenummer", id = true)
     private int customerID;
-    @DatabaseField (columnName = "Hash_av_passord")
+    @DatabaseField(columnName = "Hash_av_passord")
     private String passwordHash;
 
     public UserPassword() {

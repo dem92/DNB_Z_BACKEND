@@ -10,10 +10,10 @@ import java.util.List;
 public class DBServiceAccount {
     private static ConnectionSource connectionSource = DBConnector.makeConnection();
 
-    public String saldo(String accountNumber)throws SQLException{
+    public String saldo(String accountNumber) throws SQLException {
         new Account();
-        Dao<Account, String> saldoStringDao= DaoManager.createDao(connectionSource, Account.class);
-        List<no.westerdals.pj3100g15.ORM.Account> account = saldoStringDao.queryForEq("Kontonummer",accountNumber);
+        Dao<Account, String> saldoStringDao = DaoManager.createDao(connectionSource, Account.class);
+        List<no.westerdals.pj3100g15.ORM.Account> account = saldoStringDao.queryForEq("Kontonummer", accountNumber);
         return account.get(0).getKroner().toString();
     }
 

@@ -34,47 +34,43 @@ public class Database {
     }
 
 
-
     public void testMethod() {
         testList = getAllCustomers();
-        for (Customer cust: testList)
-        {
+        for (Customer cust : testList) {
             System.out.println(cust.toString());
         }
     }
 
 
     public Integer returnInteger(String sql) {
-        try(Connection con = sql2o.open()){
+        try (Connection con = sql2o.open()) {
             return con.createQuery(sql).executeScalar(Integer.class);
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
 
     }
 
     public String returnString(String sql) {
-        try(Connection con = sql2o.open()){
+        try (Connection con = sql2o.open()) {
             return con.createQuery(sql).executeScalar(String.class);
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
     public Double returnDouble(String sql) {
-        try(Connection con = sql2o.open()){
+        try (Connection con = sql2o.open()) {
             return con.createQuery(sql).executeScalar(Double.class);
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    public List<Customer> getAllCustomers()
-    {
+    public List<Customer> getAllCustomers() {
         String sql = "SELECT Foedselsnummer, Fornavn, Etternavn, Adresse, Postnummer, Mail, Telefon, Score\n" +
                 "FROM Bruker";
-        try(Connection con = sql2o.open())
-        {
+        try (Connection con = sql2o.open()) {
             return con.createQuery(sql).executeAndFetch(Customer.class);
         }
     }

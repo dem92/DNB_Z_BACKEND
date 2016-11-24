@@ -3,26 +3,26 @@ package no.westerdals.pj3100g15.ORM;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable (tableName = "Bruker")
+@DatabaseTable(tableName = "Bruker")
 public class Customer {
 
-    @DatabaseField(columnName = "Kundenummer",id = true)
+    @DatabaseField(columnName = "Kundenummer", id = true)
     private int customerID;
     @DatabaseField(columnName = "Foedselsnummer")
     private String birthdayNumber; //denne er bigInt i databasen
     @DatabaseField(columnName = "Fornavn")
     private String firstName;
-    @DatabaseField (columnName = "Etternavn")
+    @DatabaseField(columnName = "Etternavn")
     private String surName;
-    @DatabaseField (columnName = "Adresse")
+    @DatabaseField(columnName = "Adresse")
     private String Address;
-    @DatabaseField (columnName = "Postnummer")
+    @DatabaseField(columnName = "Postnummer")
     private int postalCode;
-    @DatabaseField (columnName = "Mail")
+    @DatabaseField(columnName = "Mail")
     private String eMail;
-    @DatabaseField (columnName = "Telefon")
+    @DatabaseField(columnName = "Telefon")
     private String phoneNumber; //denne er int i databasen
-    @DatabaseField (columnName = "Score")
+    @DatabaseField(columnName = "Score")
     private int score;
 
     public Customer() {
