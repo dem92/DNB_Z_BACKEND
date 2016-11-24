@@ -22,12 +22,10 @@ public class DBService {
             connectionSource = DBConnector.makeConnection();
     }
 
-    // TODO: This method is possibly redundant, or should return a more specific set of values.
     public static List<Customer> getAllCustomers(){
         makeConnection();
 
         try {
-
             Dao<Customer, String> customerDao = DaoManager.createDao(connectionSource, Customer.class);
             List<Customer> customers = customerDao.queryForAll();
             return customers;
@@ -85,6 +83,53 @@ public class DBService {
             Account account = accountDao.queryForId(accountNumber);
 
             return account;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String[] getPassword(String birthNumber){
+        makeConnection();
+
+        try {
+            Dao<UserPassword, String> passwordDao = DaoManager.createDao(connectionSource, UserPassword.class);
+            List<UserPassword> password = passwordDao.queryForEq("Foedselsnummer", birthNumber);
+
+            if (password.size() != 1)
+                return null;
+
+            return new String[]{password.get(0).getPasswordHash(), password.get(0).getPasswordPlain()};
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<Account> getAllAccounts(){
+        makeConnection();
+
+        try {
+            Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
+            List<Account> accounts = accountDao.queryForAll();
+            return accounts;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Customer getCustomer(String birthNumber) {
+        makeConnection();
+
+        try {
+            Dao<Customer, String> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            List<Customer> customer = customerDao.queryForEq("Foedselsnummer", birthNumber);
+
+            if (customer.size() != 1)
+                return null;
+
+            return customer.get(0);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package no.westerdals.pj3100g15.RequestMapping;
 
 import no.westerdals.pj3100g15.ORM.Account;
+import no.westerdals.pj3100g15.ORM.Customer;
 import no.westerdals.pj3100g15.ORM.DBService;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,15 +13,33 @@ import java.util.List;
 @RestController
 public class SpringAccountRetrievalController {
 
-    @RequestMapping(value = "/user/{userID}/account/{accountID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/account/{accountID}", method = RequestMethod.GET)
     @ResponseBody
-    public Account getAccount(@PathVariable(value = "accountID") String string){
-        return DBService.getAccount(string);
+    public Account getAccount(@PathVariable(value = "accountID") String account){
+        return DBService.getAccount(account);
     }
 
-    @RequestMapping(value = "/user/{id}/accounts", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{id}/account/all", method = RequestMethod.GET)
     @ResponseBody
-    public List<Account> getAccounts(@PathVariable(value = "id") String string){
-        return DBService.getCustomerAccounts(string);
+    public List<Account> getAccounts(@PathVariable(value = "id") String userID){
+        return DBService.getCustomerAccounts(userID);
+    }
+
+    @RequestMapping(value = "/user/all/account/all", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Account> getAllAccounts(){
+        return DBService.getAllAccounts();
+    }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Customer getCustomer(@PathVariable(value = "id") String userID){
+        return DBService.getCustomer(userID);
+    }
+
+    @RequestMapping(value = "/user/all", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Customer> getAllCustomers(){
+        return DBService.getAllCustomers();
     }
 }

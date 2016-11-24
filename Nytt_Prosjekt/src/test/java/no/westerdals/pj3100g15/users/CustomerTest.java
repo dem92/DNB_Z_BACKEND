@@ -1,6 +1,6 @@
 package no.westerdals.pj3100g15.users;
 
-import no.westerdals.pj3100g15.Account;
+import no.westerdals.pj3100g15.BankAccount;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class CustomerTest {
 
     Customer customer = new Customer("1", "Fornavn", "Etternavn", "Adresse", 1234, "hello@gmail.com", 12345687, 123);
-    Account account = new Account(21321, customer);
+    BankAccount account = new BankAccount(21321, customer);
 
     @Before
     public void setUp() {
@@ -22,7 +22,7 @@ public class CustomerTest {
 
     @Test
     public void testAddAccount(){
-        Account account2 = new Account(21321, customer);
+        BankAccount account2 = new BankAccount(21321, customer);
         Boolean addAccount = customer.addAccount(account2);
 
         assertTrue(addAccount);

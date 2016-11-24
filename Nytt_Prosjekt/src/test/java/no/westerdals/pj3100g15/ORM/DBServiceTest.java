@@ -12,6 +12,20 @@ import static org.junit.Assert.*;
  */
 public class DBServiceTest {
     @Test
+    public void getAllCustomers() throws Exception {
+        List<Customer> customers = DBService.getAllCustomers();
+        assertNotNull(customers);
+        assertNotNull(customers.get(0));
+    }
+
+    @Test
+    public void getAllAccounts() throws Exception {
+        List<Account> accounts = DBService.getAllAccounts();
+        assertNotNull(accounts);
+        assertNotNull(accounts.get(0));
+    }
+
+    @Test
     public void getAccount() throws Exception {
         Account account = DBService.getAccount("95207460912"); // Has to be a valid accountNumber
         assertNotNull(account);
@@ -32,4 +46,17 @@ public class DBServiceTest {
         assertNotNull(accounts.get(0));
     }
 
+    @Test
+    public void getPassword() throws Exception {
+        String[] password = DBService.getPassword("05089622442"); // Has to be a valid birthNumber
+        assertNotNull(password);
+        assertNotNull(password[0]);
+        assertNotNull(password[1]);
+    }
+
+    @Test
+    public void getCustomer() throws Exception {
+        Customer customer = DBService.getCustomer("05089622442"); // Has to be a valid birthNumber
+        assertNotNull(customer);
+    }
 }
