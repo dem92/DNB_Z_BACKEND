@@ -1,4 +1,4 @@
-package no.westerdals.pj3100g15.users;
+package no.westerdals.pj3100g15.RequestMapping;
 
 import no.westerdals.pj3100g15.ORM.Account;
 import no.westerdals.pj3100g15.ORM.DBService;
