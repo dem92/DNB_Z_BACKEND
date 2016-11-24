@@ -23,4 +23,14 @@ public class SpringAccountRetrievalController {
     public List<Account> getAccounts(@PathVariable(value = "id") String string){
         return DBService.getCustomerAccounts(string);
     }
+/* TODO endre URL
+    @RequestMapping("/account")
+    @ResponseBody
+    public String getSaldoForAccount(@RequestParam(value = "kontonummer", defaultValue = "80766645136") String kontonummer) {
+        DBServiceAccount dbServiceAccount=new DBServiceAccount();
+        String text ="";
+        try{
+            text = dbServiceAccount.saldo(kontonummer);}catch (SQLException e){e.printStackTrace();}
+        return text;
+    }*/
 }
