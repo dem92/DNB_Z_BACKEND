@@ -10,7 +10,7 @@ public class DepositItem extends LogItem {
     private final int kroner;
     private final int oere;
 
-    public DepositItem(int logCount, String customerID, int toAccount, int kroner, int oere){
+    public DepositItem(int logCount, String customerID, int toAccount, int kroner, int oere) {
         super(logCount, customerID);
         this.toAccount = toAccount;
         this.kroner = kroner;

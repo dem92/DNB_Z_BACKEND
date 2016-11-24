@@ -8,6 +8,7 @@ package no.westerdals.pj3100g15.ORM;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.sun.jmx.snmp.Timestamp;
+
 import java.math.BigInteger;
 
 @DatabaseTable(

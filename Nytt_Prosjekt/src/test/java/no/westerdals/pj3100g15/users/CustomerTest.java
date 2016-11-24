@@ -31,7 +31,6 @@ public class CustomerTest {
     @Test
     public void testGetAccounts(){
         int accounts = customer.getAccounts().size();
-
         assertEquals(1, accounts);
     }
 }

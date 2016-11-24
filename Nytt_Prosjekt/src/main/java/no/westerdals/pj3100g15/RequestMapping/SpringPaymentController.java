@@ -1,6 +1,8 @@
-package no.westerdals.pj3100g15;
+package no.westerdals.pj3100g15.RequestMapping;
 
 
+import no.westerdals.pj3100g15.Database;
+import no.westerdals.pj3100g15.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;

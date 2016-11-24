@@ -28,11 +28,11 @@ public class DBConnector {
         }
 
         //Kaller på privat metode
-        return connectToDatabase(userName,password,databaseUrl);
-        }
+        return connectToDatabase(userName, password, databaseUrl);
+    }
 
-        public static ConnectionSource connectToDatabase(String user, String password, String databaseUrl){
-            try {
+    public static ConnectionSource connectToDatabase(String user, String password, String databaseUrl) {
+        try {
             ConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl, user, password);
             return connectionSource;
         } catch (Exception e) {

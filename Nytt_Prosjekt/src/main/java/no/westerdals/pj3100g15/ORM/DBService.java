@@ -2,8 +2,6 @@ package no.westerdals.pj3100g15.ORM;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.stmt.PreparedQuery;
-import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 
 import java.math.BigInteger;
@@ -17,7 +15,7 @@ public class DBService {
     private static ConnectionSource connectionSource;
 
     //Should be called first thing in every method in this class that requires a working connection to the database.
-    private static void makeConnection(){
+    private static void makeConnection() {
         if (connectionSource == null)
             connectionSource = DBConnector.makeConnection();
     }
@@ -35,7 +33,7 @@ public class DBService {
         return null;
     }
 
-    public static BigInteger[] getAccountBalance(String accountNumber){
+    public static BigInteger[] getAccountBalance(String accountNumber) {
         makeConnection();
 
         try {
@@ -55,7 +53,7 @@ public class DBService {
         return null;
     }
 
-    public static List<Account> getCustomerAccounts(String birthNumber){
+    public static List<Account> getCustomerAccounts(String birthNumber) {
         makeConnection();
 
         try {
@@ -75,7 +73,7 @@ public class DBService {
         return null;
     }
 
-    public static Account getAccount(String accountNumber){
+    public static Account getAccount(String accountNumber) {
         makeConnection();
 
         try {
