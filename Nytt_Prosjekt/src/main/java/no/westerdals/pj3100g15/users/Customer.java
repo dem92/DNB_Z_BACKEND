@@ -10,11 +10,11 @@ import java.util.ArrayList;
 /**
  * Created by Eva Dahlo on 29/09/2016.
  */
-public class Customer extends User implements Log {
+public class Customer extends User {
     private ArrayList<BankAccount> accounts;
     private int logCount;
     private int score;
-    private ArrayList<LogItem> log;
+    
 
     public Customer(String id, String firstName, String lastName, String addressLine1,/* String addressLine2, */ int postalCode, String eMailAddress, int phoneNumber, int score){
         super(id, firstName, lastName, addressLine1, /* addressLine2, */ postalCode, eMailAddress, phoneNumber);
@@ -35,7 +35,7 @@ public class Customer extends User implements Log {
         return log.add(item);
     }
 
-    
+
 
     public void logDeposit(){
 
