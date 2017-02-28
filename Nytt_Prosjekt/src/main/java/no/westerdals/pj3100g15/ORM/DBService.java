@@ -21,7 +21,7 @@ public class DBService {
             connectionSource = DBConnector.makeConnection();
     }
 
-    public static List<Customer> getAllCustomers(){
+    public static List<Customer> getAllCustomers() {
         makeConnection();
 
         try {
@@ -88,7 +88,7 @@ public class DBService {
         return null;
     }
 
-    public static String[] getPassword(String birthNumber){
+    public static String[] getPassword(String birthNumber) {
         makeConnection();
 
         try {
@@ -105,7 +105,7 @@ public class DBService {
         return null;
     }
 
-    public static List<Account> getAllAccounts(){
+    public static List<Account> getAllAccounts() {
         makeConnection();
 
         try {
@@ -135,32 +135,47 @@ public class DBService {
         return null;
     }
 
-    public void addAccount(int customerId, String accountType){
+    public void addAccount(int customerId, String accountType) {
         makeConnection();
-
         String accountNo = randomNumber();
-
         Account account = new Account();
         account.setCustomerNumber(customerId);
         account.setAccountType(getAccountType(accountType));
         account.setKroner(BigInteger.ZERO);
         account.setOere(0);
-
         boolean hasFoundValidAccountNo = false;
-
-        while(!hasFoundValidAccountNo) {
+        while (!hasFoundValidAccountNo) {
             account.setAccountNumber(accountNo);
             try {
                 Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
                 accountDao.createIfNotExists(account);
-                hasFoundValidAccountNo=true;
+                hasFoundValidAccountNo = true;
             } catch (SQLException e) {
                 accountNo = randomNumber();
             }
         }
     }
 
-    public String randomNumber(){
+    public void addCustomer(String phoneNumber, int postalcode, String address, String birthdayNumber, String email, String firstname, String surname) {
+        makeConnection();
+        Customer customer = new Customer();
+        customer.setAddress(address);
+        customer.setBirthdayNumber(birthdayNumber);
+        customer.seteMail(email);
+        customer.setFirstName(firstname);
+        customer.setSurName(surname);
+        customer.setPostalCode(postalcode);
+        customer.setPhoneNumber(phoneNumber);
+        customer.setScore(0);
+        try {
+            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            customerDao.createIfNotExists(customer);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String randomNumber() {
         String accountNo;
         int first = ThreadLocalRandom.current().nextInt(100000, 999999);
         String frst = Integer.toString(first);
@@ -170,9 +185,10 @@ public class DBService {
         return accountNo;
     }
 
-    public String getAccountType(String accountType){
-        if(accountType=="Sparekonto"){
-            return "Sparekonto";}
+    public String getAccountType(String accountType) {
+        if (accountType == "Sparekonto") {
+            return "Sparekonto";
+        }
         return "Brukskonto";
     }
 }
