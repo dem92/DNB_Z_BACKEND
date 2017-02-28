@@ -1,15 +1,8 @@
 package no.westerdals.pj3100g15;
 
-import no.westerdals.pj3100g15.users.Customer;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class TransactionTest {
 

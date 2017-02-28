@@ -9,7 +9,7 @@ import java.sql.Statement;
  */
 public class setup {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         testPeople test = new testPeople();
         test.createData();
         DBConnector dbConnector = new DBConnector();
@@ -18,11 +18,11 @@ public class setup {
         for (int i = 0; i < 200; i++) {
             insertString += "(" + new BigInteger("" + test.bankAccount.get(i)) + ", "
                     + i + ", '";
-                    if (i % 2 == 0)
-                        insertString += "Brukskonto', ";
-                    else
-                        insertString += "Sparekonto', ";
-                    insertString += new BigInteger("" + test.accountBalance.get(i)) + ", 0, "
+            if (i % 2 == 0)
+                insertString += "Brukskonto', ";
+            else
+                insertString += "Sparekonto', ";
+            insertString += new BigInteger("" + test.accountBalance.get(i)) + ", 0, "
                     + "2.5)";
             if (i == 199)
                 insertString += ";";
@@ -32,9 +32,16 @@ public class setup {
         try (Connection connection = dbConnector.makeConnection(); java.sql.Statement statement = connection.createStatement()) {
 
             statement.executeUpdate(insertString);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("ERROR!!!!");
         }
+    }
+
+    public void addAccount(){
+        String inString = "INSERT INTO Bankkonto VALUES ";
+        inString += "(" + account.getAccountNumber() + ", " + account.getCustomerNumber() + ", " + account.getAccountType()
+                + ", 0, 0, 2.5, 0;";
+
+        System.out.println(inString);
     }
 }

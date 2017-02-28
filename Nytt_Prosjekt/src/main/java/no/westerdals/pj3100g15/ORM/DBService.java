@@ -7,6 +7,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Eva Dahlo on 23/11/2016.
@@ -132,5 +133,46 @@ public class DBService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void addAccount(int customerId, String accountType){
+        makeConnection();
+
+        String accountNo = randomNumber();
+
+        Account account = new Account();
+        account.setCustomerNumber(customerId);
+        account.setAccountType(getAccountType(accountType));
+        account.setKroner(BigInteger.ZERO);
+        account.setOere(0);
+
+        boolean hasFoundValidAccountNo = false;
+
+        while(!hasFoundValidAccountNo) {
+            account.setAccountNumber(accountNo);
+            try {
+                Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
+                accountDao.createIfNotExists(account);
+                hasFoundValidAccountNo=true;
+            } catch (SQLException e) {
+                accountNo = randomNumber();
+            }
+        }
+    }
+
+    public String randomNumber(){
+        String accountNo;
+        int first = ThreadLocalRandom.current().nextInt(100000, 999999);
+        String frst = Integer.toString(first);
+        int last = ThreadLocalRandom.current().nextInt(10000, 99999);
+        String lst = Integer.toString(last);
+        accountNo = frst + lst;
+        return accountNo;
+    }
+
+    public String getAccountType(String accountType){
+        if(accountType=="Sparekonto"){
+            return "Sparekonto";}
+        return "Brukskonto";
     }
 }
