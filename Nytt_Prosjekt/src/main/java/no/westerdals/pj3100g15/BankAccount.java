@@ -70,7 +70,7 @@ public class BankAccount {
         setOere(existingOere);
         return true;
     }
-    
+
 
     // Get and set.
     public int getAccountNumber() {
