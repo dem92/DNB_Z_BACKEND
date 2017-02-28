@@ -143,21 +143,24 @@ public class DBService {
         account.setAccountType(getAccountType(accountType));
         account.setKroner(BigInteger.ZERO);
         account.setOere(0);
-        boolean hasFoundValidAccountNo = false;
-        while (!hasFoundValidAccountNo) {
             account.setAccountNumber(accountNo);
             try {
                 Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
                 accountDao.createIfNotExists(account);
-                hasFoundValidAccountNo = true;
             } catch (SQLException e) {
-                accountNo = randomNumber();
+                e.printStackTrace();
             }
-        }
     }
 
     public static void addCustomer(String phoneNumber, int postalcode, String address, String birthdayNumber, String email, String firstname, String surname) {
         makeConnection();
+        Dao<Customer, Integer> customerDao = null;
+        try{
+            customerDao = DaoManager.createDao(connectionSource, Customer.class);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
         Customer customer = new Customer();
         customer.setAddress(address);
         customer.setBirthdayNumber(birthdayNumber);
@@ -168,7 +171,6 @@ public class DBService {
         customer.setPhoneNumber(phoneNumber);
         customer.setScore(0);
         try {
-            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
             customerDao.createIfNotExists(customer);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -186,7 +188,8 @@ public class DBService {
     }
 
     public static String getAccountType(String accountType) {
-        if (accountType == "Sparekonto") {
+        accountType.toLowerCase();
+        if (accountType == "sparekonto") {
             return "Sparekonto";
         }
         return "Brukskonto";

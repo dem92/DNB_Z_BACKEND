@@ -49,10 +49,16 @@ public class SpringRequestMapController {
         return DBService.getPassword(userID);
     }
 
-    @RequestMapping(value = "/user/new/{phonenumber/{postalcode}/{address}/{birthdaynumber}/{email}/{firstname}/{surname}", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/new/{phonenumber/{postalcode}/{address}/{birthdaynumber}/{email}/{firstname}/{surname}", method = RequestMethod.GET)
     @ResponseBody
-    public void createNewUser(@PathVariable(value = "phonenumber") String phoneNumber, @PathVariable(value = "address") String address, @PathVariable(value = "birthdaynumber") String birthdaynumber, @PathVariable(value = "email") String email, @PathVariable(value = "firstname") String firstName, @PathVariable(value = "surname") String surName){
-        DBService.addCustomer(phoneNumber,); //TODO gjør ferdig denne. Få den til å kjøre metoden. Alle parametere må fylles inn.
+    public void createNewUser(@PathVariable(value = "phonenumber") String phoneNumber, @PathVariable(value = "postalcode")int postCode,@PathVariable(value = "address") String address, @PathVariable(value = "birthdaynumber") String birthdaynumber, @PathVariable(value = "email") String email, @PathVariable(value = "firstname") String firstName, @PathVariable(value = "surname") String surName){
+        DBService.addCustomer(phoneNumber,postCode,address,birthdaynumber,email,firstName,surName);
+    }
+
+    @RequestMapping(value = "/user/{id}/account/new/{accounttype}", method = RequestMethod.GET)
+    @ResponseBody
+    public void createAccount(@PathVariable(value = "id")int customerId, @PathVariable(value = "accounttype") String accountType){
+        DBService.addAccount(customerId,accountType);
     }
 
 

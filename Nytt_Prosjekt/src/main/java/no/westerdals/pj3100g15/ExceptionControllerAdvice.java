@@ -14,6 +14,6 @@ public class ExceptionControllerAdvice {
 
     @ExceptionHandler
     public ResponseEntity handleException(final Exception exception) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong!");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
     }
 }
