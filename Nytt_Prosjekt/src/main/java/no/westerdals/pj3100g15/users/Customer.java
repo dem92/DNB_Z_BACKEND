@@ -1,9 +1,6 @@
 package no.westerdals.pj3100g15.users;
 
 import no.westerdals.pj3100g15.BankAccount;
-import no.westerdals.pj3100g15.logging.Log;
-import no.westerdals.pj3100g15.logging.LogItem;
-import no.westerdals.pj3100g15.logging.TransferItem;
 
 import java.util.ArrayList;
 
@@ -29,7 +26,7 @@ public class Customer extends User {
         accounts.add(account);
         return  true;
     }
-    
+
 
 
     // Get and set.
