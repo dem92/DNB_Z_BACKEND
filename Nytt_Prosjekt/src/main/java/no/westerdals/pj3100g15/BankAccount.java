@@ -77,6 +77,7 @@ public class BankAccount {
         return accountNumber;
     }
 
+    /*
     public String getAccountType() {
         // TODO: Daniel, se her!!!
         String query = "SELECT Kontotype FROM Bankkonto WHERE Kontonummer = " + accountNumber;
@@ -84,7 +85,7 @@ public class BankAccount {
 
 
         return accountType;
-    }
+    }*/
 
     public double getInterestRate() {
         // TODO: Daniel, se her!!!
