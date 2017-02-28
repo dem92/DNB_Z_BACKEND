@@ -10,8 +10,7 @@ import java.math.BigInteger;
 public class TransactionLogic {
 
     public void transferPayment(Account sending, Account receiving, BigInteger amount) {
-        //både kroner og øre-feltet må oppdateres for begge kontoene.
-        // Benytter subtractAmount og addAmount-metodene i Account-klassen
+        //TODO Denne burde også oppdatere øre, det gjør den ikke nå.
         if (controlAccounts(sending, amount)) {
             sending.setKroner(sending.getKroner().subtract(amount));
             receiving.setKroner(receiving.getKroner().add(amount));
