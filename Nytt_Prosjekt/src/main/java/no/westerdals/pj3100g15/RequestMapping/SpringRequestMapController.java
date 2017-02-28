@@ -51,14 +51,22 @@ public class SpringRequestMapController {
 
     @RequestMapping(value = "/user/new/{phonenumber/{postalcode}/{address}/{birthdaynumber}/{email}/{firstname}/{surname}", method = RequestMethod.GET)
     @ResponseBody
-    public void createNewUser(@PathVariable(value = "phonenumber") String phoneNumber, @PathVariable(value = "postalcode")int postCode,@PathVariable(value = "address") String address, @PathVariable(value = "birthdaynumber") String birthdaynumber, @PathVariable(value = "email") String email, @PathVariable(value = "firstname") String firstName, @PathVariable(value = "surname") String surName){
-        DBService.addCustomer(phoneNumber,postCode,address,birthdaynumber,email,firstName,surName);
+    public void createNewUser(@PathVariable(value = "phonenumber") String phoneNumber,
+                              @PathVariable(value = "postalcode")String postCode,
+                              @PathVariable(value = "address") String address,
+                              @PathVariable(value = "birthdaynumber") String birthdaynumber,
+                              @PathVariable(value = "email") String email,
+                              @PathVariable(value = "firstname") String firstName,
+                              @PathVariable(value = "surname") String surName){
+        DBService.addCustomer(phoneNumber,Integer.parseInt(postCode),address,birthdaynumber,email,firstName,surName);
     }
 
     @RequestMapping(value = "/user/{id}/account/new/{accounttype}", method = RequestMethod.GET)
     @ResponseBody
-    public void createAccount(@PathVariable(value = "id")int customerId, @PathVariable(value = "accounttype") String accountType){
-        DBService.addAccount(customerId,accountType);
+    public void createAccount(@PathVariable(value = "id")String customerId,
+                              @PathVariable(value = "accounttype") String accountType){
+        int customerId2 = Integer.parseInt(customerId);
+        DBService.addAccount(customerId2,accountType);
     }
 
 
