@@ -48,4 +48,12 @@ public class SpringRequestMapController {
     public String[] getPasswords(@PathVariable(value = "id") String userID) {
         return DBService.getPassword(userID);
     }
+
+    @RequestMapping(value = "/user/new/{phonenumber/{postalcode}/{address}/{birthdaynumber}/{email}/{firstname}/{surname}", method = RequestMethod.POST)
+    @ResponseBody
+    public void createNewUser(@PathVariable(value = "phonenumber") String phoneNumber, @PathVariable(value = "address") String address, @PathVariable(value = "birthdaynumber") String birthdaynumber, @PathVariable(value = "email") String email, @PathVariable(value = "firstname") String firstName, @PathVariable(value = "surname") String surName){
+        DBService.addCustomer(phoneNumber,); //TODO gjør ferdig denne. Få den til å kjøre metoden. Alle parametere må fylles inn.
+    }
+
+
 }

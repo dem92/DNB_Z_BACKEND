@@ -135,7 +135,7 @@ public class DBService {
         return null;
     }
 
-    public void addAccount(int customerId, String accountType) {
+    public static void addAccount(int customerId, String accountType) {
         makeConnection();
         String accountNo = randomNumber();
         Account account = new Account();
@@ -156,7 +156,7 @@ public class DBService {
         }
     }
 
-    public void addCustomer(String phoneNumber, int postalcode, String address, String birthdayNumber, String email, String firstname, String surname) {
+    public static void addCustomer(String phoneNumber, int postalcode, String address, String birthdayNumber, String email, String firstname, String surname) {
         makeConnection();
         Customer customer = new Customer();
         customer.setAddress(address);
@@ -175,7 +175,7 @@ public class DBService {
         }
     }
 
-    public String randomNumber() {
+    public static String randomNumber() {
         String accountNo;
         int first = ThreadLocalRandom.current().nextInt(100000, 999999);
         String frst = Integer.toString(first);
@@ -185,7 +185,7 @@ public class DBService {
         return accountNo;
     }
 
-    public String getAccountType(String accountType) {
+    public static String getAccountType(String accountType) {
         if (accountType == "Sparekonto") {
             return "Sparekonto";
         }
