@@ -14,13 +14,12 @@ public class Customer extends User {
     private ArrayList<BankAccount> accounts;
     private int logCount;
     private int score;
-    
+
 
     public Customer(String id, String firstName, String lastName, String addressLine1,/* String addressLine2, */ int postalCode, String eMailAddress, int phoneNumber, int score){
         super(id, firstName, lastName, addressLine1, /* addressLine2, */ postalCode, eMailAddress, phoneNumber);
         accounts = new ArrayList<BankAccount>();
         logCount = 0;
-        log = new ArrayList<LogItem>();
         this.score = score;
     }
 
@@ -30,20 +29,7 @@ public class Customer extends User {
         accounts.add(account);
         return  true;
     }
-
-    public boolean addLogItem(LogItem item){
-        return log.add(item);
-    }
-
-
-
-    public void logDeposit(){
-
-    }
-
-    public void logWithdrawal(){
-
-    }
+    
 
 
     // Get and set.
