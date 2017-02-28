@@ -11,45 +11,41 @@ import java.util.List;
  * Created by Eva Dahlo on 24/11/2016.
  */
 @RestController
-public class SpringAccountRetrievalController {
+public class SpringRequestMapController {
 
     @RequestMapping(value = "/user/account/{accountID}", method = RequestMethod.GET)
     @ResponseBody
-    public Account getAccount(@PathVariable(value = "accountID") String account){
+    public Account getAccount(@PathVariable(value = "accountID") String account) {
         return DBService.getAccount(account);
     }
 
     @RequestMapping(value = "/user/{id}/account/all", method = RequestMethod.GET)
     @ResponseBody
-    public List<Account> getAccounts(@PathVariable(value = "id") String userID){
+    public List<Account> getAccounts(@PathVariable(value = "id") String userID) {
         return DBService.getCustomerAccounts(userID);
     }
 
     @RequestMapping(value = "/user/all/account/all", method = RequestMethod.GET)
     @ResponseBody
-    public List<Account> getAllAccounts(){
+    public List<Account> getAllAccounts() {
         return DBService.getAllAccounts();
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Customer getCustomer(@PathVariable(value = "id") String userID){
+    public Customer getCustomer(@PathVariable(value = "id") String userID) {
         return DBService.getCustomer(userID);
     }
 
     @RequestMapping(value = "/user/all", method = RequestMethod.GET)
     @ResponseBody
-    public List<Customer> getAllCustomers(){
+    public List<Customer> getAllCustomers() {
         return DBService.getAllCustomers();
     }
-/* TODO endre URL
-    @RequestMapping("/account")
+
+    @RequestMapping(value = "/user/{id}/auth", method = RequestMethod.GET)
     @ResponseBody
-    public String getSaldoForAccount(@RequestParam(value = "kontonummer", defaultValue = "80766645136") String kontonummer) {
-        DBServiceAccount dbServiceAccount=new DBServiceAccount();
-        String text ="";
-        try{
-            text = dbServiceAccount.saldo(kontonummer);}catch (SQLException e){e.printStackTrace();}
-        return text;
-    }*/
+    public String[] getPasswords(@PathVariable(value = "id") String userID) {
+        return DBService.getPassword(userID);
+    }
 }
