@@ -70,10 +70,7 @@ public class BankAccount {
         setOere(existingOere);
         return true;
     }
-
-    public void logTransfer(int fromAccount, int toAccount, int kroner, int oere) {
-        customer.logTransfer(fromAccount, toAccount, kroner, oere);
-    }
+    
 
     // Get and set.
     public int getAccountNumber() {
