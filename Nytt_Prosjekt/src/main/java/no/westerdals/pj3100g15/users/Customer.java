@@ -1,6 +1,5 @@
 package no.westerdals.pj3100g15.users;
 
-import no.westerdals.pj3100g15.BankAccount;
 
 import java.util.ArrayList;
 
@@ -19,7 +18,7 @@ public class Customer extends User {
         logCount = 0;
         this.score = score;
     }
-
+/*
     public boolean addAccount(BankAccount account){
         if (account == null) return false;
 
@@ -37,5 +36,5 @@ public class Customer extends User {
     public void setAccounts(ArrayList<BankAccount> accounts) {
         this.accounts = accounts;
     }
-
+*/
 }
