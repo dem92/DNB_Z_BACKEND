@@ -35,11 +35,7 @@ public class Customer extends User implements Log {
         return log.add(item);
     }
 
-    public void logTransfer(int fromAccount, int toAccount, int kroner, int oere){
-        logCount++;
-        TransferItem item = new TransferItem(logCount, super.foedselsnummer, fromAccount, toAccount, kroner, oere);
-        log.add(item);
-    }
+    
 
     public void logDeposit(){
 
