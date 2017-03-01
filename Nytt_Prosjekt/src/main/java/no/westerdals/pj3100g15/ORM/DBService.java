@@ -135,12 +135,12 @@ public class DBService {
         return null;
     }
 
-    public static void addAccount(int customerId, String accountType) {
+    public static void addAccount(int customerId, int accountType) {
         makeConnection();
         String accountNo = randomNumber();
         Account account = new Account();
         account.setCustomerNumber(customerId);
-        account.setAccountType(getAccountType(accountType));
+        account.setAccountType(0);
         account.setKroner(BigInteger.ZERO);
         account.setOere(0);
             account.setAccountNumber(accountNo);

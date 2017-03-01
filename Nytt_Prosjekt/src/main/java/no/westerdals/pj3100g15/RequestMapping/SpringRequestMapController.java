@@ -60,10 +60,9 @@ public class SpringRequestMapController {
 
     @RequestMapping(value = "/user/{id}/account/new/{accounttype}", method = RequestMethod.GET)
     @ResponseBody
-    public void createAccount(@PathVariable(value = "id")String customerId,
-                              @PathVariable(value = "accounttype") String accountType){
-        int customerId2 = Integer.parseInt(customerId);
-        DBService.addAccount(customerId2,accountType);
+    public void createAccount(@PathVariable(value = "id")int customerId,
+                              @PathVariable(value = "accounttype") int accountType){
+        DBService.addAccount(customerId,accountType);
     }
 
 
