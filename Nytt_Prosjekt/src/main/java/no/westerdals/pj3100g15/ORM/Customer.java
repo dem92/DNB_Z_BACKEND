@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Customer {
 
     @DatabaseField(columnName = "Kundenummer", id = true)
-    private int customerID;
+    private Integer customerID = null;
     @DatabaseField(columnName = "Foedselsnummer")
     private String birthdayNumber;
     @DatabaseField(columnName = "Fornavn")
@@ -15,7 +15,7 @@ public class Customer {
     @DatabaseField(columnName = "Etternavn")
     private String surName;
     @DatabaseField(columnName = "Adresse")
-    private String address;
+    private int address;
     @DatabaseField(columnName = "Postnummer")
     private int postalCode;
     @DatabaseField(columnName = "Mail")
@@ -29,7 +29,7 @@ public class Customer {
         //Empty constructor
     }
 
-    public Customer(int customerID, String birthdayNumber, String firstName, String surName, String address, int postalCode, String eMail, int phoneNumber, int score) {
+    public Customer(int customerID, String birthdayNumber, String firstName, String surName, int address, int postalCode, String eMail, int phoneNumber, int score) {
         this.customerID = customerID;
         this.birthdayNumber = birthdayNumber;
         this.firstName = firstName;
@@ -73,11 +73,11 @@ public class Customer {
         this.surName = surName;
     }
 
-    public String getAddress() {
+    public int getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(int address) {
         this.address = address;
     }
 

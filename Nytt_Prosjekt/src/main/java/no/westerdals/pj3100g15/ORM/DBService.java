@@ -162,23 +162,18 @@ public class DBService {
 
     public static void addCustomer(String firstname, String surname) {
         makeConnection();
-        Dao<Customer, Integer> customerDao = null;
-        try {
-            customerDao = DaoManager.createDao(connectionSource, Customer.class);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         Customer customer = new Customer();
         customer.setFirstName(firstname);
         customer.setSurName(surname);
         customer.setPostalCode(1234);
         customer.setPhoneNumber(12345678);
-        customer.setAddress("noAddress");
-        customer.setBirthdayNumber("no birthdayNumber");
-        customer.seteMail("ingen email");
+        customer.setAddress(1234567);
+        customer.setBirthdayNumber("12345678910");
+        customer.seteMail("noemail");
         customer.setScore(0);
         try {
+            Dao<Customer, Integer>customerDao = DaoManager.createDao(connectionSource, Customer.class);
             customerDao.createIfNotExists(customer);
         } catch (SQLException e) {
             e.printStackTrace();
