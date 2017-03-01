@@ -5,11 +5,8 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 
 import java.math.BigInteger;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -168,6 +165,18 @@ public class DBService {
             e.printStackTrace();
         }
     }
+
+/* //TODO En ofärdig metod för att skicka pengar. Får inte tag i information om konton, måste hitta en lösning för det!
+    public static void sendMoney(String accountNumber, String accountNumber2, BigInteger kroner, int oere){
+        makeConnection();
+        Account account = new Account();
+        try{
+            Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
+            PreparedStatement myStatement = connectionSource.
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    } */
 
     //TODO oppdater denne metoden. Endre hardkodet verdi i Customer(customerId)
     // TODO bruk heller en if/else og sjekk om brukeren finnes eller ikke. Sett verdien til "NULL" om den ikke finnes

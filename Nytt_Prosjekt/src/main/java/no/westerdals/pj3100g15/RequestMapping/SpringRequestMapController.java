@@ -6,7 +6,6 @@ import no.westerdals.pj3100g15.ORM.DBService;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
-import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -74,5 +73,15 @@ public class SpringRequestMapController {
         DBService.addOrUpdateAccount(customerId, accountType, accountNumber, kroner, oere, main);
     }
 
+    //TODO Se metoden sendMoney i DBService för info om vad detta är.
+  /*  @RequestMapping(value = "/{sendersAccount}/{recieversAccount}/{kroner}/{oere}", method = RequestMethod.GET)
+    @ResponseBody
+    public void sendMoney(
+        @PathVariable(value = "sendersAccount") String accountNumber,
+        @PathVariable(value = "recieversAccount") String accountNumber2,
+        @PathVariable(value = "kroner") BigInteger kroner,
+        @PathVariable(value = "oere") int oere) {
+        DBService.sendMoney(accountNumber, accountNumber2, kroner, oere);
+    } */
 
 }
