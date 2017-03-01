@@ -22,15 +22,18 @@ public class Account {
     private BigInteger kroner;
     @DatabaseField(columnName = "Kontotype")
     private int accountType;
+    @DatabaseField(columnName = "Rente")
+    private double interest;
 
     public Account() {
     }
 
-    public Account(String accountNumber, int kundenummer, BigInteger kroner, int oere) {
+    public Account(String accountNumber, int kundenummer, BigInteger kroner, int oere, double interest) {
         this.accountNumber = accountNumber;
         this.customerNumber = kundenummer;
         this.kroner = kroner;
         this.oere = oere;
+        this.interest = interest;
     }
 
     public String getAccountNumber() {
@@ -71,5 +74,13 @@ public class Account {
 
     public void setAccountType(int accountType) {
         this.accountType = accountType;
+    }
+
+    public double getInterest() {
+        return interest;
+    }
+
+    public void setInterest(double interest) {
+        this.interest = interest;
     }
 }
