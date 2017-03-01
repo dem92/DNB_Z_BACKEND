@@ -140,24 +140,31 @@ public class DBService {
         String accountNo = randomNumber();
         Account account = new Account();
         account.setCustomerNumber(customerId);
-        account.setAccountType(0);
+        account.setAccountType(accountType);
         account.setKroner(BigInteger.ZERO);
         account.setOere(0);
-            account.setAccountNumber(accountNo);
-            try {
-                Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
-                accountDao.createIfNotExists(account);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        account.setAccountNumber(accountNo);
+        account.setMain(0); //TODO denne burde sjekke om kundenummeret er registrert med en annen konto.
+                            // om brukeren er det, så burde denne verdien bli satt til 1(som betyr ikke main-konto)
+        if(accountType==1){
+            account.setInterest(4.0); //Setter 4 prosent rente for sparekonto
+        }else {
+            account.setInterest(2.5); //Setter 2.5 prosent rente for brukskonto
+        }
+        try {
+            Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
+            accountDao.createIfNotExists(account);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void addCustomer(String phoneNumber, int postalcode, String address, String birthdayNumber, String email, String firstname, String surname) {
         makeConnection();
         Dao<Customer, Integer> customerDao = null;
-        try{
+        try {
             customerDao = DaoManager.createDao(connectionSource, Customer.class);
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

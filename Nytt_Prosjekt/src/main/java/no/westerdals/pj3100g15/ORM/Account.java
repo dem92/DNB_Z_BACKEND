@@ -24,6 +24,8 @@ public class Account {
     private int accountType;
     @DatabaseField(columnName = "Rente")
     private double interest;
+    @DatabaseField(columnName = "Main")
+    private int main;
 
     public Account() {
     }
@@ -82,5 +84,13 @@ public class Account {
 
     public void setInterest(double interest) {
         this.interest = interest;
+    }
+
+    public int getMain() {
+        return main;
+    }
+
+    public void setMain(int main) {
+        this.main = main;
     }
 }
