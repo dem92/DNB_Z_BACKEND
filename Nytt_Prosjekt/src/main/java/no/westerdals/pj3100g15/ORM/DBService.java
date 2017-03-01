@@ -160,17 +160,17 @@ public class DBService {
         }
     }
 
-    public static void addCustomer(String firstname, String surname) {
+    public static void addCustomer(String firstName, String surname, String birthDayNumber, String email) {
         makeConnection();
 
         Customer customer = new Customer();
-        customer.setFirstName(firstname);
+        customer.setFirstName(firstName);
         customer.setSurName(surname);
-        customer.setPostalCode(1234);
-        customer.setPhoneNumber(12345678);
-        customer.setAddress(1234567);
-        customer.setBirthdayNumber("12345678910");
-        customer.seteMail("noemail");
+        customer.setPostalCode(9999);
+        customer.setPhoneNumber(99999999);
+        customer.setAddress("NULL");
+        customer.setBirthdayNumber(birthDayNumber);
+        customer.seteMail(email);
         customer.setScore(0);
         try {
             Dao<Customer, Integer>customerDao = DaoManager.createDao(connectionSource, Customer.class);
