@@ -46,14 +46,18 @@ public class SpringRequestMapController {
         return DBService.getPassword(userID);
     }
 
-    @RequestMapping(value = "/user/new/{firstname}/{surname}/{email}/{birthdaynumber}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/new/{firstname}/{surname}/{email}/{birthdaynumber}/{customerid}/{addresse}/{postnummer}/{telefonnummer}", method = RequestMethod.GET)
     @ResponseBody
     public void createNewUser(
             @PathVariable(value = "firstname") String firstName,
             @PathVariable(value = "surname") String surName,
             @PathVariable(value = "birthdaynumber") String birthdaynumber,
-            @PathVariable(value = "email") String email) {
-        DBService.addCustomer(firstName, surName, birthdaynumber, email);
+            @PathVariable(value = "email") String email,
+            @PathVariable(value = "customerid") int customerId,
+            @PathVariable(value = "addresse")String address,
+            @PathVariable(value = "postnummer") int postalCode,
+            @PathVariable(value = "telefonnummer") int telephoneNumber) {
+        DBService.addCustomer(firstName, surName, birthdaynumber, email, customerId, address, postalCode, telephoneNumber);
     }
 
     @RequestMapping(value = "/user/{id}/account/new/{accounttype}", method = RequestMethod.GET)
@@ -62,6 +66,8 @@ public class SpringRequestMapController {
                               @PathVariable(value = "accounttype") int accountType) {
         DBService.addAccount(customerId, accountType);
     }
+
+    
 
 
 }

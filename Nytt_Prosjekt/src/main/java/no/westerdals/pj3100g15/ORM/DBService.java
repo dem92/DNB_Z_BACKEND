@@ -7,6 +7,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -145,10 +146,10 @@ public class DBService {
         account.setOere(0);
         account.setAccountNumber(accountNo);
 
-        if(accountType==2){
+        if (accountType == 2) {
             account.setInterest(4.0); //Setter 4 prosent rente for sparekonto
             account.setMain(1);
-        }else {
+        } else {
             account.setInterest(2.5); //Setter 2.5 prosent rente for brukskonto
             account.setMain(0);
         }
@@ -160,21 +161,27 @@ public class DBService {
         }
     }
 
-    public static void addCustomer(String firstName, String surname, String birthDayNumber, String email) {
-        makeConnection();
+    //TODO oppdater denne metoden. Endre hardkodet verdi i Customer(customerId)
+    // TODO bruk heller en if/else og sjekk om brukeren finnes eller ikke. Sett verdien til "NULL" om den ikke finnes
+    //TODO lag lang url for springrequestmapcontroller addCustomer-metoden
 
+    public static void addCustomer(String firstName, String surname, String birthDayNumber, String email, int customerId, String address, int postalCode, int telephoneNumber) {
+        makeConnection();
         Customer customer = new Customer();
+        if(checkCustomer(customerId)){
+            customer.setCustomerID(customerId);
+        }
         customer.setFirstName(firstName);
         customer.setSurName(surname);
-        customer.setPostalCode(9999);
-        customer.setPhoneNumber(99999999);
-        customer.setAddress("NULL");
+        customer.setPostalCode(postalCode);
+        customer.setPhoneNumber(telephoneNumber);
+        customer.setAddress(address);
         customer.setBirthdayNumber(birthDayNumber);
         customer.seteMail(email);
         customer.setScore(0);
         try {
-            Dao<Customer, Integer>customerDao = DaoManager.createDao(connectionSource, Customer.class);
-            customerDao.createIfNotExists(customer);
+            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            customerDao.createOrUpdate(customer); //
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -188,5 +195,20 @@ public class DBService {
         String lst = Integer.toString(last);
         accountNo = frst + lst;
         return accountNo;
+    }
+
+
+    public static boolean checkCustomer(int customerId) {
+        makeConnection();
+        try {
+            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            if (customerDao.idExists(customerId)) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
     }
 }
