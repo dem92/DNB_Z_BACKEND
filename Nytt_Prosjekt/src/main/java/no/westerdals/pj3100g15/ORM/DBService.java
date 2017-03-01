@@ -144,7 +144,7 @@ public class DBService {
         account.setKroner(BigInteger.ZERO);
         account.setOere(0);
         account.setAccountNumber(accountNo);
-        
+
         if(accountType==2){
             account.setInterest(4.0); //Setter 4 prosent rente for sparekonto
             account.setMain(1);
@@ -160,7 +160,7 @@ public class DBService {
         }
     }
 
-    public static void addCustomer(String phoneNumber, int postalcode, String address, String birthdayNumber, String email, String firstname, String surname) {
+    public static void addCustomer(String firstname, String surname) {
         makeConnection();
         Dao<Customer, Integer> customerDao = null;
         try {
@@ -170,13 +170,13 @@ public class DBService {
         }
 
         Customer customer = new Customer();
-        customer.setAddress(address);
-        customer.setBirthdayNumber(birthdayNumber);
-        customer.seteMail(email);
         customer.setFirstName(firstname);
         customer.setSurName(surname);
-        customer.setPostalCode(postalcode);
-        customer.setPhoneNumber(phoneNumber);
+        customer.setPostalCode(1234);
+        customer.setPhoneNumber(12345678);
+        customer.setAddress("noAddress");
+        customer.setBirthdayNumber("no birthdayNumber");
+        customer.seteMail("ingen email");
         customer.setScore(0);
         try {
             customerDao.createIfNotExists(customer);

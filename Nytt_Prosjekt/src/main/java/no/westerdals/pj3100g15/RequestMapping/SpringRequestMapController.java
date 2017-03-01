@@ -46,17 +46,19 @@ public class SpringRequestMapController {
         return DBService.getPassword(userID);
     }
 
-    @RequestMapping(value = "/user/new/{phonenumber/{postalcode}/{address}/{birthdaynumber}/{email}/{firstname}/{surname}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/new/{firstname}/{surname}", method = RequestMethod.GET)
     @ResponseBody
-    public void createNewUser(@PathVariable(value = "phonenumber") String phoneNumber,
-                              @PathVariable(value = "postalcode")String postCode,
-                              @PathVariable(value = "address") String address,
-                              @PathVariable(value = "birthdaynumber") String birthdaynumber,
-                              @PathVariable(value = "email") String email,
+    public void createNewUser(
                               @PathVariable(value = "firstname") String firstName,
                               @PathVariable(value = "surname") String surName){
-        DBService.addCustomer(phoneNumber,Integer.parseInt(postCode),address,birthdaynumber,email,firstName,surName);
+        DBService.addCustomer(firstName,surName);
     }
+/*
+    @PathVariable(value = "phonenumber") int phoneNumber,
+    @PathVariable(value = "postalcode")int postCode,
+    @PathVariable(value = "address") String address,
+    @PathVariable(value = "birthdaynumber") String birthdaynumber,
+    @PathVariable(value = "email") String email,*/
 
     @RequestMapping(value = "/user/{id}/account/new/{accounttype}", method = RequestMethod.GET)
     @ResponseBody

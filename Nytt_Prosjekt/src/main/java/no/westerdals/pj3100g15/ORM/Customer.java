@@ -9,24 +9,36 @@ public class Customer {
     @DatabaseField(columnName = "Kundenummer", id = true)
     private int customerID;
     @DatabaseField(columnName = "Foedselsnummer")
-    private String birthdayNumber; //denne er bigInt i databasen
+    private String birthdayNumber;
     @DatabaseField(columnName = "Fornavn")
     private String firstName;
     @DatabaseField(columnName = "Etternavn")
     private String surName;
     @DatabaseField(columnName = "Adresse")
-    private String Address;
+    private String address;
     @DatabaseField(columnName = "Postnummer")
     private int postalCode;
     @DatabaseField(columnName = "Mail")
     private String eMail;
     @DatabaseField(columnName = "Telefon")
-    private String phoneNumber; //denne er int i databasen
+    private int phoneNumber;
     @DatabaseField(columnName = "Score")
     private int score;
 
     public Customer() {
         //Empty constructor
+    }
+
+    public Customer(int customerID, String birthdayNumber, String firstName, String surName, String address, int postalCode, String eMail, int phoneNumber, int score) {
+        this.customerID = customerID;
+        this.birthdayNumber = birthdayNumber;
+        this.firstName = firstName;
+        this.surName = surName;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.eMail = eMail;
+        this.phoneNumber = phoneNumber;
+        this.score = score;
     }
 
     public int getCustomerID() {
@@ -62,11 +74,11 @@ public class Customer {
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public int getPostalCode() {
@@ -85,11 +97,11 @@ public class Customer {
         this.eMail = eMail;
     }
 
-    public String getPhoneNumber() {
+    public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
