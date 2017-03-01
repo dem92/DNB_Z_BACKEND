@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by Eva Dahlo on 24/11/2016.
- */
 @RestController
 public class SpringRequestMapController {
 
