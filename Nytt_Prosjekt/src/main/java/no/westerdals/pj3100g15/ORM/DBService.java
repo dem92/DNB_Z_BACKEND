@@ -166,17 +166,29 @@ public class DBService {
         }
     }
 
-/* //TODO En ofärdig metod för att skicka pengar. Får inte tag i information om konton, måste hitta en lösning för det!
+ //TODO En ofärdig metod för att skicka pengar. Får inte tag i information om konton, måste hitta en lösning för det!
     public static void sendMoney(String accountNumber, String accountNumber2, BigInteger kroner, int oere){
         makeConnection();
-        Account account = new Account();
+        Account sending = getAccount(accountNumber);
+        Account recieving = getAccount(accountNumber2);
+        //TODO Det här är väldigt osäkert och potentiellt exploitable. Får fixa detta vid senare tillfälle!
+        if (kroner.compareTo(sending.getKroner()) >= 0) {
+            sending.setKroner(sending.getKroner().subtract(kroner));
+            if(sending.getOere() < oere){
+                sending.setKroner(sending.getKroner().subtract((BigInteger.ONE)));
+                sending.setOere(sending.getOere()+100);
+            }
+        }
+        sending.setOere(sending.getOere() - oere);
+        recieving.setKroner(recieving.getKroner().add(kroner));
+        recieving.setOere(recieving.getOere() + oere);
         try{
             Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
-            PreparedStatement myStatement = connectionSource.
+            //TODO Skriv klart detta!!! 
         } catch (SQLException e){
             e.printStackTrace();
         }
-    } */
+    }
 
     //TODO oppdater denne metoden. Endre hardkodet verdi i Customer(customerId)
     // TODO bruk heller en if/else og sjekk om brukeren finnes eller ikke. Sett verdien til "NULL" om den ikke finnes
