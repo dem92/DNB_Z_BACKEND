@@ -144,12 +144,13 @@ public class DBService {
         account.setKroner(BigInteger.ZERO);
         account.setOere(0);
         account.setAccountNumber(accountNo);
-        account.setMain(0); //TODO denne burde sjekke om kundenummeret er registrert med en annen konto.
-                            // om brukeren er det, så burde denne verdien bli satt til 1(som betyr ikke main-konto)
-        if(accountType==1){
+        
+        if(accountType==2){
             account.setInterest(4.0); //Setter 4 prosent rente for sparekonto
+            account.setMain(1);
         }else {
             account.setInterest(2.5); //Setter 2.5 prosent rente for brukskonto
+            account.setMain(0);
         }
         try {
             Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
@@ -192,13 +193,5 @@ public class DBService {
         String lst = Integer.toString(last);
         accountNo = frst + lst;
         return accountNo;
-    }
-
-    public static String getAccountType(String accountType) {
-        accountType.toLowerCase();
-        if (accountType == "sparekonto") {
-            return "Sparekonto";
-        }
-        return "Brukskonto";
     }
 }
