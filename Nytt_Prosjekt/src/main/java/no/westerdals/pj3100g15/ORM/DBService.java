@@ -5,6 +5,8 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 
 import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
@@ -136,16 +138,22 @@ public class DBService {
         return null;
     }
 
-    public static void addAccount(int customerId, int accountType) {
+
+    public static void addOrUpdateAccount(int customerId, int accountType, String accountNumber, BigInteger kroner, int oere, int main) {
         makeConnection();
-        String accountNo = randomNumber();
+
         Account account = new Account();
         account.setCustomerNumber(customerId);
         account.setAccountType(accountType);
-        account.setKroner(BigInteger.ZERO);
-        account.setOere(0);
-        account.setAccountNumber(accountNo);
-
+        account.setKroner(kroner);
+        account.setOere(oere);
+        if (checkAccount(accountNumber)){
+            account.setAccountNumber(accountNumber);
+        }else {
+            String randomAccountNumber = randomNumber();
+            account.setAccountNumber(randomAccountNumber);
+        }
+        account.setMain(main);
         if (accountType == 2) {
             account.setInterest(4.0); //Setter 4 prosent rente for sparekonto
             account.setMain(1);
@@ -155,7 +163,7 @@ public class DBService {
         }
         try {
             Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
-            accountDao.createIfNotExists(account);
+            accountDao.createOrUpdate(account);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -165,10 +173,10 @@ public class DBService {
     // TODO bruk heller en if/else og sjekk om brukeren finnes eller ikke. Sett verdien til "NULL" om den ikke finnes
     //TODO lag lang url for springrequestmapcontroller addCustomer-metoden
 
-    public static void addCustomer(String firstName, String surname, String birthDayNumber, String email, int customerId, String address, int postalCode, int telephoneNumber) {
+    public static void addOrUpdateCustomer(String firstName, String surname, String birthDayNumber, String email, int customerId, String address, int postalCode, int telephoneNumber) {
         makeConnection();
         Customer customer = new Customer();
-        if(checkCustomer(customerId)){
+        if (checkCustomer(customerId)) {
             customer.setCustomerID(customerId);
         }
         customer.setFirstName(firstName);
@@ -208,6 +216,19 @@ public class DBService {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+        return false;
+    }
+
+    public static boolean checkAccount(String accountNumber) {
+        makeConnection();
+        try {
+            Dao<Account, String> accountStringDao = DaoManager.createDao(connectionSource, Account.class);
+            if (accountStringDao.idExists(accountNumber)) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return false;
     }

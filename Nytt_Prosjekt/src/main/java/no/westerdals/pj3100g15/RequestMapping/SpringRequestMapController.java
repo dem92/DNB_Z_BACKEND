@@ -5,6 +5,8 @@ import no.westerdals.pj3100g15.ORM.Customer;
 import no.westerdals.pj3100g15.ORM.DBService;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -54,20 +56,23 @@ public class SpringRequestMapController {
             @PathVariable(value = "birthdaynumber") String birthdaynumber,
             @PathVariable(value = "email") String email,
             @PathVariable(value = "customerid") int customerId,
-            @PathVariable(value = "addresse")String address,
+            @PathVariable(value = "addresse") String address,
             @PathVariable(value = "postnummer") int postalCode,
             @PathVariable(value = "telefonnummer") int telephoneNumber) {
-        DBService.addCustomer(firstName, surName, birthdaynumber, email, customerId, address, postalCode, telephoneNumber);
+        DBService.addOrUpdateCustomer(firstName, surName, birthdaynumber, email, customerId, address, postalCode, telephoneNumber);
     }
 
-    @RequestMapping(value = "/user/{id}/account/new/{accounttype}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{id}/account/neworupdate/{accounttype}/{kontonummer}/{kroner}/{oere}/{main}", method = RequestMethod.GET)
     @ResponseBody
-    public void createAccount(@PathVariable(value = "id") int customerId,
-                              @PathVariable(value = "accounttype") int accountType) {
-        DBService.addAccount(customerId, accountType);
+    public void createAccount(
+            @PathVariable(value = "id") int customerId,
+            @PathVariable(value = "accounttype") int accountType,
+            @PathVariable(value = "kontonummer") String accountNumber,
+            @PathVariable(value = "kroner") BigInteger kroner,
+            @PathVariable(value = "oere") int oere,
+            @PathVariable(value = "main") int main) {
+        DBService.addOrUpdateAccount(customerId, accountType, accountNumber, kroner, oere, main);
     }
-
-    
 
 
 }
