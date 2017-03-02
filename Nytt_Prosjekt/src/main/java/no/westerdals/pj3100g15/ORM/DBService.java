@@ -54,12 +54,12 @@ public class DBService {
         return null;
     }
 
-    public static List<Account> getCustomerAccounts(String birthNumber) {
+    public static List<Account> getCustomerAccounts(int customerId) {
         makeConnection();
 
         try {
             Dao<Customer, String> customerDao = DaoManager.createDao(connectionSource, Customer.class);
-            List<Customer> customer = customerDao.queryForEq("Foedselsnummer", birthNumber);
+            List<Customer> customer = customerDao.queryForEq("Kundenummer", customerId);
 
             if (customer.size() != 1)
                 return null;
@@ -88,12 +88,12 @@ public class DBService {
         return null;
     }
 
-    public static String[] getPassword(String birthNumber) {
+    public static String[] getPassword(int customerId) {
         makeConnection();
 
         try {
             Dao<UserPassword, String> passwordDao = DaoManager.createDao(connectionSource, UserPassword.class);
-            List<UserPassword> password = passwordDao.queryForEq("Foedselsnummer", birthNumber);
+            List<UserPassword> password = passwordDao.queryForEq("Kundenummer", customerId);
 
             if (password.size() != 1)
                 return null;
@@ -118,12 +118,12 @@ public class DBService {
         return null;
     }
 
-    public static Customer getCustomer(String birthNumber) {
+    public static Customer getCustomer(int customerId) {
         makeConnection();
 
         try {
             Dao<Customer, String> customerDao = DaoManager.createDao(connectionSource, Customer.class);
-            List<Customer> customer = customerDao.queryForEq("Foedselsnummer", birthNumber);
+            List<Customer> customer = customerDao.queryForEq("Kundenummer", customerId);
 
             if (customer.size() != 1)
                 return null;
@@ -136,27 +136,35 @@ public class DBService {
     }
 
 
-    public static void addOrUpdateAccount(int customerId, int accountType, String accountNumber, BigInteger kroner, int oere, int main) {
+    public static void addAccount(int customerId, String accountType) {
         makeConnection();
 
         Account account = new Account();
+        accountType = accountType.toLowerCase();
+        String randomNumber = randomNumber();
         account.setCustomerNumber(customerId);
-        account.setAccountType(accountType);
-        account.setKroner(kroner);
-        account.setOere(oere);
-        if (checkAccount(accountNumber)){
-            account.setAccountNumber(accountNumber);
-        }else {
+        account.setKroner(BigInteger.ZERO);
+        account.setOere(0);
+        if (!checkAccount(randomNumber)) {
+            account.setAccountNumber(randomNumber);
+        } else {
             String randomAccountNumber = randomNumber();
             account.setAccountNumber(randomAccountNumber);
         }
-        account.setMain(main);
-        if (accountType == 2) {
+
+        if(getCustomerAccounts(customerId).size() > 1){
+            account.setMain(1);
+        }else {account.setMain(0);}
+
+
+        if (accountType.equals("sparekonto")) {
+            account.setAccountType("Sparekonto");
             account.setInterest(4.0); //Setter 4 prosent rente for sparekonto
             account.setMain(1);
         } else {
             account.setInterest(2.5); //Setter 2.5 prosent rente for brukskonto
             account.setMain(0);
+            account.setAccountType("Brukskonto");
         }
         try {
             Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
@@ -166,35 +174,40 @@ public class DBService {
         }
     }
 
- //TODO En ofärdig metod för att skicka pengar. Får inte tag i information om konton, måste hitta en lösning för det!
-    public static boolean sendMoney(String accountNumber, String accountNumber2, BigInteger kroner, int oere){
+
+    public static boolean sendMoney(String accountNumber, String accountNumber2, BigInteger kroner, int oere) {
         makeConnection();
         Account sending = getAccount(accountNumber);
         Account recieving = getAccount(accountNumber2);
         boolean hasMoney = false;
-        //TODO Det här är väldigt osäkert och potentiellt exploitable. Får fixa detta vid senare tillfälle!
-        int moneyOnAccount = sending.getKroner().subtract(kroner).intValue();
+
         if (sending.getOere() < oere) {
             sending.setKroner(sending.getKroner().subtract((BigInteger.ONE)));
-            sending.setOere(sending.getOere()+100);
-            moneyOnAccount--;
+            sending.setOere(sending.getOere() + 100);
         }
-        if(moneyOnAccount >= 0){
+        if (sending.getKroner().subtract(kroner).compareTo(BigInteger.ZERO) >= 0) {
             hasMoney = true;
         }
-        if(hasMoney) {
+        if (hasMoney) {
             sending.setOere(sending.getOere() - oere);
             sending.setKroner(sending.getKroner().subtract(kroner));
             recieving.setKroner(recieving.getKroner().add(kroner));
             recieving.setOere(recieving.getOere() + oere);
-            try{
+            if (recieving.getOere() > 99) {
+                recieving.setKroner(recieving.getKroner().add(BigInteger.ONE));
+                recieving.setOere(recieving.getOere() - 100);
+            }
+            try {
                 Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
                 accountDao.update(sending);
                 accountDao.update(recieving);
                 return true;
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
+        } else {
+            sending.setKroner(sending.getKroner().add((BigInteger.ONE)));
+            sending.setOere(sending.getOere() - 100);
         }
         return false;
     }

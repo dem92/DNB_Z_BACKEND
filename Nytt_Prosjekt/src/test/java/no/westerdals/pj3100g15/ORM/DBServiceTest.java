@@ -41,14 +41,14 @@ public class DBServiceTest {
 
     @Test
     public void getCustomerAccounts() throws Exception {
-        List<Account> accounts = DBService.getCustomerAccounts("05089622442"); // Has to be a valid birthNumber
+        List<Account> accounts = DBService.getCustomerAccounts(0); // Has to be a valid birthNumber
         assertNotNull(accounts);
         assertNotNull(accounts.get(0));
     }
 
     @Test
     public void getPassword() throws Exception {
-        String[] password = DBService.getPassword("05089622442"); // Has to be a valid birthNumber
+        String[] password = DBService.getPassword(1); // Has to be a valid birthNumber
         assertNotNull(password);
         assertNotNull(password[0]);
         assertNotNull(password[1]);
@@ -56,7 +56,7 @@ public class DBServiceTest {
 
     @Test
     public void getCustomer() throws Exception {
-        Customer customer = DBService.getCustomer("05089622442"); // Has to be a valid birthNumber
+        Customer customer = DBService.getCustomer(2); // Has to be a valid birthNumber
         assertNotNull(customer);
     }
 }

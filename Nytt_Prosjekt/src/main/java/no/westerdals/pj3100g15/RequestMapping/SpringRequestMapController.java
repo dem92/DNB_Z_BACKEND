@@ -19,8 +19,8 @@ public class SpringRequestMapController {
 
     @RequestMapping(value = "/user/{id}/account/all", method = RequestMethod.GET)
     @ResponseBody
-    public List<Account> getAccounts(@PathVariable(value = "id") String userID) {
-        return DBService.getCustomerAccounts(userID);
+    public List<Account> getAccounts(@PathVariable(value = "id") int customerId) {
+        return DBService.getCustomerAccounts(customerId);
     }
 
     @RequestMapping(value = "/user/all/account/all", method = RequestMethod.GET)
@@ -31,8 +31,8 @@ public class SpringRequestMapController {
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Customer getCustomer(@PathVariable(value = "id") String userID) {
-        return DBService.getCustomer(userID);
+    public Customer getCustomer(@PathVariable(value = "id") int customerId) {
+        return DBService.getCustomer(customerId);
     }
 
     @RequestMapping(value = "/user/all", method = RequestMethod.GET)
@@ -43,8 +43,8 @@ public class SpringRequestMapController {
 
     @RequestMapping(value = "/user/{id}/auth", method = RequestMethod.GET)
     @ResponseBody
-    public String[] getPasswords(@PathVariable(value = "id") String userID) {
-        return DBService.getPassword(userID);
+    public String[] getPasswords(@PathVariable(value = "id") int customerId) {
+        return DBService.getPassword(customerId);
     }
 
     @RequestMapping(value = "/user/new/{firstname}/{surname}/{email}/{birthdaynumber}/{customerid}/{addresse}/{postnummer}/{telefonnummer}", method = RequestMethod.GET)
@@ -61,16 +61,12 @@ public class SpringRequestMapController {
         DBService.addOrUpdateCustomer(firstName, surName, birthdaynumber, email, customerId, address, postalCode, telephoneNumber);
     }
 
-    @RequestMapping(value = "/user/{id}/account/neworupdate/{accounttype}/{kontonummer}/{kroner}/{oere}/{main}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{id}/account/new/{accounttype}", method = RequestMethod.GET)
     @ResponseBody
     public void createAccount(
             @PathVariable(value = "id") int customerId,
-            @PathVariable(value = "accounttype") int accountType,
-            @PathVariable(value = "kontonummer") String accountNumber,
-            @PathVariable(value = "kroner") BigInteger kroner,
-            @PathVariable(value = "oere") int oere,
-            @PathVariable(value = "main") int main) {
-        DBService.addOrUpdateAccount(customerId, accountType, accountNumber, kroner, oere, main);
+            @PathVariable(value = "accounttype") String accountType) {
+        DBService.addAccount(customerId, accountType);
     }
 
     //TODO Se metoden sendMoney i DBService för info om vad detta är.
