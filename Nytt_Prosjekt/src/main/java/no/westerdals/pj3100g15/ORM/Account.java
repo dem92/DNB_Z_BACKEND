@@ -26,7 +26,7 @@ public class Account {
     private double interest;
     @DatabaseField(columnName = "Main")
     private int main;
-    @DatabaseField(columnName = "Navn")
+    @DatabaseField(columnName = "Kontonavn")
     private String name;
 
     public Account() {
