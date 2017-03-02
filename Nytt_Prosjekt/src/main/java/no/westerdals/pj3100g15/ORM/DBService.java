@@ -85,12 +85,12 @@ public class DBService {
         return null;
     }
 
-    public static String[] getPassword(int customerId) {
+    public static String[] getPassword(String birthdayNumber) {
         makeConnection();
 
         try {
             Dao<UserPassword, String> passwordDao = DaoManager.createDao(connectionSource, UserPassword.class);
-            List<UserPassword> password = passwordDao.queryForEq("Kundenummer", customerId);
+            List<UserPassword> password = passwordDao.queryForEq("Foedselsnummer", birthdayNumber);
 
             if (password.size() != 1)
                 return null;

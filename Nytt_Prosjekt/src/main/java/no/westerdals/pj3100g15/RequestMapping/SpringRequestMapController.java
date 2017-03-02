@@ -43,8 +43,8 @@ public class SpringRequestMapController {
 
     @RequestMapping(value = "/user/{id}/auth", method = RequestMethod.GET)
     @ResponseBody
-    public String[] getPasswords(@PathVariable(value = "id") int customerId) {
-        return DBService.getPassword(customerId);
+    public String[] getPasswords(@PathVariable(value = "id") String birthdayNumber) {
+        return DBService.getPassword(birthdayNumber);
     }
 
     @RequestMapping(value = "/newuser/{firstname}/{surname}/{email}/{birthdaynumber}", method = RequestMethod.GET)
