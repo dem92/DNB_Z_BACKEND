@@ -46,17 +46,10 @@ public class DBServiceTest {
         assertNotNull(accounts.get(0));
     }
 
-    @Test
-    public void getPassword() throws Exception {
-        String[] password = DBService.getPassword(1); // Has to be a valid birthNumber
-        assertNotNull(password);
-        assertNotNull(password[0]);
-        assertNotNull(password[1]);
-    }
 
     @Test
     public void getCustomer() throws Exception {
-        Customer customer = DBService.getCustomer(2); // Has to be a valid birthNumber
+        Customer customer = DBService.getCustomer(0);
         assertNotNull(customer);
     }
 }

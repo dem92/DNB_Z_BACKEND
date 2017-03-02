@@ -187,5 +187,26 @@ public class SpringRequestMapController {
         }
     }
 
+    // ------------ sletting av bruker eller konto  ----------------
+
+    @RequestMapping(value = "deleteuser/{customerid}")
+    @ResponseBody
+    public boolean deleteCustomer(@PathVariable(value = "customerid") int customerId){
+        if(DBService.deleteUser(customerId)){
+            return true;
+        }
+        return false;
+    }
+
+    @RequestMapping(value = "deleteaccount/{accountid}")
+    @ResponseBody
+    public boolean deleteAccount(@PathVariable(value = "accountid") String accountId){
+        if(DBService.deleteAccount(accountId)){
+            return true;
+        }
+        return false;
+    }
+
+
 
 }
