@@ -386,4 +386,30 @@ public class DBService {
         }
         return false;
     }
+
+    public static boolean deleteUser(int customerId){
+        makeConnection();
+        Customer customer = getCustomer(customerId);
+        try{
+            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            customerDao.delete(customer);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean deleteAccount(String accountNumber) {
+        makeConnection();
+        Account account = getAccount(accountNumber);
+        try {
+            Dao<Account, String> accountStringDao = DaoManager.createDao(connectionSource, Account.class);
+            accountStringDao.delete(account);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
