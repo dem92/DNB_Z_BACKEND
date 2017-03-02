@@ -165,7 +165,7 @@ public class DBService {
         }
         try {
             Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
-            accountDao.createOrUpdate(account);
+            accountDao.create(account);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
