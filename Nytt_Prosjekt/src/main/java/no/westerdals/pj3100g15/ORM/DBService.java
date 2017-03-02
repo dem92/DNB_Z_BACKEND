@@ -167,27 +167,36 @@ public class DBService {
     }
 
  //TODO En ofärdig metod för att skicka pengar. Får inte tag i information om konton, måste hitta en lösning för det!
-    public static void sendMoney(String accountNumber, String accountNumber2, BigInteger kroner, int oere){
+    public static boolean sendMoney(String accountNumber, String accountNumber2, BigInteger kroner, int oere){
         makeConnection();
         Account sending = getAccount(accountNumber);
         Account recieving = getAccount(accountNumber2);
+        boolean hasMoney = false;
         //TODO Det här är väldigt osäkert och potentiellt exploitable. Får fixa detta vid senare tillfälle!
-        if (kroner.compareTo(sending.getKroner()) >= 0) {
+        int moneyOnAccount = sending.getKroner().subtract(kroner).intValue();
+        if (sending.getOere() < oere) {
+            sending.setKroner(sending.getKroner().subtract((BigInteger.ONE)));
+            sending.setOere(sending.getOere()+100);
+            moneyOnAccount--;
+        }
+        if(moneyOnAccount >= 0){
+            hasMoney = true;
+        }
+        if(hasMoney) {
+            sending.setOere(sending.getOere() - oere);
             sending.setKroner(sending.getKroner().subtract(kroner));
-            if(sending.getOere() < oere){
-                sending.setKroner(sending.getKroner().subtract((BigInteger.ONE)));
-                sending.setOere(sending.getOere()+100);
+            recieving.setKroner(recieving.getKroner().add(kroner));
+            recieving.setOere(recieving.getOere() + oere);
+            try{
+                Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
+                accountDao.update(sending);
+                accountDao.update(recieving);
+                return true;
+            } catch (SQLException e){
+                e.printStackTrace();
             }
         }
-        sending.setOere(sending.getOere() - oere);
-        recieving.setKroner(recieving.getKroner().add(kroner));
-        recieving.setOere(recieving.getOere() + oere);
-        try{
-            Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
-            //TODO Skriv klart detta!!! 
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
+        return false;
     }
 
     //TODO oppdater denne metoden. Endre hardkodet verdi i Customer(customerId)
