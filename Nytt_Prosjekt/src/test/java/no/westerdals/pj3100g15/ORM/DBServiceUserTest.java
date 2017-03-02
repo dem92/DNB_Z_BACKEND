@@ -46,7 +46,7 @@ public class DBServiceUserTest {
         customer.setCustomerID(220);
         int customerId = 220;
         if (customer.getCustomerID() == customerId){
-
+            couldCreate = true;
         }
         assertTrue(couldCreate);
     }
