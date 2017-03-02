@@ -26,6 +26,8 @@ public class Account {
     private double interest;
     @DatabaseField(columnName = "Main")
     private int main;
+    @DatabaseField(columnName = "Navn")
+    private String name;
 
     public Account() {
     }
@@ -72,6 +74,14 @@ public class Account {
 
     public String getAccountType() {
         return accountType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setAccountType(String accountType) {

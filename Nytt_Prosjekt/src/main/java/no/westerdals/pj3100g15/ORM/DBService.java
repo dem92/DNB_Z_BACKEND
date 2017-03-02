@@ -275,4 +275,116 @@ public class DBService {
         }
         return false;
     }
+
+    public static boolean updateMain(String accountNumber, int main){
+        makeConnection();
+        Account account = getAccount(accountNumber);
+        account.setMain(main);
+        try{
+            Dao<Account, String> accountStringDao = DaoManager.createDao(connectionSource, Account.class);
+            accountStringDao.update(account);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateAccountname(String accountNumber, String accountName){
+        makeConnection();
+        Account account = getAccount(accountNumber);
+        account.setName(accountName);
+        try{
+            Dao<Account, String> accountStringDao = DaoManager.createDao(connectionSource, Account.class);
+            accountStringDao.update(account);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateFirstname(int customerId, String firstname){
+        makeConnection();
+        Customer customer = getCustomer(customerId);
+        customer.setFirstName(firstname);
+        try{
+            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            customerDao.update(customer);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateSurname(int customerId, String surname){
+        makeConnection();
+        Customer customer = getCustomer(customerId);
+        customer.setSurName(surname);
+        try{
+            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            customerDao.update(customer);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateAddress(int customerId, String address){
+        makeConnection();
+        Customer customer = getCustomer(customerId);
+        customer.setAddress(address);
+        try{
+            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            customerDao.update(customer);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updatePostalcode(int customerId, int postalcode){
+        makeConnection();
+        Customer customer = getCustomer(customerId);
+        customer.setPostalCode(postalcode);
+        try{
+            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            customerDao.update(customer);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateEmail(int customerId, String mail){
+        makeConnection();
+        Customer customer = getCustomer(customerId);
+        customer.seteMail(mail);
+        try{
+            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            customerDao.update(customer);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updatePhone(int customerId, int phoneNumber){
+        makeConnection();
+        Customer customer = getCustomer(customerId);
+        customer.setPhoneNumber(phoneNumber);
+        try{
+            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            customerDao.update(customer);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
