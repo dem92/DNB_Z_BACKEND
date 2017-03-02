@@ -229,7 +229,7 @@ public class DBService {
         customer.setAddress("Ingen Verdi");
         try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
-            customerDao.createIfNotExists(customer);
+            customerDao.create(customer);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
