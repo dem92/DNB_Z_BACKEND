@@ -5,18 +5,12 @@ import org.junit.Test;
 import java.math.BigInteger;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
- * Created by Eva Dahlo on 23/11/2016.
+ * Created by Henrik on 02.03.2017.
  */
-public class DBServiceTest {
-    @Test
-    public void getAllCustomers() throws Exception {
-        List<Customer> customers = DBService.getAllCustomers();
-        assertNotNull(customers);
-        assertNotNull(customers.get(0));
-    }
+public class DBServiceAccountTest {
 
     @Test
     public void getAllAccounts() throws Exception {
@@ -37,19 +31,5 @@ public class DBServiceTest {
         assertNotNull(balance);
         assertNotNull(balance[0]);
         assertNotNull(balance[1]);
-    }
-
-    @Test
-    public void getCustomerAccounts() throws Exception {
-        List<Account> accounts = DBService.getCustomerAccounts(0); // Has to be a valid birthNumber
-        assertNotNull(accounts);
-        assertNotNull(accounts.get(0));
-    }
-
-
-    @Test
-    public void getCustomer() throws Exception {
-        Customer customer = DBService.getCustomer(0);
-        assertNotNull(customer);
     }
 }
