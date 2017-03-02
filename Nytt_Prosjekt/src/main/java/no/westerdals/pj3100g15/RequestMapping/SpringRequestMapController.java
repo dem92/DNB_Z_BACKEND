@@ -47,22 +47,28 @@ public class SpringRequestMapController {
         return DBService.getPassword(customerId);
     }
 
-    @RequestMapping(value = "/user/new/{firstname}/{surname}/{email}/{birthdaynumber}", method = RequestMethod.GET)
+    @RequestMapping(value = "/newuser/{firstname}/{surname}/{email}/{birthdaynumber}", method = RequestMethod.GET)
     @ResponseBody
-    public void createNewUser(
+    public boolean createNewUser(
             @PathVariable(value = "firstname") String firstName,
             @PathVariable(value = "surname") String surName,
             @PathVariable(value = "birthdaynumber") String birthdaynumber,
             @PathVariable(value = "email") String email) {
-        DBService.addCustomer(firstName, surName, birthdaynumber, email);
+        if(DBService.addCustomer(firstName, surName, birthdaynumber, email)){
+            return true;
+        }
+        return false;
     }
 
-    @RequestMapping(value = "/user/{id}/account/new/{accounttype}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{id}/newaccount/{accounttype}", method = RequestMethod.GET)
     @ResponseBody
-    public void createAccount(
+    public boolean createAccount(
             @PathVariable(value = "id") int customerId,
             @PathVariable(value = "accounttype") String accountType) {
-        DBService.addAccount(customerId, accountType);
+        if(DBService.addAccount(customerId, accountType)){
+            return true;
+        }
+        return false;
     }
 
     //TODO Se metoden sendMoney i DBService för info om vad detta är.

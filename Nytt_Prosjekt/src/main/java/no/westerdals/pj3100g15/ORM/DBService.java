@@ -133,7 +133,7 @@ public class DBService {
     }
 
 
-    public static void addAccount(int customerId, String accountType) {
+    public static boolean addAccount(int customerId, String accountType) {
         makeConnection();
 
         Account account = new Account();
@@ -166,9 +166,11 @@ public class DBService {
         try {
             Dao<Account, String> accountDao = DaoManager.createDao(connectionSource, Account.class);
             accountDao.createOrUpdate(account);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
 
@@ -213,7 +215,7 @@ public class DBService {
     // TODO bruk heller en if/else og sjekk om brukeren finnes eller ikke. Sett verdien til "NULL" om den ikke finnes
     //TODO lag lang url for springrequestmapcontroller addCustomer-metoden
 
-    public static void addCustomer(String firstName, String surname, String birthDayNumber, String email) {
+    public static boolean addCustomer(String firstName, String surname, String birthDayNumber, String email) {
         makeConnection();
         Customer customer = new Customer();
 
@@ -227,10 +229,12 @@ public class DBService {
         customer.setAddress("Ingen Verdi");
         try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
-            customerDao.createIfNotExists(customer); //
+            customerDao.createIfNotExists(customer);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public static String randomNumber() {
