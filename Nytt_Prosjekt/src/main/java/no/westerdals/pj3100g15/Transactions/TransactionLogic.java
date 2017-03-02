@@ -4,9 +4,6 @@ import no.westerdals.pj3100g15.ORM.Account;
 
 import java.math.BigInteger;
 
-/**
- * Created by Henrik on 28.02.2017.
- */
 public class TransactionLogic {
 
     public void transferPayment(Account sending, Account receiving, BigInteger amount) {

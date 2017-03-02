@@ -9,9 +9,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * Created by Eva Dahlo on 23/11/2016.
- */
 public class DBService {
     private static ConnectionSource connectionSource;
 
@@ -216,23 +213,21 @@ public class DBService {
     // TODO bruk heller en if/else og sjekk om brukeren finnes eller ikke. Sett verdien til "NULL" om den ikke finnes
     //TODO lag lang url for springrequestmapcontroller addCustomer-metoden
 
-    public static void addOrUpdateCustomer(String firstName, String surname, String birthDayNumber, String email, int customerId, String address, int postalCode, int telephoneNumber) {
+    public static void addCustomer(String firstName, String surname, String birthDayNumber, String email) {
         makeConnection();
         Customer customer = new Customer();
-        if (checkCustomer(customerId)) {
-            customer.setCustomerID(customerId);
-        }
+
         customer.setFirstName(firstName);
         customer.setSurName(surname);
-        customer.setPostalCode(postalCode);
-        customer.setPhoneNumber(telephoneNumber);
-        customer.setAddress(address);
         customer.setBirthdayNumber(birthDayNumber);
         customer.seteMail(email);
+        customer.setPostalCode(9999);
+        customer.setPhoneNumber(99999999);
         customer.setScore(0);
+        customer.setAddress("Ingen Verdi");
         try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
-            customerDao.createOrUpdate(customer); //
+            customerDao.createIfNotExists(customer); //
         } catch (SQLException e) {
             e.printStackTrace();
         }

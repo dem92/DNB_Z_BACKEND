@@ -3,9 +3,6 @@ package no.westerdals.pj3100g15.ORM;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-/**
- * Created by Eva Dahlo on 22/11/2016.
- */
 @DatabaseTable(tableName = "Passord_Bruker")
 public class UserPassword {
 
