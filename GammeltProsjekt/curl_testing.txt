@@ -1,1 +1,0 @@
-curl -v -H "Content-Type: application/json" -X POST -d '{"payerId": 5, "receiverId": 2, "amount": 200}' http://localhost:8080/payments 
