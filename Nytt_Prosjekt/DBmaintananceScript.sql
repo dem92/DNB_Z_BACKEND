@@ -13,10 +13,10 @@ update Bankkonto
 set Kroner=2000
 where Kundenummer=1;
 
-/* Auto increment fungerer ikke */
-/* for å lage en bankkonto Husk å fylle inn riktig info! kontonummer og kundenummer skal produseres automatisk. */
+
+/* for å lage en bankkonto Husk å fylle inn riktig info! kontonummer blir random produsert og trengs ikke å fylle inn. */
 insert into Bankkonto
-values(FLOOR(RAND() * (10000000000 - 99999999999 + 1)) + 10000000000, last_insert_id(),2,0,0,4,0,0);
+values(FLOOR(RAND() * (10000000000 - 99999999999 + 1)) + 10000000000, 216,2,0,0,4,0,0);
 
 /* For å slette bankkontoer */
 delete from Bankkonto where Kundenummer=0 and Kontonummer=-19982987492;
