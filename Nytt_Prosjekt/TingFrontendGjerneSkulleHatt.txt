@@ -1,0 +1,8 @@
+Ting frontend gjerne skulle hatt
+
+1.	Muligheten til å legge ved meldinger til transaksjoner.
+2.	Logging for transaksjoner(nice to have)
+3.	Legge til sparemål
+4.	Mulighet for å lage sparemål(mål i penger, startdato, sluttdato)
+	Den skal returnere noe som lar frontend lage en progressbar. eks. et tall mellom 0 og 100.
+5.	
