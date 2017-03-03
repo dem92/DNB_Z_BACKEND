@@ -10,10 +10,10 @@ public class DBConnector {
 
     public static ConnectionSource makeConnection() {
 
-        String userName = "";
-        String password = "";
-        String databaseUrl = "";
-
+        String userName = "daheva15_MainUsr";
+        String password = "PJ3100gruppe15!";
+        String databaseUrl = "jdbc:mysql://tek.westerdals.no:3306/daheva15_PJ3100_gruppe15";
+/*
         //Unngår hardkoding i programmet
         //Leser brukernavn, databaseurl og passord fra properties-fil(db.properties).
         try {
@@ -26,7 +26,7 @@ public class DBConnector {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+*/
         //Kaller på privat metode
         return connectToDatabase(userName, password, databaseUrl);
     }

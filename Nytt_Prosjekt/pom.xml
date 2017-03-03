@@ -5,7 +5,7 @@
 
     <groupId>no.westerdals.PJ3100g15</groupId>
     <artifactId>dnb_z_backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>DNB_Z_BACKEND</name>
