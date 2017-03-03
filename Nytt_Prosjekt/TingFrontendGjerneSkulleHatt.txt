@@ -6,4 +6,6 @@ Ting frontend gjerne skulle hatt
 4.	Mulighet for å lage sparemål(mål i penger, startdato, sluttdato)
 	Den skal returnere noe som lar frontend lage en progressbar. eks. et tall mellom 0 og 100.
 	Gradering av hvor bra man ligger ann. Eks. fem grader.
-5.	
+5.	Mulighet for å legge inn og hente ut budsjett for bruker. 
+	Eks. om man har gått i pluss eller minus. Må samkjøres med logging.
+	Skal se på om man har gått i pluss eller minus for denne måneden.
