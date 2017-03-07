@@ -1,5 +1,6 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
+errormessages.txt
 
 ### STS ###
 .apt_generated

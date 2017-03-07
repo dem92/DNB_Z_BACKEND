@@ -3,6 +3,7 @@ package no.westerdals.pj3100g15.ORM;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
+import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 
 import java.math.BigInteger;
 import java.sql.SQLException;
@@ -26,6 +27,7 @@ public class DBService {
             List<Customer> customers = customerDao.queryForAll();
             return customers;
         } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return null;
@@ -46,6 +48,7 @@ public class DBService {
 
             return balance;
         } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return null;
@@ -66,6 +69,7 @@ public class DBService {
 
             return accounts;
         } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return null;
@@ -80,6 +84,7 @@ public class DBService {
 
             return account;
         } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return null;
@@ -97,6 +102,7 @@ public class DBService {
 
             return new String[]{password.get(0).getPasswordHash(), password.get(0).getPasswordPlain()};
         } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return null;
@@ -110,6 +116,7 @@ public class DBService {
             List<Account> accounts = accountDao.queryForAll();
             return accounts;
         } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return null;
@@ -127,6 +134,7 @@ public class DBService {
 
             return customer.get(0);
         } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return null;
@@ -168,6 +176,7 @@ public class DBService {
             accountDao.create(account);
             return true;
         } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return false;
@@ -207,6 +216,7 @@ public class DBService {
                 return true;
             } catch (SQLException e) {
                 e.printStackTrace();
+                WriteLogg.writeLogg(e);
             }
         } else {
             sending.setKroner(sending.getKroner().add((BigInteger.ONE)));
@@ -237,6 +247,7 @@ public class DBService {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            WriteLogg.writeLogg(e);
         }
         return false;
     }
@@ -261,6 +272,7 @@ public class DBService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            WriteLogg.writeLogg(e);
             return false;
         }
         return false;
@@ -275,6 +287,7 @@ public class DBService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            WriteLogg.writeLogg(e);
         }
         return false;
     }
@@ -289,6 +302,7 @@ public class DBService {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            WriteLogg.writeLogg(e);
         }
         return false;
     }
@@ -303,6 +317,7 @@ public class DBService {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            WriteLogg.writeLogg(e);
         }
         return false;
     }
@@ -317,6 +332,7 @@ public class DBService {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            WriteLogg.writeLogg(e);
         }
         return false;
     }
@@ -331,6 +347,7 @@ public class DBService {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            WriteLogg.writeLogg(e);
         }
         return false;
     }
@@ -345,6 +362,7 @@ public class DBService {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            WriteLogg.writeLogg(e);
         }
         return false;
     }
@@ -359,6 +377,7 @@ public class DBService {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            WriteLogg.writeLogg(e);
         }
         return false;
     }
@@ -373,6 +392,7 @@ public class DBService {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            WriteLogg.writeLogg(e);
         }
         return false;
     }
@@ -387,6 +407,7 @@ public class DBService {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            WriteLogg.writeLogg(e);
         }
         return false;
     }
@@ -399,6 +420,7 @@ public class DBService {
             customerDao.delete(customer);
             return true;
         } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return false;
@@ -412,6 +434,7 @@ public class DBService {
             accountStringDao.delete(account);
             return true;
         } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return false;

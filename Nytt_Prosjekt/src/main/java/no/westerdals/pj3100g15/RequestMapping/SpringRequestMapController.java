@@ -3,9 +3,11 @@ package no.westerdals.pj3100g15.RequestMapping;
 import no.westerdals.pj3100g15.ORM.Account;
 import no.westerdals.pj3100g15.ORM.Customer;
 import no.westerdals.pj3100g15.ORM.DBService;
+import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -205,6 +207,14 @@ public class SpringRequestMapController {
             return true;
         }
         return false;
+    }
+
+    @RequestMapping(value = "throwerror")
+    @ResponseBody
+    public void throwError(){
+        WriteLogg.writeLogg(new RuntimeException());
+        //WriteLogg.writeLogg(new NullPointerException());
+        WriteLogg.writeLogg(new SQLException());
     }
 
 
