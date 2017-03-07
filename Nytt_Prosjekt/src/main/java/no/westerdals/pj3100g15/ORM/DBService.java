@@ -7,8 +7,11 @@ import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 
 import java.math.BigInteger;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class DBService {
     private static ConnectionSource connectionSource;
@@ -223,6 +226,23 @@ public class DBService {
             sending.setOere(sending.getOere() - 100);
         }
         return false;
+    }
+
+    public static List<LoggedTransaction> getPaymentsFromAccount(String accountNumber) {
+        makeConnection();
+
+        try {
+            Dao<LoggedTransaction, String> transactionDao = DaoManager.createDao(connectionSource, LoggedTransaction.class);
+            List<LoggedTransaction> transactions = transactionDao.queryForEq("Avsenderkonto", accountNumber);
+            transactions.addAll(transactionDao.queryForEq("Mottakerkonto", accountNumber));
+            transactions.stream().sorted(Comparator.comparing(LoggedTransaction::getId)).collect(Collectors.toList());
+            Collections.reverse(transactions);
+            return transactions;
+        } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
+        }
+        return null;
     }
 
     //TODO oppdater denne metoden. Endre hardkodet verdi i Customer(customerId)

@@ -3,6 +3,7 @@ package no.westerdals.pj3100g15.RequestMapping;
 import no.westerdals.pj3100g15.ORM.Account;
 import no.westerdals.pj3100g15.ORM.Customer;
 import no.westerdals.pj3100g15.ORM.DBService;
+import no.westerdals.pj3100g15.ORM.LoggedTransaction;
 import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 import org.springframework.web.bind.annotation.*;
 
@@ -88,6 +89,12 @@ public class SpringRequestMapController {
         }
     }
 
+    @RequestMapping(value = "/{accountNumber}/payment", method = RequestMethod.GET)
+    @ResponseBody
+    public List<LoggedTransaction> getPaymentsFromAccount(
+            @PathVariable(value = "accountNumber") String accountNumber) {
+        return DBService.getPaymentsFromAccount(accountNumber);
+    }
 
     // -------------------    Oppdatere customer under denne streken   ---------------------
 

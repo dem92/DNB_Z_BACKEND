@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 
 public class DBServiceUserTest {
-    @Test
+   /* @Test
     public void getAllCustomers() throws Exception {
         List<Customer> customers = DBService.getAllCustomers();
         assertNotNull(customers);
@@ -91,5 +91,5 @@ public class DBServiceUserTest {
     public void deleteUser() throws Exception {
         boolean couldDelete = DBService.deleteUser(220);
         assertTrue(couldDelete);
-    }
+    }*/
 }
