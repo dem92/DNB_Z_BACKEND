@@ -56,7 +56,7 @@ public class SpringRequestMapController {
             @PathVariable(value = "surname") String surName,
             @PathVariable(value = "birthdaynumber") String birthdaynumber,
             @PathVariable(value = "email") String email) {
-        if(DBService.addCustomer(firstName, surName, birthdaynumber, email)){
+        if (DBService.addCustomer(firstName, surName, birthdaynumber, email)) {
             return true;
         }
         return false;
@@ -67,7 +67,7 @@ public class SpringRequestMapController {
     public boolean createAccount(
             @PathVariable(value = "id") int customerId,
             @PathVariable(value = "accounttype") String accountType) {
-        if(DBService.addAccount(customerId, accountType)){
+        if (DBService.addAccount(customerId, accountType)) {
             return true;
         }
         return false;
@@ -106,7 +106,7 @@ public class SpringRequestMapController {
     @RequestMapping(value = "/updateuser/{customerid}/firstname/{firstname}")
     @ResponseBody
     public boolean updateCustomerFirstName(@PathVariable(value = "customerid") int customerId,
-                                         @PathVariable(value = "firstname") String firstName) {
+                                           @PathVariable(value = "firstname") String firstName) {
 
         if (DBService.updateFirstname(customerId, firstName)) {
             return true;
@@ -130,7 +130,7 @@ public class SpringRequestMapController {
     @RequestMapping(value = "/updateuser/{customerid}/postalcode/{postalcode}")
     @ResponseBody
     public boolean updateCustomerPostalCode(@PathVariable(value = "customerid") int customerId,
-                                         @PathVariable(value = "postalcode") int postalCode) {
+                                            @PathVariable(value = "postalcode") int postalCode) {
 
         if (DBService.updatePostalcode(customerId, postalCode)) {
             return true;
@@ -142,7 +142,7 @@ public class SpringRequestMapController {
     @RequestMapping(value = "/updateuser/{customerid}/email/{email}")
     @ResponseBody
     public boolean updateCustomerEmail(@PathVariable(value = "customerid") int customerId,
-                                         @PathVariable(value = "email") String email) {
+                                       @PathVariable(value = "email") String email) {
 
         if (DBService.updateEmail(customerId, email)) {
             return true;
@@ -154,7 +154,7 @@ public class SpringRequestMapController {
     @RequestMapping(value = "/updateuser/{customerid}/phonenumber/{phone}")
     @ResponseBody
     public boolean updateCustomerPhone(@PathVariable(value = "customerid") int customerId,
-                                         @PathVariable(value = "phone") int phone) {
+                                       @PathVariable(value = "phone") int phone) {
 
         if (DBService.updatePhone(customerId, phone)) {
             return true;
@@ -168,7 +168,7 @@ public class SpringRequestMapController {
     @RequestMapping(value = "/updateaccount/{accountid}/main/{main}")
     @ResponseBody
     public boolean updateAccountMain(@PathVariable(value = "accountid") String accountId,
-                                         @PathVariable(value = "main") int main) {
+                                     @PathVariable(value = "main") int main) {
 
         if (DBService.updateMain(accountId, main)) {
             return true;
@@ -193,8 +193,8 @@ public class SpringRequestMapController {
 
     @RequestMapping(value = "deleteuser/{customerid}")
     @ResponseBody
-    public boolean deleteCustomer(@PathVariable(value = "customerid") int customerId){
-        if(DBService.deleteUser(customerId)){
+    public boolean deleteCustomer(@PathVariable(value = "customerid") int customerId) {
+        if (DBService.deleteUser(customerId)) {
             return true;
         }
         return false;
@@ -202,21 +202,12 @@ public class SpringRequestMapController {
 
     @RequestMapping(value = "deleteaccount/{accountid}")
     @ResponseBody
-    public boolean deleteAccount(@PathVariable(value = "accountid") String accountId){
-        if(DBService.deleteAccount(accountId)){
+    public boolean deleteAccount(@PathVariable(value = "accountid") String accountId) {
+        if (DBService.deleteAccount(accountId)) {
             return true;
         }
         return false;
     }
-
-    @RequestMapping(value = "throwerror")
-    @ResponseBody
-    public void throwError(){
-        WriteLogg.writeLogg(new RuntimeException());
-        //WriteLogg.writeLogg(new NullPointerException());
-        WriteLogg.writeLogg(new SQLException());
-    }
-
 
 
 }
