@@ -21,4 +21,9 @@ values(FLOOR(RAND() * (10000000000 - 99999999999 + 1)) + 10000000000, 216,2,0,0,
 /* For å slette bankkontoer */
 delete from Bankkonto where Kundenummer=0 and Kontonummer=-19982987492;
 
+/*
+insert into Bruker
+values(last_insert_id(), FLOOR(RAND() * (10000000000 - 99999999999 + 1)) + 10000000000, 'Eirik', 'Svensson', */
+
+select * from Bankkonto;
 

@@ -2,3 +2,5 @@ Ting vi må fikse:
 1.	Det går ann å overskrive for mange øre i transaksjoner.
 	Det skal ikke kunne gå ann å sende flere enn 99 øre.
 
+2.	(nice to do) implementere passord i bruker-entiteten(kutte ut ekstra tabell).
+3.	Slette unødvendige tabeller i databasen.

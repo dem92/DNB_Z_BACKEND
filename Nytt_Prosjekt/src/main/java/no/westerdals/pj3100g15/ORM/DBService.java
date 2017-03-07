@@ -180,6 +180,10 @@ public class DBService {
         Account recieving = getAccount(accountNumber2);
         boolean hasMoney = false;
 
+        if(oere>99){
+            return false;
+        }
+
         if (sending.getOere() < oere) {
             sending.setKroner(sending.getKroner().subtract((BigInteger.ONE)));
             sending.setOere(sending.getOere() + 100);
