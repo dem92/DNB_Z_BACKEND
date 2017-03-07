@@ -231,15 +231,12 @@ public class DBService {
         return false;
     }
 
-    public static List<LoggedTransaction> getPaymentsFromAccount(String accountNumber) {
+    public static List<LoggedTransaction> getAllLoggedTransactionsFromAccount(String accountNumber) {
         makeConnection();
-
         try {
             Dao<LoggedTransaction, String> transactionDao = DaoManager.createDao(connectionSource, LoggedTransaction.class);
             List<LoggedTransaction> transactions = transactionDao.queryForEq("Avsenderkonto", accountNumber);
             transactions.addAll(transactionDao.queryForEq("Mottakerkonto", accountNumber));
-            transactions.stream().sorted(Comparator.comparing(LoggedTransaction::getId)).collect(Collectors.toList());
-            Collections.reverse(transactions);
             return transactions;
         } catch (SQLException e) {
             WriteLogg.writeLogg(e);
@@ -247,27 +244,6 @@ public class DBService {
         }
         return null;
     }
-
-
-    public static List<RecurringTransfer> getRecurringTransfersForAccount(String accountNumber) {
-        makeConnection();
-        try {
-            Dao<RecurringTransfer, Integer> transferDao = DaoManager.createDao(connectionSource, RecurringTransfer.class);
-            List<RecurringTransfer> recurringTransfers = transferDao.queryForEq("Avsenderkonto", accountNumber);
-            recurringTransfers.addAll(transferDao.queryForEq("Mottakerkonto", accountNumber));
-            recurringTransfers.stream().sorted((Comparator.comparing(RecurringTransfer::getId))).collect(Collectors.toList());
-            Collections.reverse((recurringTransfers));
-            return recurringTransfers;
-        } catch (SQLException e) {
-            WriteLogg.writeLogg(e);
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    //TODO oppdater denne metoden. Endre hardkodet verdi i Customer(customerId)
-    // TODO bruk heller en if/else og sjekk om brukeren finnes eller ikke. Sett verdien til "NULL" om den ikke finnes
-    //TODO lag lang url for springrequestmapcontroller addCustomer-metoden
 
     public static boolean addCustomer(String firstName, String surname, String birthDayNumber, String email) {
         makeConnection();
