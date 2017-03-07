@@ -4,6 +4,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
+import sun.rmi.runtime.Log;
 
 import java.math.BigInteger;
 import java.sql.SQLException;
@@ -160,9 +161,11 @@ public class DBService {
             account.setAccountNumber(randomAccountNumber);
         }
 
-        if(getCustomerAccounts(customerId).size() > 1){
+        if (getCustomerAccounts(customerId).size() > 1) {
             account.setMain(1);
-        }else {account.setMain(0);}
+        } else {
+            account.setMain(0);
+        }
 
 
         if (accountType.equals("sparekonto")) {
@@ -192,7 +195,7 @@ public class DBService {
         Account recieving = getAccount(accountNumber2);
         boolean hasMoney = false;
 
-        if(oere>99){
+        if (oere > 99) {
             return false;
         }
 
@@ -238,6 +241,23 @@ public class DBService {
             transactions.stream().sorted(Comparator.comparing(LoggedTransaction::getId)).collect(Collectors.toList());
             Collections.reverse(transactions);
             return transactions;
+        } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public static List<RecurringTransfer> getRecurringTransfersForAccount(String accountNumber) {
+        makeConnection();
+        try {
+            Dao<RecurringTransfer, Integer> transferDao = DaoManager.createDao(connectionSource, RecurringTransfer.class);
+            List<RecurringTransfer> recurringTransfers = transferDao.queryForEq("Avsenderkonto", accountNumber);
+            recurringTransfers.addAll(transferDao.queryForEq("Mottakerkonto", accountNumber));
+            recurringTransfers.stream().sorted((Comparator.comparing(RecurringTransfer::getId))).collect(Collectors.toList());
+            Collections.reverse((recurringTransfers));
+            return recurringTransfers;
         } catch (SQLException e) {
             WriteLogg.writeLogg(e);
             e.printStackTrace();
@@ -312,11 +332,11 @@ public class DBService {
         return false;
     }
 
-    public static boolean updateMain(String accountNumber, int main){
+    public static boolean updateMain(String accountNumber, int main) {
         makeConnection();
         Account account = getAccount(accountNumber);
         account.setMain(main);
-        try{
+        try {
             Dao<Account, String> accountStringDao = DaoManager.createDao(connectionSource, Account.class);
             accountStringDao.update(account);
             return true;
@@ -327,11 +347,11 @@ public class DBService {
         return false;
     }
 
-    public static boolean updateAccountname(String accountNumber, String accountName){
+    public static boolean updateAccountname(String accountNumber, String accountName) {
         makeConnection();
         Account account = getAccount(accountNumber);
         account.setName(accountName);
-        try{
+        try {
             Dao<Account, String> accountStringDao = DaoManager.createDao(connectionSource, Account.class);
             accountStringDao.update(account);
             return true;
@@ -342,11 +362,11 @@ public class DBService {
         return false;
     }
 
-    public static boolean updateFirstname(int customerId, String firstname){
+    public static boolean updateFirstname(int customerId, String firstname) {
         makeConnection();
         Customer customer = getCustomer(customerId);
         customer.setFirstName(firstname);
-        try{
+        try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
             customerDao.update(customer);
             return true;
@@ -357,11 +377,11 @@ public class DBService {
         return false;
     }
 
-    public static boolean updateSurname(int customerId, String surname){
+    public static boolean updateSurname(int customerId, String surname) {
         makeConnection();
         Customer customer = getCustomer(customerId);
         customer.setSurName(surname);
-        try{
+        try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
             customerDao.update(customer);
             return true;
@@ -372,11 +392,11 @@ public class DBService {
         return false;
     }
 
-    public static boolean updateAddress(int customerId, String address){
+    public static boolean updateAddress(int customerId, String address) {
         makeConnection();
         Customer customer = getCustomer(customerId);
         customer.setAddress(address);
-        try{
+        try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
             customerDao.update(customer);
             return true;
@@ -387,11 +407,11 @@ public class DBService {
         return false;
     }
 
-    public static boolean updatePostalcode(int customerId, int postalcode){
+    public static boolean updatePostalcode(int customerId, int postalcode) {
         makeConnection();
         Customer customer = getCustomer(customerId);
         customer.setPostalCode(postalcode);
-        try{
+        try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
             customerDao.update(customer);
             return true;
@@ -402,11 +422,11 @@ public class DBService {
         return false;
     }
 
-    public static boolean updateEmail(int customerId, String mail){
+    public static boolean updateEmail(int customerId, String mail) {
         makeConnection();
         Customer customer = getCustomer(customerId);
         customer.seteMail(mail);
-        try{
+        try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
             customerDao.update(customer);
             return true;
@@ -417,11 +437,11 @@ public class DBService {
         return false;
     }
 
-    public static boolean updatePhone(int customerId, int phoneNumber){
+    public static boolean updatePhone(int customerId, int phoneNumber) {
         makeConnection();
         Customer customer = getCustomer(customerId);
         customer.setPhoneNumber(phoneNumber);
-        try{
+        try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
             customerDao.update(customer);
             return true;
@@ -432,10 +452,10 @@ public class DBService {
         return false;
     }
 
-    public static boolean deleteUser(int customerId){
+    public static boolean deleteUser(int customerId) {
         makeConnection();
         Customer customer = getCustomer(customerId);
-        try{
+        try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
             customerDao.delete(customer);
             return true;
