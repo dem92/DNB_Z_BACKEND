@@ -163,6 +163,14 @@ public class SpringRequestMapController {
         return recurringTransfers;
     }
 
+    @RequestMapping(value = "/{customerId}/savingstargets")
+    @ResponseBody
+    public List<SavingsTargets> getAllSavingsTargetsForUser(
+            @PathVariable(value = "customerId") int customerId) {
+        List<SavingsTargets> savingsTargets = DBService.getAllSavingsTargetsForUser(customerId);
+        return savingsTargets;
+    }
+
 
     // -------------------    Oppdatere customer under denne streken   ---------------------
 
