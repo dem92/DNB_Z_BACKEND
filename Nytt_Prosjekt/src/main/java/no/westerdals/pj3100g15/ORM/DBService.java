@@ -62,7 +62,7 @@ public class DBService {
         makeConnection();
 
         try {
-            Dao<Customer, String> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
             List<Customer> customer = customerDao.queryForEq("Kundenummer", customerId);
 
             if (customer.size() != 1)
@@ -132,7 +132,7 @@ public class DBService {
         makeConnection();
 
         try {
-            Dao<Customer, String> customerDao = DaoManager.createDao(connectionSource, Customer.class);
+            Dao<Customer, Integer> customerDao = DaoManager.createDao(connectionSource, Customer.class);
             List<Customer> customer = customerDao.queryForEq("Kundenummer", customerId);
 
             if (customer.size() != 1)
