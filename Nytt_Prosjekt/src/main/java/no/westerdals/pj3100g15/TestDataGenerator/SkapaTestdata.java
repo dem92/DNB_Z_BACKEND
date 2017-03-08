@@ -6,18 +6,30 @@ package no.westerdals.pj3100g15.TestDataGenerator;
 public class SkapaTestdata {
 /*
     public static void main(String[] args) {
+        //Testdata till att fylla Fasta_Overforinger i databasen.
+       // String insertString = "INSERT INTO Faste_Overforingar (Avsenderkonto, Mottakerkonto, KundeID, Kroner, Oere, Melding_kid, Neste_Overforing, Intervall, Sluttdato) VALUES ";
+
+
+        //Testdata till att fylla Logg_Transaksjoner i databasen.
         Random random = new Random();
 
-        String insertString = "INSERT INTO Logg_Transaksjoner (Avsenderkonto, Mottakerkonto, Kroner, Oere, Melding_kid, Transaksjonstype, AvsenderID, MottakerID) VALUES ";
+        String insertString = "INSERT INTO Logg_Transaksjoner (Avsenderkonto, Mottakerkonto, Kroner, Oere, Transaksjonstype, Kjopested, AvsenderID, MottakerID) VALUES ";
         for (int i = 1; i < 201; i++) {
-            List<Account> accounts = DBService.getCustomerAccounts(DBService.getCustomer(i).getCustomerID());
-            List<Account> accounts2 = DBService.getCustomerAccounts(DBService.getCustomer(i+1).getCustomerID());
+            int avs = random.nextInt(200) + 1;
+            int mot = random.nextInt(200) + 1;
+            while (avs == mot){
+                mot = random.nextInt(200) + 1;
+            }
+
+            List<Account> accounts = DBService.getCustomerAccounts(avs);
+            List<Account> accounts2 = DBService.getCustomerAccounts(mot);
 
             String avsenderkonto = accounts.get(0).getAccountNumber();
             String mottakerkonto = accounts2.get(0).getAccountNumber();
-            int rdm = random.nextInt(12500);
-            insertString += "(" + avsenderkonto + ", " + mottakerkonto + ", " + rdm + ", " + 0 + ", '" + "Husleie mars" + "', '" +
-                    "payment" + "', " + DBService.getCustomer(i).getCustomerID() + ", " + DBService.getCustomer(i+1).getCustomerID() + ")";
+            int rdm = random.nextInt(501);
+            int shrt = random.nextInt(2) + 1;
+            insertString += "(" + avsenderkonto + ", " + mottakerkonto + ", " + rdm + ", " + 0 + ", " +
+                    shrt + ", '" + "Rema 1000 Bjerke" + "', " + avs + ", " + mot + ")";
             if (i == 200)
                 insertString += ";";
             else
@@ -25,6 +37,5 @@ public class SkapaTestdata {
         }
 
         System.out.println(insertString);
-    }
-    */
+    } */
 }
