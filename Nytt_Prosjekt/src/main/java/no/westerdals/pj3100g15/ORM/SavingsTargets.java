@@ -14,7 +14,7 @@ public class SavingsTargets {
     @DatabaseField(columnName = "Kontonummer")
     private String accountNumber;
     @DatabaseField(columnName = "Tidspunkt")
-    private Timestamp time;
+    private long time;
     @DatabaseField(columnName = "Navn")
     private String name;
     @DatabaseField(columnName = "KundeID")
@@ -34,7 +34,7 @@ public class SavingsTargets {
 
     }
 
-    public SavingsTargets(int id, String accountNumber, Timestamp time, String name, int customerId, BigInteger savedKroner, int savedOere, BigInteger goalKroner, int goalOere, boolean done) {
+    public SavingsTargets(int id, String accountNumber, long time, String name, int customerId, BigInteger savedKroner, int savedOere, BigInteger goalKroner, int goalOere, boolean done) {
         this.id = id;
         this.accountNumber = accountNumber;
         this.time = time;
@@ -63,11 +63,11 @@ public class SavingsTargets {
         this.accountNumber = accountNumber;
     }
 
-    public Timestamp getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(long time) {
         this.time = time;
     }
 

@@ -28,12 +28,12 @@ public class RecurringTransfer {
     @DatabaseField(columnName = "Intervall")
     private String intervall;
     @DatabaseField(columnName = "Sluttdato")
-    private Timestamp endDate;
+    private long endDate;
 
     public RecurringTransfer() {
     }
 
-    public RecurringTransfer(int id, String sendingAccount, String receivingAccount, int customerId, BigInteger kroner, int oere, String message, int nextTransfer, String intervall, Timestamp endDate) {
+    public RecurringTransfer(int id, String sendingAccount, String receivingAccount, int customerId, BigInteger kroner, int oere, String message, int nextTransfer, String intervall, long endDate) {
         this.id = id;
         this.sendingAccount = sendingAccount;
         this.receivingAccount = receivingAccount;
@@ -118,11 +118,11 @@ public class RecurringTransfer {
         this.intervall = intervall;
     }
 
-    public Timestamp getEndDate() {
+    public long getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Timestamp endDate) {
+    public void setEndDate(long endDate) {
         this.endDate = endDate;
     }
 }
