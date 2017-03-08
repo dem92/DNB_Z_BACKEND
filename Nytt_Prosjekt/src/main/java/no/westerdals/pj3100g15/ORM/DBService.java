@@ -524,5 +524,28 @@ public class DBService {
         return null;
     }
 
+    public static boolean createSavingsTarget(BigInteger goalKroner, int goalOere, int customerId, String name){
+        makeConnection();
+        SavingsTargets savingsTargets = new SavingsTargets();
+        savingsTargets.setCustomerId(customerId);
+        savingsTargets.setDone(false);
+        savingsTargets.setGoalKroner(goalKroner);
+        savingsTargets.setGoalOere(goalOere);
+        savingsTargets.setSavedKroner(BigInteger.ZERO);
+        savingsTargets.setSavedOere(0);
+        savingsTargets.setAccountNumber(randomNumber());
+        savingsTargets.setName(name);
+        savingsTargets.setTime(System.currentTimeMillis()/1000);
+
+        try{
+            Dao<SavingsTargets, Integer> savingsTargetsIntegerDao= DaoManager.createDao(connectionSource, SavingsTargets.class);
+            savingsTargetsIntegerDao.create(savingsTargets);
+            return true;
+        }catch (SQLException e){
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }

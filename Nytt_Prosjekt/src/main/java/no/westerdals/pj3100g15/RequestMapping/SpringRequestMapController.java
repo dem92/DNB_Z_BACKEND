@@ -309,4 +309,16 @@ public class SpringRequestMapController {
     public boolean check() {
         return true;
     }
+
+    @RequestMapping(value = "/createsavingstargets/{name}/{customerId}/{kroner}/{oere}")
+    @ResponseBody
+    public boolean createSavingsTargets(@PathVariable(value = "name") String name,
+                                        @PathVariable(value = "customerId") int customerId,
+                                        @PathVariable(value = "kroner")BigInteger kroner,
+                                        @PathVariable(value = "oere")int oere){
+        if(DBService.createSavingsTarget(kroner,oere,customerId,name)){
+            return true;
+        }
+        return false;
+    }
 }
