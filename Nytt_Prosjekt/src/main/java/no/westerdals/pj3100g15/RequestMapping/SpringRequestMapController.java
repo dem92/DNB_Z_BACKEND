@@ -87,7 +87,7 @@ public class SpringRequestMapController {
         }
     }
 
-    @RequestMapping(value = "{accountNumber}/transfer")
+    @RequestMapping(value = "/{accountNumber}/transfer")
     @ResponseBody
     public List<LoggedTransaction> getTransferFromAccount(
             @PathVariable(value = "accountNumber") String accountNumber
@@ -100,7 +100,7 @@ public class SpringRequestMapController {
         return transfers;
     }
 
-    @RequestMapping(value = "{accountNumber}/card")
+    @RequestMapping(value = "/{accountNumber}/card")
     @ResponseBody
     public List<LoggedTransaction> getCardFromAccount(
             @PathVariable(value = "accountNumber") String accountNumber
@@ -114,7 +114,7 @@ public class SpringRequestMapController {
     }
 
 
-    @RequestMapping(value = "{accountNumber}/payment")
+    @RequestMapping(value = "/{accountNumber}/payment")
     @ResponseBody
     public List<LoggedTransaction> getPaymentFromAccount(
             @PathVariable(value = "accountNumber") String accountNumber
@@ -240,7 +240,7 @@ public class SpringRequestMapController {
 
     // ------------ sletting av bruker eller konto  ----------------
 
-    @RequestMapping(value = "deleteuser/{customerid}")
+    @RequestMapping(value = "/deleteuser/{customerid}")
     @ResponseBody
     public boolean deleteCustomer(@PathVariable(value = "customerid") int customerId) {
         if (DBService.deleteUser(customerId)) {
@@ -249,7 +249,7 @@ public class SpringRequestMapController {
         return false;
     }
 
-    @RequestMapping(value = "deleteaccount/{accountid}")
+    @RequestMapping(value = "/deleteaccount/{accountid}")
     @ResponseBody
     public boolean deleteAccount(@PathVariable(value = "accountid") String accountId) {
         if (DBService.deleteAccount(accountId)) {
