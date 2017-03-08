@@ -474,6 +474,7 @@ public class DBService {
     }
 
     public static boolean logTransfer(String accountNumber, String accountNumber2, BigInteger kroner, int oere, String message) {
+        makeConnection();
         LoggedTransaction loggedTransaction = new LoggedTransaction();
         loggedTransaction.setSendingAccount(accountNumber);
         loggedTransaction.setRecievingAccount(accountNumber2);
@@ -500,6 +501,31 @@ public class DBService {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static SavingsTargets getSavingsTarget(int savingsTargetId) {
+        makeConnection();
+        try {
+            Dao<SavingsTargets, Integer> savingsTargetsIntegerDao = DaoManager.createDao(connectionSource, SavingsTargets.class);
+            SavingsTargets savingsTargets = savingsTargetsIntegerDao.queryForId(savingsTargetId);
+            return savingsTargets;
+        } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<SavingsTargets> getAllSavingsTargetsForUser(int customerId) {
+        makeConnection();
+        try {
+            Dao<SavingsTargets, Integer> savingsTargetsIntegerDao = DaoManager.createDao(connectionSource, SavingsTargets.class);
+            return savingsTargetsIntegerDao.queryForEq("KundeID", customerId);
+        } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
