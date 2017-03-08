@@ -260,6 +260,8 @@ public class DBService {
         return null;
     }
 
+
+
     public static boolean addCustomer(String firstName, String surname, String birthDayNumber, String email) {
         makeConnection();
         Customer customer = new Customer();

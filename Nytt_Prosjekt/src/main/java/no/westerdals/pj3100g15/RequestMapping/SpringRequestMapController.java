@@ -4,6 +4,7 @@ import no.westerdals.pj3100g15.ORM.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -143,6 +144,22 @@ public class SpringRequestMapController {
     public List<RecurringTransfer> getAllRecurringTransfersForAccount(
             @PathVariable(value = "accountNumber") String accountNumber) {
         List<RecurringTransfer> recurringTransfers = DBService.getAllRecurringTransfersForAccount(accountNumber);
+        return recurringTransfers;
+    }
+
+    @RequestMapping(value = "/{customerId}/recurringtransfers/user")
+    @ResponseBody
+    public List<RecurringTransfer> getAllRecurringTransfersForUser(
+            @PathVariable(value = "customerId") int customerId) {
+        List<String> accountNumbers = DBService
+                .getCustomerAccounts(customerId).stream()
+                .map(account -> account.getAccountNumber())
+                .collect(Collectors.toList());
+
+       List<RecurringTransfer> recurringTransfers = new ArrayList<>();
+        for (String accountNumber : accountNumbers) {
+            recurringTransfers.addAll(DBService.getAllRecurringTransfersForAccount(accountNumber));
+        }
         return recurringTransfers;
     }
 
