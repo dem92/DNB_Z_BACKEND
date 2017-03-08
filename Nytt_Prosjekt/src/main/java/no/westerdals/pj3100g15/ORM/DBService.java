@@ -246,14 +246,19 @@ public class DBService {
         }
         return null;
     }
-    //TODO EVA!
-    /*
+
     public static List<RecurringTransfer> getAllRecurringTransfersForAccount(String accountNumber){
         makeConnection();
         try{
-            Dao<>
+            Dao<RecurringTransfer, Integer> recurringTransfersDao= DaoManager.createDao(connectionSource, RecurringTransfer.class);
+            List<RecurringTransfer> recurringTransfers = recurringTransfersDao.queryForEq("Avsenderkonto", accountNumber);
+            return recurringTransfers;
+        }catch (SQLException e){
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
         }
-    }*/
+        return null;
+    }
 
     public static boolean addCustomer(String firstName, String surname, String birthDayNumber, String email) {
         makeConnection();

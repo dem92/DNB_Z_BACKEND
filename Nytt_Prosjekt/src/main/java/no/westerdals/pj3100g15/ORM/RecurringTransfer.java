@@ -5,7 +5,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.math.BigInteger;
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 @DatabaseTable(tableName = "Faste_Overforingar")
 public class RecurringTransfer {
