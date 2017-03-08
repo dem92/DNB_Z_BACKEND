@@ -139,6 +139,22 @@ public class SpringRequestMapController {
         return transactions;
     }
 
+    @RequestMapping(value = "/{accountNumber}/logcard")
+    @ResponseBody
+    public List<LoggedTransaction> getLoggedCardTransactionsFromAccount(
+            @PathVariable(value = "accountNumber") String accountNumber){
+        List<LoggedTransaction> logCard = DBService.getLoggedCardTransactionsFromAccount(accountNumber);
+        return logCard;
+    }
+
+    @RequestMapping(value = "/{accountNumber}/logtransfer")
+    @ResponseBody
+    public List<LoggedTransaction> getLoggedBankTransactionsFromAccount(
+            @PathVariable(value = "accountNumber") String accountNumber){
+        List<LoggedTransaction> logTransactions = DBService.getLoggedBankTransactionsFromAccount(accountNumber);
+        return logTransactions;
+    }
+
     @RequestMapping(value = "/{accountNumber}/recurringtransfers/account")
     @ResponseBody
     public List<RecurringTransfer> getAllRecurringTransfersForAccount(
@@ -167,7 +183,7 @@ public class SpringRequestMapController {
     @ResponseBody
     public SavingsTargets getSavingsTarget(
             @PathVariable(value = "savingstargetId") int savingstargetId) {
-        DBService.getSavingsTarget(savingstargetId);
+        return DBService.getSavingsTarget(savingstargetId);
     }
 
     @RequestMapping(value = "/{customerId}/allsavingstargets")
@@ -177,6 +193,7 @@ public class SpringRequestMapController {
         List<SavingsTargets> savingsTargets = DBService.getAllSavingsTargetsForUser(customerId);
         return savingsTargets;
     }
+
 
 
     // -------------------    Oppdatere customer under denne streken   ---------------------
