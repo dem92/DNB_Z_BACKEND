@@ -4,7 +4,6 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.math.BigInteger;
-import java.sql.Timestamp;
 
 /**
  * Created by Eva Dahloe on 07.03.2017.
@@ -18,7 +17,7 @@ public class LoggedTransaction {
     @DatabaseField(columnName = "Mottakerkonto")
     private String recievingAccount;
     @DatabaseField(columnName = "Tidspunkt")
-    private Timestamp timestamp;
+    private long timestamp;
     @DatabaseField(columnName = "Kroner")
     private BigInteger kroner;
     @DatabaseField(columnName = "Oere")
@@ -27,8 +26,6 @@ public class LoggedTransaction {
     private String message_kid;
     @DatabaseField(columnName = "Transaksjonstype")
     private String transactionType;
-    @DatabaseField(columnName = "Kjopested")
-    private String placeOfPurchase;
     @DatabaseField(columnName = "AvsenderID")
     private int senderID;
     @DatabaseField(columnName = "MottakerID")
@@ -37,7 +34,7 @@ public class LoggedTransaction {
     public LoggedTransaction() {
     }
 
-    public LoggedTransaction(int id, String sendingAccount, String recievingAccount, Timestamp timestamp, BigInteger kroner, int oere, String message_kid, String transactionType, String placeOfPurchase, int senderID, int receiverID) {
+    public LoggedTransaction(int id, String sendingAccount, String recievingAccount, long timestamp, BigInteger kroner, int oere, String message_kid, String transactionType, int senderID, int receiverID) {
         this.id = id;
         this.sendingAccount = sendingAccount;
         this.recievingAccount = recievingAccount;
@@ -46,7 +43,6 @@ public class LoggedTransaction {
         this.oere = oere;
         this.message_kid = message_kid;
         this.transactionType = transactionType;
-        this.placeOfPurchase = placeOfPurchase;
         this.senderID = senderID;
         this.receiverID = receiverID;
     }
@@ -75,11 +71,11 @@ public class LoggedTransaction {
         this.recievingAccount = recievingAccount;
     }
 
-    public Timestamp getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -113,14 +109,6 @@ public class LoggedTransaction {
 
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
-    }
-
-    public String getPlaceOfPurchase() {
-        return placeOfPurchase;
-    }
-
-    public void setPlaceOfPurchase(String placeOfPurchase) {
-        this.placeOfPurchase = placeOfPurchase;
     }
 
     public int getSenderID() {

@@ -2,19 +2,13 @@ package no.westerdals.pj3100g15.ORM;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.stmt.query.In;
 import com.j256.ormlite.support.ConnectionSource;
 import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
-import sun.rmi.runtime.Log;
 
 import java.math.BigInteger;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 public class DBService {
     private static ConnectionSource connectionSource;
@@ -481,6 +475,8 @@ public class DBService {
         loggedTransaction.setKroner(kroner);
         loggedTransaction.setOere(oere);
         loggedTransaction.setMessage_kid(message);
+
+        loggedTransaction.setTimestamp(System.currentTimeMillis() / 1000L);
 
         if (DBService.getAccount(accountNumber).getCustomerNumber() == DBService.getAccount(accountNumber2).getCustomerNumber()) {
             loggedTransaction.setTransactionType("transfer");
