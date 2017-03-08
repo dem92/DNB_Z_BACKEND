@@ -302,5 +302,11 @@ public class SpringRequestMapController {
         return false;
     }
 
+    // ------------ sjekke om server er oppe  ----------------
 
+    @RequestMapping(value = "/check")
+    @ResponseBody
+    public boolean check() {
+        return true;
+    }
 }
