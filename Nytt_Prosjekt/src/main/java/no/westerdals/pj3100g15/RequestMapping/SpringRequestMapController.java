@@ -163,7 +163,14 @@ public class SpringRequestMapController {
         return recurringTransfers;
     }
 
-    @RequestMapping(value = "/{customerId}/savingstargets")
+    @RequestMapping(value = "/{savingstargetId}/savingstargets")
+    @ResponseBody
+    public SavingsTargets getSavingsTarget(
+            @PathVariable(value = "savingstargetId") int savingstargetId) {
+        DBService.getSavingsTarget(savingstargetId);
+    }
+
+    @RequestMapping(value = "/{customerId}/allsavingstargets")
     @ResponseBody
     public List<SavingsTargets> getAllSavingsTargetsForUser(
             @PathVariable(value = "customerId") int customerId) {
