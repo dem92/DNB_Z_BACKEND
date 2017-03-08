@@ -79,6 +79,8 @@ public class DBService {
         return null;
     }
 
+
+
     public static Account getAccount(String accountNumber) {
         makeConnection();
 
@@ -244,6 +246,14 @@ public class DBService {
         }
         return null;
     }
+    //TODO EVA!
+    /*
+    public static List<RecurringTransfer> getAllRecurringTransfersForAccount(String accountNumber){
+        makeConnection();
+        try{
+            Dao<>
+        }
+    }*/
 
     public static boolean addCustomer(String firstName, String surname, String birthDayNumber, String email) {
         makeConnection();
