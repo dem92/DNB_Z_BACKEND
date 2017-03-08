@@ -138,6 +138,15 @@ public class SpringRequestMapController {
         return transactions;
     }
 
+    @RequestMapping(value = "/{accountNumber}/recurringtransfersaccount")
+    @ResponseBody
+    public List<RecurringTransfer> getAllRecurringTransfersForAccount(
+            @PathVariable(value = "customerid") String accountNumber) {
+        List<RecurringTransfer> recurringTransfers = DBService.getAllRecurringTransfersForAccount(accountNumber);
+        return recurringTransfers;
+    }
+
+
     // -------------------    Oppdatere customer under denne streken   ---------------------
 
     @RequestMapping(value = "/updateuser/{customerid}/surname/{surname}")
