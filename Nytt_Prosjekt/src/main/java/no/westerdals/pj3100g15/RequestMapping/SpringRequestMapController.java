@@ -73,15 +73,17 @@ public class SpringRequestMapController {
         return false;
     }
 
-    //TODO Se metoden sendMoney i DBService för info om vad detta är.
-    @RequestMapping(value = "/{sendersAccount}/{recieversAccount}/{kroner}/{oere}", method = RequestMethod.GET)
+    @RequestMapping(value = "/sendmoney/{message}/{sendersAccount}/{recieversAccount}/{kroner}/{oere}", method = RequestMethod.GET)
     @ResponseBody
     public boolean sendMoney(
+            @PathVariable(value = "message") String message,
             @PathVariable(value = "sendersAccount") String accountNumber,
             @PathVariable(value = "recieversAccount") String accountNumber2,
             @PathVariable(value = "kroner") BigInteger kroner,
-            @PathVariable(value = "oere") int oere) {
+            @PathVariable(value = "oere") int oere
+    ) {
         if (DBService.sendMoney(accountNumber, accountNumber2, kroner, oere)) {
+            DBService.logTransfer(accountNumber, accountNumber2, kroner, oere, message);
             return true;
         } else {
             return false;

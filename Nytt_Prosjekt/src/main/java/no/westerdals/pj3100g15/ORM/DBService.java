@@ -2,12 +2,14 @@ package no.westerdals.pj3100g15.ORM;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.stmt.query.In;
 import com.j256.ormlite.support.ConnectionSource;
 import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 import sun.rmi.runtime.Log;
 
 import java.math.BigInteger;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -78,7 +80,6 @@ public class DBService {
         }
         return null;
     }
-
 
 
     public static Account getAccount(String accountNumber) {
@@ -247,19 +248,18 @@ public class DBService {
         return null;
     }
 
-    public static List<RecurringTransfer> getAllRecurringTransfersForAccount(String accountNumber){
+    public static List<RecurringTransfer> getAllRecurringTransfersForAccount(String accountNumber) {
         makeConnection();
-        try{
-            Dao<RecurringTransfer, Integer> recurringTransfersDao= DaoManager.createDao(connectionSource, RecurringTransfer.class);
+        try {
+            Dao<RecurringTransfer, Integer> recurringTransfersDao = DaoManager.createDao(connectionSource, RecurringTransfer.class);
             List<RecurringTransfer> recurringTransfers = recurringTransfersDao.queryForEq("Avsenderkonto", accountNumber);
             return recurringTransfers;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return null;
     }
-
 
 
     public static boolean addCustomer(String firstName, String surname, String birthDayNumber, String email) {
@@ -465,6 +465,35 @@ public class DBService {
         try {
             Dao<Account, String> accountStringDao = DaoManager.createDao(connectionSource, Account.class);
             accountStringDao.delete(account);
+            return true;
+        } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean logTransfer(String accountNumber, String accountNumber2, BigInteger kroner, int oere, String message) {
+        LoggedTransaction loggedTransaction = new LoggedTransaction();
+        loggedTransaction.setSendingAccount(accountNumber);
+        loggedTransaction.setRecievingAccount(accountNumber2);
+        loggedTransaction.setKroner(kroner);
+        loggedTransaction.setOere(oere);
+        loggedTransaction.setMessage_kid(message);
+
+        if (DBService.getAccount(accountNumber).getCustomerNumber() == DBService.getAccount(accountNumber2).getCustomerNumber()) {
+            loggedTransaction.setTransactionType("transfer");
+        } else if (!(DBService.getAccount(accountNumber).getCustomerNumber() == DBService.getAccount(accountNumber2).getCustomerNumber()) && (accountNumber != null || accountNumber2 != null)) {
+            loggedTransaction.setTransactionType("payment");
+        } else if (accountNumber == null) {
+            loggedTransaction.setTransactionType("payment");
+        } else if (accountNumber2 == null) {
+            loggedTransaction.setTransactionType("card");
+        }
+
+        try {
+            Dao<LoggedTransaction, Integer> loggedTransactionIntegerDao = DaoManager.createDao(connectionSource, LoggedTransaction.class);
+            loggedTransactionIntegerDao.create(loggedTransaction);
             return true;
         } catch (SQLException e) {
             WriteLogg.writeLogg(e);
