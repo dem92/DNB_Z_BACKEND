@@ -1,15 +1,13 @@
 package no.westerdals.pj3100g15.RequestMapping;
 
-import no.westerdals.pj3100g15.ORM.Account;
-import no.westerdals.pj3100g15.ORM.Customer;
-import no.westerdals.pj3100g15.ORM.DBService;
-import no.westerdals.pj3100g15.ORM.LoggedTransaction;
-import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
+import no.westerdals.pj3100g15.ORM.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
-import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class SpringRequestMapController {
@@ -89,11 +87,55 @@ public class SpringRequestMapController {
         }
     }
 
-    @RequestMapping(value = "/{accountNumber}/payment", method = RequestMethod.GET)
+    @RequestMapping(value = "{accountNumber}/transfer")
     @ResponseBody
-    public List<LoggedTransaction> getPaymentsFromAccount(
+    public List<LoggedTransaction> getTransferFromAccount(
+            @PathVariable(value = "accountNumber") String accountNumber
+    ) {
+        List<LoggedTransaction> transfers = DBService.getAllLoggedTransactionsFromAccount(accountNumber).stream()
+                .filter(payment -> payment.getTransactionType().equals("transfer"))
+                .sorted(Comparator.comparing(LoggedTransaction::getId))
+                .collect(Collectors.toList());
+        Collections.reverse(transfers);
+        return transfers;
+    }
+
+    @RequestMapping(value = "{accountNumber}/card")
+    @ResponseBody
+    public List<LoggedTransaction> getCardFromAccount(
+            @PathVariable(value = "accountNumber") String accountNumber
+    ) {
+        List<LoggedTransaction> cards = DBService.getAllLoggedTransactionsFromAccount(accountNumber).stream()
+                .filter(payment -> payment.getTransactionType().equals("card"))
+                .sorted(Comparator.comparing(LoggedTransaction::getId))
+                .collect(Collectors.toList());
+        Collections.reverse(cards);
+        return cards;
+    }
+
+
+    @RequestMapping(value = "{accountNumber}/payment")
+    @ResponseBody
+    public List<LoggedTransaction> getPaymentFromAccount(
+            @PathVariable(value = "accountNumber") String accountNumber
+    ) {
+        List<LoggedTransaction> payments = DBService.getAllLoggedTransactionsFromAccount(accountNumber).stream()
+                .filter(payment -> payment.getTransactionType().equals("payment"))
+                .sorted(Comparator.comparing(LoggedTransaction::getId))
+                .collect(Collectors.toList());
+        Collections.reverse(payments);
+        return payments;
+    }
+
+    @RequestMapping(value = "/{accountNumber}/all", method = RequestMethod.GET)
+    @ResponseBody
+    public List<LoggedTransaction> getAllLoggedTransactionsFromAccount(
             @PathVariable(value = "accountNumber") String accountNumber) {
-        return DBService.getPaymentsFromAccount(accountNumber);
+        List<LoggedTransaction> transactions = DBService.getAllLoggedTransactionsFromAccount(accountNumber).stream()
+                .sorted(Comparator.comparing(LoggedTransaction::getId))
+                .collect(Collectors.toList());
+        Collections.reverse(transactions);
+        return transactions;
     }
 
     // -------------------    Oppdatere customer under denne streken   ---------------------
