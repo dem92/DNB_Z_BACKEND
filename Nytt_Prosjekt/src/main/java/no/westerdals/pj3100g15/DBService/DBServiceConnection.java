@@ -1,7 +1,6 @@
 package no.westerdals.pj3100g15.DBService;
 
 import com.j256.ormlite.support.ConnectionSource;
-import no.westerdals.pj3100g15.ORM.DBConnector;
 import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 
 import java.io.IOException;
