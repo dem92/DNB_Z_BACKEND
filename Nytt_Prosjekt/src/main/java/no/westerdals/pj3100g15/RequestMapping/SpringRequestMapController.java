@@ -16,37 +16,49 @@ public class SpringRequestMapController {
     @RequestMapping(value = "/user/account/{accountID}", method = RequestMethod.GET)
     @ResponseBody
     public Account getAccount(@PathVariable(value = "accountID") String account) {
-        return DBService.getAccount(account);
+        Account account1 = DBService.getAccount(account);
+        DBService.closeConnection();
+        return account1;
     }
 
     @RequestMapping(value = "/user/{id}/account/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Account> getAccounts(@PathVariable(value = "id") int customerId) {
-        return DBService.getCustomerAccounts(customerId);
+        List<Account> accounts = DBService.getCustomerAccounts(customerId);
+        DBService.closeConnection();
+        return accounts;
     }
 
     @RequestMapping(value = "/user/all/account/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Account> getAllAccounts() {
-        return DBService.getAllAccounts();
+        List<Account> accounts = DBService.getAllAccounts();
+        DBService.closeConnection();
+        return accounts;
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Customer getCustomer(@PathVariable(value = "id") int customerId) {
-        return DBService.getCustomer(customerId);
+        Customer customer = DBService.getCustomer(customerId);
+        DBService.closeConnection();
+        return customer;
     }
 
     @RequestMapping(value = "/user/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Customer> getAllCustomers() {
-        return DBService.getAllCustomers();
+        List<Customer> customers = DBService.getAllCustomers();
+        DBService.closeConnection();
+        return customers;
     }
 
     @RequestMapping(value = "/user/{id}/auth", method = RequestMethod.GET)
     @ResponseBody
     public String[] getPasswords(@PathVariable(value = "id") String birthdayNumber) {
-        return DBService.getPassword(birthdayNumber);
+        String[] password = DBService.getPassword(birthdayNumber);
+        DBService.closeConnection();
+        return password;
     }
 
     @RequestMapping(value = "/newuser/{firstname}/{surname}/{email}/{birthdaynumber}", method = RequestMethod.GET)
@@ -57,8 +69,10 @@ public class SpringRequestMapController {
             @PathVariable(value = "birthdaynumber") String birthdaynumber,
             @PathVariable(value = "email") String email) {
         if (DBService.addCustomer(firstName, surName, birthdaynumber, email)) {
+            DBService.closeConnection();
             return true;
         }
+        DBService.closeConnection();
         return false;
     }
 
@@ -68,8 +82,10 @@ public class SpringRequestMapController {
             @PathVariable(value = "id") int customerId,
             @PathVariable(value = "accounttype") String accountType) {
         if (DBService.addAccount(customerId, accountType)) {
+            DBService.closeConnection();
             return true;
         }
+        DBService.closeConnection();
         return false;
     }
 
@@ -90,9 +106,10 @@ public class SpringRequestMapController {
 
             if (recurring)
                 DBService.addRecurringTransfer(accountNumber, accountNumber2, kroner, oere, message, interval, endDate);
-
+            DBService.closeConnection();
             return true;
         } else {
+            DBService.closeConnection();
             return false;
         }
     }
@@ -107,6 +124,7 @@ public class SpringRequestMapController {
                 .sorted(Comparator.comparing(LoggedTransaction::getId))
                 .collect(Collectors.toList());
         Collections.reverse(transfers);
+        DBService.closeConnection();
         return transfers;
     }
 
@@ -120,6 +138,7 @@ public class SpringRequestMapController {
                 .sorted(Comparator.comparing(LoggedTransaction::getId))
                 .collect(Collectors.toList());
         Collections.reverse(cards);
+        DBService.closeConnection();
         return cards;
     }
 
@@ -134,6 +153,7 @@ public class SpringRequestMapController {
                 .sorted(Comparator.comparing(LoggedTransaction::getId))
                 .collect(Collectors.toList());
         Collections.reverse(payments);
+        DBService.closeConnection();
         return payments;
     }
 
@@ -145,6 +165,7 @@ public class SpringRequestMapController {
                 .sorted(Comparator.comparing(LoggedTransaction::getId))
                 .collect(Collectors.toList());
         Collections.reverse(transactions);
+        DBService.closeConnection();
         return transactions;
     }
 
@@ -153,6 +174,7 @@ public class SpringRequestMapController {
     public List<RecurringTransfer> getAllRecurringTransfersForAccount(
             @PathVariable(value = "accountNumber") String accountNumber) {
         List<RecurringTransfer> recurringTransfers = DBService.getAllRecurringTransfersForAccount(accountNumber);
+        DBService.closeConnection();
         return recurringTransfers;
     }
 
@@ -169,6 +191,7 @@ public class SpringRequestMapController {
         for (String accountNumber : accountNumbers) {
             recurringTransfers.addAll(DBService.getAllRecurringTransfersForAccount(accountNumber));
         }
+        DBService.closeConnection();
         return recurringTransfers;
     }
 
@@ -176,7 +199,9 @@ public class SpringRequestMapController {
     @ResponseBody
     public SavingsTargets getSavingsTarget(
             @PathVariable(value = "savingstargetId") int savingstargetId) {
-        return DBService.getSavingsTarget(savingstargetId);
+        SavingsTargets savingsTargets = DBService.getSavingsTarget(savingstargetId);
+        DBService.closeConnection();
+        return savingsTargets;
     }
 
     @RequestMapping(value = "/{customerId}/allsavingstargets")
@@ -184,6 +209,7 @@ public class SpringRequestMapController {
     public List<SavingsTargets> getAllSavingsTargetsForUser(
             @PathVariable(value = "customerId") int customerId) {
         List<SavingsTargets> savingsTargets = DBService.getAllSavingsTargetsForUser(customerId);
+        DBService.closeConnection();
         return savingsTargets;
     }
 
@@ -197,8 +223,10 @@ public class SpringRequestMapController {
                                          @PathVariable(value = "surname") String surname) {
 
         if (DBService.updateSurname(customerId, surname)) {
+            DBService.closeConnection();
             return true;
         } else {
+            DBService.closeConnection();
             return false;
         }
     }
@@ -209,8 +237,10 @@ public class SpringRequestMapController {
                                            @PathVariable(value = "firstname") String firstName) {
 
         if (DBService.updateFirstname(customerId, firstName)) {
+            DBService.closeConnection();
             return true;
         } else {
+            DBService.closeConnection();
             return false;
         }
     }
@@ -221,8 +251,10 @@ public class SpringRequestMapController {
                                          @PathVariable(value = "address") String address) {
 
         if (DBService.updateAddress(customerId, address)) {
+            DBService.closeConnection();
             return true;
         } else {
+            DBService.closeConnection();
             return false;
         }
     }
@@ -233,8 +265,10 @@ public class SpringRequestMapController {
                                             @PathVariable(value = "postalcode") int postalCode) {
 
         if (DBService.updatePostalcode(customerId, postalCode)) {
+            DBService.closeConnection();
             return true;
         } else {
+            DBService.closeConnection();
             return false;
         }
     }
@@ -245,8 +279,10 @@ public class SpringRequestMapController {
                                        @PathVariable(value = "email") String email) {
 
         if (DBService.updateEmail(customerId, email)) {
+            DBService.closeConnection();
             return true;
         } else {
+            DBService.closeConnection();
             return false;
         }
     }
@@ -257,8 +293,10 @@ public class SpringRequestMapController {
                                        @PathVariable(value = "phone") int phone) {
 
         if (DBService.updatePhone(customerId, phone)) {
+            DBService.closeConnection();
             return true;
         } else {
+            DBService.closeConnection();
             return false;
         }
     }
@@ -271,8 +309,10 @@ public class SpringRequestMapController {
                                      @PathVariable(value = "main") int main) {
 
         if (DBService.updateMain(accountId, main)) {
+            DBService.closeConnection();
             return true;
         } else {
+            DBService.closeConnection();
             return false;
         }
     }
@@ -283,8 +323,10 @@ public class SpringRequestMapController {
                                      @PathVariable(value = "accountname") String accountname) {
 
         if (DBService.updateAccountname(accountId, accountname)) {
+            DBService.closeConnection();
             return true;
         } else {
+            DBService.closeConnection();
             return false;
         }
     }
@@ -295,8 +337,10 @@ public class SpringRequestMapController {
     @ResponseBody
     public boolean deleteCustomer(@PathVariable(value = "customerid") int customerId) {
         if (DBService.deleteUser(customerId)) {
+            DBService.closeConnection();
             return true;
         }
+        DBService.closeConnection();
         return false;
     }
 
@@ -304,8 +348,10 @@ public class SpringRequestMapController {
     @ResponseBody
     public boolean deleteAccount(@PathVariable(value = "accountid") String accountId) {
         if (DBService.deleteAccount(accountId)) {
+            DBService.closeConnection();
             return true;
         }
+        DBService.closeConnection();
         return false;
     }
 
@@ -324,8 +370,10 @@ public class SpringRequestMapController {
                                         @PathVariable(value = "kroner")BigInteger kroner,
                                         @PathVariable(value = "oere")int oere){
         if(DBService.createSavingsTarget(kroner,oere,customerId,name)){
+            DBService.closeConnection();
             return true;
         }
+        DBService.closeConnection();
         return false;
     }
 }

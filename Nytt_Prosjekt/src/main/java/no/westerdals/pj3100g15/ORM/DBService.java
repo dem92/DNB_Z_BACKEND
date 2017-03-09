@@ -5,6 +5,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.*;
@@ -17,6 +18,15 @@ public class DBService {
     private static void makeConnection() {
         if (connectionSource == null)
             connectionSource = DBConnector.makeConnection();
+    }
+
+    public static void closeConnection(){
+        try {
+            connectionSource.close();
+        } catch (IOException e) {
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
+        }
     }
 
     public static List<Customer> getAllCustomers() {
