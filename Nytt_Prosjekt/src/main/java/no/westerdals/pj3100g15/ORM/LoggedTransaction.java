@@ -5,9 +5,6 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.math.BigInteger;
 
-/**
- * Created by Eva Dahloe on 07.03.2017.
- */
 @DatabaseTable (tableName = "Logg_Transaksjoner")
 public class LoggedTransaction {
     @DatabaseField(columnName = "", id = true)

@@ -1,8 +1,5 @@
 package no.westerdals.pj3100g15.TestDataGenerator;
 
-/**
- * Created by Sven Craehn on 07.03.2017.
- */
 public class SkapaTestdata {
 /*
     public static void main(String[] args) {
