@@ -24,16 +24,18 @@ public class RecurringTransfer {
     @DatabaseField(columnName = "Melding_kid")
     private String message;
     @DatabaseField(columnName = "Neste_Overforing")
-    private int nextTransfer;
+    private long nextTransfer;
     @DatabaseField(columnName = "Intervall")
     private String intervall;
     @DatabaseField(columnName = "Sluttdato")
     private long endDate;
+    @DatabaseField(columnName = "Aktiv")
+    private boolean active;
 
     public RecurringTransfer() {
     }
 
-    public RecurringTransfer(int id, String sendingAccount, String receivingAccount, int customerId, BigInteger kroner, int oere, String message, int nextTransfer, String intervall, long endDate) {
+    public RecurringTransfer(int id, String sendingAccount, String receivingAccount, int customerId, BigInteger kroner, int oere, String message, long nextTransfer, String intervall, long endDate, boolean active) {
         this.id = id;
         this.sendingAccount = sendingAccount;
         this.receivingAccount = receivingAccount;
@@ -44,6 +46,7 @@ public class RecurringTransfer {
         this.nextTransfer = nextTransfer;
         this.intervall = intervall;
         this.endDate = endDate;
+        this.active = active;
     }
 
     public int getId() {
@@ -102,11 +105,11 @@ public class RecurringTransfer {
         this.message = message;
     }
 
-    public int getNextTransfer() {
+    public long getNextTransfer() {
         return nextTransfer;
     }
 
-    public void setNextTransfer(int nextTransfer) {
+    public void setNextTransfer(long nextTransfer) {
         this.nextTransfer = nextTransfer;
     }
 
@@ -124,5 +127,13 @@ public class RecurringTransfer {
 
     public void setEndDate(long endDate) {
         this.endDate = endDate;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

@@ -242,6 +242,8 @@ public class DBService {
         return null;
     }
 
+    //------------ Faste betalinger -------------
+
     public static List<RecurringTransfer> getAllRecurringTransfersForAccount(String accountNumber) {
         makeConnection();
         try {
@@ -255,6 +257,37 @@ public class DBService {
         return null;
     }
 
+    public static void addRecurringTransfer(String sendingAccount, String receivingAccount, BigInteger kroner, int oere, String message, String interval, long endDate){
+        makeConnection();
+
+        RecurringTransfer recurringTransfer = new RecurringTransfer();
+        recurringTransfer.setSendingAccount(sendingAccount);
+        recurringTransfer.setReceivingAccount(receivingAccount);
+        recurringTransfer.setKroner(kroner);
+        recurringTransfer.setOere(oere);
+        recurringTransfer.setMessage(message);
+        recurringTransfer.setIntervall(interval);
+        recurringTransfer.setEndDate(endDate);
+        recurringTransfer.setActive(true);
+        recurringTransfer.setCustomerId(getAccount(sendingAccount).getCustomerNumber());
+
+        Random random = new Random();
+        int i = random.nextInt(10000);
+        long nextTransfer = 1499428800 + i * 100;
+
+        recurringTransfer.setNextTransfer(nextTransfer);
+
+        try {
+            Dao<RecurringTransfer, Integer> recurringTransfersDao = DaoManager.createDao(connectionSource, RecurringTransfer.class);
+            recurringTransfersDao.create(recurringTransfer);
+
+        } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
+        }
+    }
+
+    //------------- Slutt --------------------------
 
     public static boolean addCustomer(String firstName, String surname, String birthDayNumber, String email) {
         makeConnection();
@@ -486,6 +519,14 @@ public class DBService {
             loggedTransaction.setTransactionType("payment");
         } else if (accountNumber2 == null) {
             loggedTransaction.setTransactionType("card");
+        }
+
+        if (accountNumber != null){
+            loggedTransaction.setSenderID(getAccount(accountNumber).getCustomerNumber());
+        }
+
+        if (accountNumber2 != null){
+            loggedTransaction.setReceiverID(getAccount(accountNumber2).getCustomerNumber());
         }
 
         try {
