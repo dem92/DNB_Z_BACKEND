@@ -10,9 +10,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Henrik on 09.03.2017.
- */
 public class DBServiceRecurringTransfer {
     public static List<RecurringTransfer> getAllRecurringTransfersForAccount(String accountNumber) {
         DBServiceConnection.makeConnection();

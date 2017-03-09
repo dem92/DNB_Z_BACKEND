@@ -11,9 +11,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * Created by Henrik on 09.03.2017.
- */
 public class DBServiceAccount {
     public static BigInteger[] getAccountBalance(String accountNumber) {
         DBServiceConnection.makeConnection();

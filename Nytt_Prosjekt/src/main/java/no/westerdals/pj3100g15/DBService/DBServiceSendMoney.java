@@ -8,9 +8,6 @@ import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 import java.math.BigInteger;
 import java.sql.SQLException;
 
-/**
- * Created by Henrik on 09.03.2017.
- */
 public class DBServiceSendMoney {
     public static boolean sendMoney(String accountNumber, String accountNumber2, BigInteger kroner, int oere) {
         DBServiceConnection.makeConnection();
