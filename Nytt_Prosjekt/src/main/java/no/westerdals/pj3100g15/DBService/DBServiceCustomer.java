@@ -8,9 +8,6 @@ import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by Henrik on 09.03.2017.
- */
 public class DBServiceCustomer {
     public static List<Customer> getAllCustomers() {
         DBServiceConnection.makeConnection();

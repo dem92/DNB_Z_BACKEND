@@ -14,7 +14,7 @@ public class RequestMapUserPassword {
     @ResponseBody
     public String[] getPasswords(@PathVariable(value = "id") String birthdayNumber) {
         String[] password = DBServiceUserPassword.getPassword(birthdayNumber);
-        DBServiceConnection.closeConnection();
+        //DBServiceConnection.closeConnection();
         return password;
     }
 }

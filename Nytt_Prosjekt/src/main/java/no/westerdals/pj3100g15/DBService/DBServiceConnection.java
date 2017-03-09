@@ -5,9 +5,6 @@ import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 
 import java.io.IOException;
 
-/**
- * Created by Henrik on 09.03.2017.
- */
 public class DBServiceConnection {
     public static ConnectionSource connectionSource;
 

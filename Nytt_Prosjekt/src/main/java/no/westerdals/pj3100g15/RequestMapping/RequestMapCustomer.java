@@ -17,7 +17,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public Customer getCustomer(@PathVariable(value = "id") int customerId) {
         Customer customer = DBServiceCustomer.getCustomer(customerId);
-        DBServiceConnection.closeConnection();
+        //DBServiceConnection.closeConnection();
         return customer;
     }
 
@@ -25,7 +25,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public List<Customer> getAllCustomers() {
         List<Customer> customers = DBServiceCustomer.getAllCustomers();
-        DBServiceConnection.closeConnection();
+        //DBServiceConnection.closeConnection();
         return customers;
     }
 
@@ -37,7 +37,7 @@ public class RequestMapCustomer {
             @PathVariable(value = "birthdaynumber") String birthdaynumber,
             @PathVariable(value = "email") String email) {
         if (DBServiceCustomer.addCustomer(firstName, surName, birthdaynumber, email)) {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         }
         DBServiceConnection.closeConnection();
@@ -52,10 +52,10 @@ public class RequestMapCustomer {
                                          @PathVariable(value = "surname") String surname) {
 
         if (DBServiceCustomer.updateSurname(customerId, surname)) {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         } else {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return false;
         }
     }
@@ -66,10 +66,10 @@ public class RequestMapCustomer {
                                            @PathVariable(value = "firstname") String firstName) {
 
         if (DBServiceCustomer.updateFirstname(customerId, firstName)) {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         } else {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return false;
         }
     }
@@ -80,10 +80,10 @@ public class RequestMapCustomer {
                                          @PathVariable(value = "address") String address) {
 
         if (DBServiceCustomer.updateAddress(customerId, address)) {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         } else {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return false;
         }
     }
@@ -94,10 +94,10 @@ public class RequestMapCustomer {
                                             @PathVariable(value = "postalcode") int postalCode) {
 
         if (DBServiceCustomer.updatePostalcode(customerId, postalCode)) {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         } else {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return false;
         }
     }
@@ -108,10 +108,10 @@ public class RequestMapCustomer {
                                        @PathVariable(value = "email") String email) {
 
         if (DBServiceCustomer.updateEmail(customerId, email)) {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         } else {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return false;
         }
     }
@@ -122,10 +122,10 @@ public class RequestMapCustomer {
                                        @PathVariable(value = "phone") int phone) {
 
         if (DBServiceCustomer.updatePhone(customerId, phone)) {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         } else {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return false;
         }
     }
@@ -134,10 +134,10 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean deleteCustomer(@PathVariable(value = "customerid") int customerId) {
         if (DBServiceCustomer.deleteUser(customerId)) {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         }
-        DBServiceConnection.closeConnection();
+        //DBServiceConnection.closeConnection();
         return false;
     }
 }

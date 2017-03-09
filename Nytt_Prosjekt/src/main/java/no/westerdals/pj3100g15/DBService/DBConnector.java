@@ -1,7 +1,9 @@
 package no.westerdals.pj3100g15.DBService;
 
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
+import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 
 import java.io.FileReader;
 import java.util.Properties;
@@ -33,9 +35,13 @@ public class DBConnector {
 
     public static ConnectionSource connectToDatabase(String user, String password, String databaseUrl) {
         try {
-            ConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl, user, password);
+            JdbcPooledConnectionSource connectionSource =
+                    new JdbcPooledConnectionSource(databaseUrl, user, password);
+            //ConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl, user, password);
+            connectionSource.setMaxConnectionAgeMillis(5 * 60 * 1000);
             return connectionSource;
         } catch (Exception e) {
+            WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return null;

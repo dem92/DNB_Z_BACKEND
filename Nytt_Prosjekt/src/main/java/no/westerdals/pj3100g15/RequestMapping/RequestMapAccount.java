@@ -18,7 +18,7 @@ public class RequestMapAccount {
     @ResponseBody
     public Account getAccount(@PathVariable(value = "accountID") String account) {
         Account account1 = DBServiceAccount.getAccount(account);
-        DBServiceConnection.closeConnection();
+        //DBServiceConnection.closeConnection();
         return account1;
     }
 
@@ -26,7 +26,7 @@ public class RequestMapAccount {
     @ResponseBody
     public List<Account> getAccounts(@PathVariable(value = "id") int customerId) {
         List<Account> accounts = DBServiceAccount.getCustomerAccounts(customerId);
-        DBServiceConnection.closeConnection();
+        //DBServiceConnection.closeConnection();
         return accounts;
     }
 
@@ -34,7 +34,7 @@ public class RequestMapAccount {
     @ResponseBody
     public List<Account> getAllAccounts() {
         List<Account> accounts = DBServiceAccount.getAllAccounts();
-        DBServiceConnection.closeConnection();
+        //DBServiceConnection.closeConnection();
         return accounts;
     }
 
@@ -44,7 +44,7 @@ public class RequestMapAccount {
             @PathVariable(value = "id") int customerId,
             @PathVariable(value = "accounttype") String accountType) {
         if (DBServiceAccount.addAccount(customerId, accountType)) {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         }
         DBServiceConnection.closeConnection();
@@ -58,10 +58,10 @@ public class RequestMapAccount {
                                      @PathVariable(value = "main") int main) {
 
         if (DBServiceAccount.updateMain(accountId, main)) {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         } else {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return false;
         }
     }
@@ -72,10 +72,10 @@ public class RequestMapAccount {
                                      @PathVariable(value = "accountname") String accountname) {
 
         if (DBServiceAccount.updateAccountname(accountId, accountname)) {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         } else {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return false;
         }
     }
@@ -84,10 +84,10 @@ public class RequestMapAccount {
     @ResponseBody
     public boolean deleteAccount(@PathVariable(value = "accountid") String accountId) {
         if (DBServiceAccount.deleteAccount(accountId)) {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         }
-        DBServiceConnection.closeConnection();
+        //DBServiceConnection.closeConnection();
         return false;
     }
 }

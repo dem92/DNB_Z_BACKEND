@@ -18,7 +18,7 @@ public class RequestMapSavingsTargets {
     public SavingsTargets getSavingsTarget(
             @PathVariable(value = "savingstargetId") int savingstargetId) {
         SavingsTargets savingsTargets = DBServiceSavingsTargets.getSavingsTarget(savingstargetId);
-        DBServiceConnection.closeConnection();
+        //DBServiceConnection.closeConnection();
         return savingsTargets;
     }
 
@@ -27,7 +27,7 @@ public class RequestMapSavingsTargets {
     public List<SavingsTargets> getAllSavingsTargetsForUser(
             @PathVariable(value = "customerId") int customerId) {
         List<SavingsTargets> savingsTargets = DBServiceSavingsTargets.getAllSavingsTargetsForUser(customerId);
-        DBServiceConnection.closeConnection();
+        //DBServiceConnection.closeConnection();
         return savingsTargets;
     }
 
@@ -38,10 +38,10 @@ public class RequestMapSavingsTargets {
                                         @PathVariable(value = "kroner")BigInteger kroner,
                                         @PathVariable(value = "oere")int oere){
         if(DBServiceSavingsTargets.createSavingsTarget(kroner,oere,customerId,name)){
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         }
-        DBServiceConnection.closeConnection();
+        //DBServiceConnection.closeConnection();
         return false;
     }
 }

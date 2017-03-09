@@ -32,10 +32,10 @@ public class RequestMapSendMoney {
 
             if (recurring)
                 DBServiceRecurringTransfer.addRecurringTransfer(accountNumber, accountNumber2, kroner, oere, message, interval, endDate);
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return true;
         } else {
-            DBServiceConnection.closeConnection();
+            //DBServiceConnection.closeConnection();
             return false;
         }
     }

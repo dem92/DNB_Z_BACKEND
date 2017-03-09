@@ -9,9 +9,6 @@ import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by Henrik on 09.03.2017.
- */
 public class DBServiceLoggedTransaction {
     public static List<LoggedTransaction> getAllLoggedTransactionsFromAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
