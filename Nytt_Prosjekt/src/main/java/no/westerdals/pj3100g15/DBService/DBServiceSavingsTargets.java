@@ -10,6 +10,21 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DBServiceSavingsTargets {
+
+    public static boolean deleteSavingsTarget(int savingsTargetId){
+        DBServiceConnection.makeConnection();
+        try{
+            Dao<SavingsTargets, Integer> savingsTargetsIntegerDao = DaoManager.createDao(DBServiceConnection.connectionSource, SavingsTargets.class);
+            SavingsTargets savingsTargets = savingsTargetsIntegerDao.queryForId(savingsTargetId);
+            savingsTargetsIntegerDao.delete(savingsTargets);
+            return true;
+        } catch (SQLException e){
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static SavingsTargets getSavingsTarget(int savingsTargetId) {
         DBServiceConnection.makeConnection();
         try {

@@ -44,4 +44,13 @@ public class RequestMapSavingsTargets {
         //DBServiceConnection.closeConnection();
         return false;
     }
+
+    @RequestMapping(value = "/deletesavingstargets/{savingsTargetsId}")
+    @ResponseBody
+    public boolean deleteSavingsTarggets(@PathVariable(value = "savingsTargetsId")int savingsTargetsId){
+        if(DBServiceSavingsTargets.deleteSavingsTarget(savingsTargetsId)){
+            return true;
+        }
+        return false;
+    }
 }
