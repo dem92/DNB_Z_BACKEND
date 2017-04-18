@@ -73,20 +73,27 @@ public class DBServiceSavingsTargets {
         }
         return false;
     }
-// ----------------------------------
+// ---------------------------------- Some changes
 
     public static boolean addToTarget(String accountNumber, int savingsTargetId, BigInteger kroner, int oere) {
         DBServiceConnection.makeConnection();
         SavingsTargets savingsTarget = getSavingsTarget(savingsTargetId);
-        if (oere > 99) {
+        if (validateTargetOere(oere)) {
             return false;
         }
+        if(savingsTarget.getSavedOere() + oere > 99){
+            kroner.add(BigInteger.ONE);
+            savingsTarget.setSavedOere(savingsTarget.getSavedOere() + oere - 100);
+        }else{
+            savingsTarget.setSavedOere(oere+ savingsTarget.getSavedOere());
+        }
+        savingsTarget.setSavedKroner(savingsTarget.getSavedKroner().add(kroner));
 
         return false;
     }
 
     public static boolean subtractFromTarget(String accountNumber, int savingsTargetId, BigInteger kroner, int oere) {
-
+        
 
         return false;
     }
@@ -99,7 +106,7 @@ public class DBServiceSavingsTargets {
     }
 
 
-    public static boolean updateTargetGoal(BigInteger goalKroner, int goalOere, int savingsTargetId) {
+    public static boolean updateTargetGoal(int savingsTargetId, BigInteger goalKroner, int goalOere) {
         DBServiceConnection.makeConnection();
         SavingsTargets savingsTargets = getSavingsTarget(savingsTargetId);
 
@@ -122,7 +129,9 @@ public class DBServiceSavingsTargets {
         return true;
     }
 
-    // --------------------------------
+    // --------------------------------  SomeChanges Stop
+
+
     public static boolean updateSavingsTarget(SavingsTargets savingsTargets) {
         try {
             Dao<SavingsTargets, Integer> savingsTargetsIntegerDao = DaoManager.createDao(DBServiceConnection.connectionSource, SavingsTargets.class);

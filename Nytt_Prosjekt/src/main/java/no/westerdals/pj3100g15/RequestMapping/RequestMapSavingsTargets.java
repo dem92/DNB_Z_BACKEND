@@ -81,7 +81,7 @@ public class RequestMapSavingsTargets {
 
     @RequestMapping(value = "/subtractfromtarget/{accountNo}/{savingsTargetId}/{kroner}/{oere}")
     @ResponseBody
-    public boolean addToTarget(@PathVariable(value = "accountNo") String accountNumber,
+    public boolean subtractFromTarget(@PathVariable(value = "accountNo") String accountNumber,
                                @PathVariable(value = "savingsTargetId") int savingsTargetId,
                                @PathVariable(value = "kroner") BigInteger kroner,
                                @PathVariable(value = "oere") int oere){
