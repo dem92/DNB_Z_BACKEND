@@ -1,6 +1,5 @@
 package no.westerdals.pj3100g15.RequestMapping;
 
-import no.westerdals.pj3100g15.DBService.DBServiceConnection;
 import no.westerdals.pj3100g15.DBService.DBServiceSavingsTargets;
 import no.westerdals.pj3100g15.ORM.SavingsTargets;
 import org.springframework.stereotype.Controller;
@@ -42,6 +41,53 @@ public class RequestMapSavingsTargets {
             return true;
         }
         //DBServiceConnection.closeConnection();
+        return false;
+    }
+
+    // -------------------    Update savings targets under this line    ---------------------
+
+    @RequestMapping(value = "/updatesavingstarget/{savingsTargetId}/name/{name}")
+    @ResponseBody
+    public boolean updateTargetName(@PathVariable(value = "savingsTargetId") int savingsTargetId,
+                              @PathVariable(value = "name") String name){
+        if(DBServiceSavingsTargets.updateTargetName(savingsTargetId, name)){
+            return true;
+        }
+        return false;
+    }
+
+    @RequestMapping(value = "/updatesavingstarget/{savingsTargetId}/goal/{kroner}/{oere}")
+    @ResponseBody
+    public boolean updateTargetGoal(@PathVariable(value = "savingsTargetId") int savingsTargetId,
+                              @PathVariable(value = "kroner") BigInteger kroner,
+                              @PathVariable(value = "oere") int oere){
+        if(DBServiceSavingsTargets.updateTargetGoal(savingsTargetId, kroner, oere)){
+            return true;
+        }
+        return false;
+    }
+
+    @RequestMapping(value = "/addtotarget/{accountNo}/{savingsTargetId}/{kroner}/{oere}")
+    @ResponseBody
+    public boolean addToTarget(@PathVariable(value = "accountNo") String accountNumber,
+                               @PathVariable(value = "savingsTargetId") int savingsTargetId,
+                               @PathVariable(value = "kroner") BigInteger kroner,
+                               @PathVariable(value = "oere") int oere){
+        if(DBServiceSavingsTargets.addToTarget(accountNumber, savingsTargetId, kroner, oere)){
+            return true;
+        }
+        return false;
+    }
+
+    @RequestMapping(value = "/subtractfromtarget/{accountNo}/{savingsTargetId}/{kroner}/{oere}")
+    @ResponseBody
+    public boolean addToTarget(@PathVariable(value = "accountNo") String accountNumber,
+                               @PathVariable(value = "savingsTargetId") int savingsTargetId,
+                               @PathVariable(value = "kroner") BigInteger kroner,
+                               @PathVariable(value = "oere") int oere){
+        if(DBServiceSavingsTargets.subtractFromTarget(accountNumber, savingsTargetId, kroner, oere)){
+            return true;
+        }
         return false;
     }
 
