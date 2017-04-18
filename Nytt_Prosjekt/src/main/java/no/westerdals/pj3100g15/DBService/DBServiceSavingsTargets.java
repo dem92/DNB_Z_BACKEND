@@ -73,4 +73,22 @@ public class DBServiceSavingsTargets {
         }
         return false;
     }
+
+    public static boolean updateMaalSavingsTarget(BigInteger goalKroner, int goalOere, int savingsTargetId){
+        DBServiceConnection.makeConnection();
+        SavingsTargets savingsTargets = getSavingsTarget(savingsTargetId);
+        savingsTargets.setGoalKroner(goalKroner);
+        savingsTargets.setGoalOere(goalOere);
+
+        try{
+            Dao<SavingsTargets, Integer> savingsTargetsIntegerDao=DaoManager.createDao(DBServiceConnection.connectionSource, SavingsTargets.class);
+            savingsTargetsIntegerDao.update();
+            return true;
+        }catch (SQLException e){
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
+        }
+        return false;
+
+    }
 }
