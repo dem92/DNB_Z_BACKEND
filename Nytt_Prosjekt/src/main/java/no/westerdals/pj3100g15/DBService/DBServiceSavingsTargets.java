@@ -11,14 +11,14 @@ import java.util.List;
 
 public class DBServiceSavingsTargets {
 
-    public static boolean deleteSavingsTarget(int savingsTargetId){
+    public static boolean deleteSavingsTarget(int savingsTargetId) {
         DBServiceConnection.makeConnection();
-        try{
+        try {
             Dao<SavingsTargets, Integer> savingsTargetsIntegerDao = DaoManager.createDao(DBServiceConnection.connectionSource, SavingsTargets.class);
             SavingsTargets savingsTargets = savingsTargetsIntegerDao.queryForId(savingsTargetId);
             savingsTargetsIntegerDao.delete(savingsTargets);
             return true;
-        } catch (SQLException e){
+        } catch (SQLException e) {
             WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
@@ -50,7 +50,7 @@ public class DBServiceSavingsTargets {
         return null;
     }
 
-    public static boolean createSavingsTarget(BigInteger goalKroner, int goalOere, int customerId, String name){
+    public static boolean createSavingsTarget(BigInteger goalKroner, int goalOere, int customerId, String name) {
         DBServiceConnection.makeConnection();
         SavingsTargets savingsTargets = new SavingsTargets();
         savingsTargets.setCustomerId(customerId);
@@ -61,34 +61,77 @@ public class DBServiceSavingsTargets {
         savingsTargets.setSavedOere(0);
         savingsTargets.setAccountNumber(DBServiceAccount.randomNumber());
         savingsTargets.setName(name);
-        savingsTargets.setTime(System.currentTimeMillis()/1000);
+        savingsTargets.setTime(System.currentTimeMillis() / 1000);
 
-        try{
-            Dao<SavingsTargets, Integer> savingsTargetsIntegerDao= DaoManager.createDao(DBServiceConnection.connectionSource, SavingsTargets.class);
+        try {
+            Dao<SavingsTargets, Integer> savingsTargetsIntegerDao = DaoManager.createDao(DBServiceConnection.connectionSource, SavingsTargets.class);
             savingsTargetsIntegerDao.create(savingsTargets);
             return true;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return false;
     }
+// ----------------------------------
 
-    public static boolean updateMaalSavingsTarget(BigInteger goalKroner, int goalOere, int savingsTargetId){
+    public static boolean addToTarget(String accountNumber, int savingsTargetId, BigInteger kroner, int oere) {
+        DBServiceConnection.makeConnection();
+        SavingsTargets savingsTarget = getSavingsTarget(savingsTargetId);
+        if (oere > 99) {
+            return false;
+        }
+
+        return false;
+    }
+
+    public static boolean subtractFromTarget(String accountNumber, int savingsTargetId, BigInteger kroner, int oere) {
+
+
+        return false;
+    }
+
+    public static boolean updateTargetName(int savingTargetId, String name) {
+        DBServiceConnection.makeConnection();
+        SavingsTargets savingsTarget = getSavingsTarget(savingTargetId);
+        savingsTarget.setName(name);
+        return updateSavingsTarget(savingsTarget);
+    }
+
+
+    public static boolean updateTargetGoal(BigInteger goalKroner, int goalOere, int savingsTargetId) {
         DBServiceConnection.makeConnection();
         SavingsTargets savingsTargets = getSavingsTarget(savingsTargetId);
-        savingsTargets.setGoalKroner(goalKroner);
-        savingsTargets.setGoalOere(goalOere);
 
-        try{
-            Dao<SavingsTargets, Integer> savingsTargetsIntegerDao=DaoManager.createDao(DBServiceConnection.connectionSource, SavingsTargets.class);
-            savingsTargetsIntegerDao.update();
+        if (goalOere > 99 || goalOere < 0) {
+            return false;
+        } else {
+            savingsTargets.setGoalOere(goalOere);
+        }
+
+        if(goalKroner.compareTo(BigInteger.ZERO) >= 0){
+            savingsTargets.setGoalKroner(goalKroner);
+        }
+        return updateSavingsTarget(savingsTargets);
+    }
+
+    public static boolean validateTargetOere(int oere){
+        if (oere > 99 || oere < 0) {
+            return false;
+        }
+        return true;
+    }
+
+    // --------------------------------
+    public static boolean updateSavingsTarget(SavingsTargets savingsTargets) {
+        try {
+            Dao<SavingsTargets, Integer> savingsTargetsIntegerDao = DaoManager.createDao(DBServiceConnection.connectionSource, SavingsTargets.class);
+            savingsTargetsIntegerDao.update(savingsTargets);
             return true;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
         return false;
-
     }
 }
