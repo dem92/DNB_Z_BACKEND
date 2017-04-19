@@ -68,7 +68,7 @@ public class RequestMapAccount {
 
     @RequestMapping(value = "/updateaccount/{accountid}/accountname/{accountname}")
     @ResponseBody
-    public boolean updateAccountMain(@PathVariable(value = "accountid") String accountId,
+    public boolean updateAccountName(@PathVariable(value = "accountid") String accountId,
                                      @PathVariable(value = "accountname") String accountname) {
 
         if (DBServiceAccount.updateAccountname(accountId, accountname)) {
