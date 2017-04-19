@@ -33,6 +33,15 @@ public class RequestMapBudget {
         return budget;
     }
 
+    @RequestMapping(value = "/budget/all", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Budget> getAllBudgets() {
+        List<Budget> budgets = DBServiceBudget.getAllBudgets();
+        if(budgets == null) return null;
+
+        else return budgets;
+    }
+
     @RequestMapping(value = "/deletebudget/{id}", method = RequestMethod.GET)
     @ResponseBody
     public boolean deleteBudget(@PathVariable(value = "id") int budgetId) {

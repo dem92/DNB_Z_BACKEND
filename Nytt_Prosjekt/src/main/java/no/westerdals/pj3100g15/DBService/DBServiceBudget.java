@@ -42,6 +42,19 @@ public class DBServiceBudget{
         return null;
     }
 
+    public static List<Budget> getAllBudgets() {
+        DBServiceConnection.makeConnection();
+        try {
+            Dao<Budget, Integer> budgetDao = DaoManager.createDao(DBServiceConnection.connectionSource, Budget.class);
+            List<Budget> budgets = budgetDao.queryForAll();
+            return budgets;
+        } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static boolean deleteBudget(int budgetId) {
         DBServiceConnection.makeConnection();
         Budget budget = getBudget(budgetId);
