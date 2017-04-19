@@ -2,7 +2,6 @@ package no.westerdals.pj3100g15.DBService;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
-import no.westerdals.pj3100g15.ORM.Account;
 import no.westerdals.pj3100g15.ORM.SavingsTargets;
 import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 
@@ -10,10 +9,7 @@ import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.List;
 
-import static no.westerdals.pj3100g15.DBService.DBServiceAccount.getAccount;
-import static no.westerdals.pj3100g15.DBService.DBServiceAccount.updateAccount;
-import static no.westerdals.pj3100g15.DBService.DBServiceSendMoney.validateInput;
-import static no.westerdals.pj3100g15.DBService.DBServiceSendMoney.validateKroner;
+import static no.westerdals.pj3100g15.ValidateData.ValidateInput.validateInput;
 
 public class DBServiceSavingsTargets {
 
@@ -131,5 +127,18 @@ public class DBServiceSavingsTargets {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static boolean lessOereOnSavingsTargetThanSentOere(SavingsTargets savingsTargets, int oere){
+        if(savingsTargets.getSavedOere() < oere){
+            return true;
+        }
+        return false;
+    }
+
+    public static SavingsTargets subtractOneKroneAndAdd100OereToSavingsTargets(SavingsTargets savingsTargets){
+        savingsTargets.setSavedKroner(savingsTargets.getSavedKroner().subtract(BigInteger.ONE));
+        savingsTargets.setSavedOere(savingsTargets.getSavedOere() + 100);
+        return savingsTargets;
     }
 }

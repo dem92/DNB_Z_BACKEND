@@ -5,6 +5,7 @@ import com.j256.ormlite.dao.DaoManager;
 import no.westerdals.pj3100g15.ORM.Account;
 import no.westerdals.pj3100g15.ORM.SavingsTargets;
 import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
+import no.westerdals.pj3100g15.ValidateData.ValidateInput;
 
 import java.math.BigInteger;
 import java.sql.SQLException;
@@ -13,62 +14,6 @@ import static no.westerdals.pj3100g15.DBService.DBServiceAccount.*;
 import static no.westerdals.pj3100g15.DBService.DBServiceSavingsTargets.*;
 
 public class DBServiceSendMoney {
-
-
-    //TODO legge validateInput og tilhørende metoder inn i en egen klasse
-
-    //Checks if oere is negative or more than 100
-    public static boolean validateOere(int oere){
-        if (oere < 99 || oere >= 0) {
-            return true;
-        }
-        return false;
-    }
-
-    //Checks if the variable kroner is negative
-    public static boolean validateKroner(BigInteger kroner){
-        if(kroner.compareTo(BigInteger.ZERO) >= 0){
-            return true;
-        }
-        return false;
-    }
-
-    //checks if input is negative or not, returns true if compareTo() returns -1
-    public static boolean validateInput(BigInteger kroner, int oere){
-        if(validateKroner(kroner) && validateOere(oere)){
-            return true;
-        }
-        return false;
-    }
-
-
-    public static boolean lessOereOnSavingsTargetThanSentOere(SavingsTargets savingsTargets, int oere){
-        if(savingsTargets.getSavedOere() < oere){
-            return true;
-        }
-        return false;
-    }
-
-    public static SavingsTargets subtractOneKroneAndAdd100OereToSavingsTargets(SavingsTargets savingsTargets){
-        savingsTargets.setSavedKroner(savingsTargets.getSavedKroner().subtract(BigInteger.ONE));
-        savingsTargets.setSavedOere(savingsTargets.getSavedOere() + 100);
-        return savingsTargets;
-    }
-
-
-
-    public static boolean lessOereOnAccountThanSentOere(Account account, int oere){
-        if(account.getOere() < oere){
-            return true;
-        }
-        return false;
-    }
-
-    public static Account subtractOneKroneAndAdd100OereToAccount(Account account){
-        account.setKroner(account.getKroner().subtract(BigInteger.ONE));
-        account.setOere(account.getOere() + 100);
-        return account;
-    }
 
     public static boolean sendMoneyFromSavingsTargetToAccount(String accountNumber, int savingTargetId, BigInteger kroner, int oere){
         DBServiceConnection.makeConnection();
@@ -134,7 +79,7 @@ public class DBServiceSendMoney {
             sending.setOere(sending.getOere() + 100);
         }
 
-        if (validateInput(kroner, oere) &&  sending.getKroner().subtract(kroner).compareTo(BigInteger.ZERO) >= 0) {
+        if (ValidateInput.validateInput(kroner, oere) &&  sending.getKroner().subtract(kroner).compareTo(BigInteger.ZERO) >= 0) {
             hasMoney = true;
         }
         if (hasMoney) {

@@ -224,4 +224,17 @@ public class DBServiceAccount {
         }
         return false;
     }
+
+    public static boolean lessOereOnAccountThanSentOere(Account account, int oere){
+        if(account.getOere() < oere){
+            return true;
+        }
+        return false;
+    }
+
+    public static Account subtractOneKroneAndAdd100OereToAccount(Account account){
+        account.setKroner(account.getKroner().subtract(BigInteger.ONE));
+        account.setOere(account.getOere() + 100);
+        return account;
+    }
 }
