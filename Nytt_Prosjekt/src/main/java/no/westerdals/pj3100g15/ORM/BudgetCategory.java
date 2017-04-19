@@ -19,12 +19,11 @@ public class BudgetCategory {
     public BudgetCategory() {
     }
 
-    public BudgetCategory(int id, int budgetId, String category, int goalAmount, int usedAmount) {
-        this.id = id;
+    public BudgetCategory(int budgetId, String category, int goalAmount) {
         this.budgetId = budgetId;
         this.category = category;
         this.goalAmount = goalAmount;
-        this.usedAmount = usedAmount;
+        this.usedAmount = 0;
     }
 
     public int getId() {
