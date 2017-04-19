@@ -265,12 +265,12 @@ public class DBServiceAccount {
 
     /**
      *
+     * Add money to a account object and returns it.
      *
-     *
-     * @param account
-     * @param kroner
-     * @param oere
-     * @return
+     * @param account is the accountobject which is being added to.
+     * @param kroner is the amount of kroner being added.
+     * @param oere is the amount of oere being added.
+     * @return Account
      */
     public static Account addToAccount(Account account, BigInteger kroner, int oere) {
         account.setOere(account.getOere() + oere);
@@ -287,8 +287,10 @@ public class DBServiceAccount {
 
     /**
      *
-     * @param accountNumber
-     * @return
+     * Deletes a account with the specified accountnumber.
+     *
+     * @param accountNumber is used to find the account-object associated with the number in the database.
+     * @return boolean
      */
     public static boolean deleteAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
@@ -306,9 +308,11 @@ public class DBServiceAccount {
 
     /**
      *
-     * @param account
-     * @param oere
-     * @return
+     * Checks whether the accountobject has less oere than is being withdrawn from it.
+     *
+     * @param account is the accountobject being checked.
+     * @param oere is the amount of oere.
+     * @return boolean
      */
     public static boolean lessOereOnAccountThanSentOere(Account account, int oere) {
         if (account.getOere() < oere) {
@@ -319,8 +323,10 @@ public class DBServiceAccount {
 
     /**
      *
-     * @param account
-     * @return
+     * Is used to convert one krone to 100 oere on the accountobject.
+     *
+     * @param account is the accountobject being changed.
+     * @return Account
      */
     public static Account subtractOneKroneAndAdd100OereToAccount(Account account) {
         account.setKroner(account.getKroner().subtract(BigInteger.ONE));
