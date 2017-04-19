@@ -11,7 +11,11 @@ import java.util.List;
 
 public class DBServiceBudget{
 
-    //--------------- Methods for creating, getting and deleting Budget ---------------
+    /**
+     *
+     * @param customerId
+     * @return
+     */
     public static boolean createBudget(int customerId){
         DBServiceConnection.makeConnection();
 
@@ -28,6 +32,11 @@ public class DBServiceBudget{
         return false;
     }
 
+    /**
+     *
+     * @param budgetId
+     * @return
+     */
     public static Budget getBudget(int budgetId){
         DBServiceConnection.makeConnection();
 
@@ -42,6 +51,10 @@ public class DBServiceBudget{
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public static List<Budget> getAllBudgets() {
         DBServiceConnection.makeConnection();
         try {
@@ -55,6 +68,11 @@ public class DBServiceBudget{
         return null;
     }
 
+    /**
+     *
+     * @param budgetId
+     * @return
+     */
     public static boolean deleteBudget(int budgetId) {
         DBServiceConnection.makeConnection();
         Budget budget = getBudget(budgetId);
@@ -71,6 +89,13 @@ public class DBServiceBudget{
 
     //-------------------- Methods for Budget Categories -------------------
 
+    /**
+     *
+     * @param budgetId
+     * @param category
+     * @param goal
+     * @return
+     */
     public static boolean createBudgetCategory(int budgetId, String category, int goal) {
         DBServiceConnection.makeConnection();
         BudgetCategory budgetCategory = new BudgetCategory(budgetId, category, goal);
@@ -88,6 +113,11 @@ public class DBServiceBudget{
         return false;
     }
 
+    /**
+     *
+     * @param categoryId
+     * @return
+     */
     public static BudgetCategory getBudgetCategory(int categoryId){
         DBServiceConnection.makeConnection();
         try {
@@ -101,6 +131,11 @@ public class DBServiceBudget{
         return null;
     }
 
+    /**
+     *
+     * @param budgetId
+     * @return
+     */
     public static List<BudgetCategory> getAllCategories(int budgetId){
         DBServiceConnection.makeConnection();
 
@@ -117,36 +152,39 @@ public class DBServiceBudget{
     }
 
     //------------------- Update methods for budget categories -------------------
+
+    /**
+     *
+     * @param categoryId
+     * @param name
+     * @return
+     */
     public static boolean updateCategoryName(int categoryId, String name){
         DBServiceConnection.makeConnection();
         BudgetCategory category = getBudgetCategory(categoryId);
         category.setCategory(name);
-        try{
-            Dao<BudgetCategory, Integer> categoryDao = DaoManager.createDao(DBServiceConnection.connectionSource, BudgetCategory.class);
-            categoryDao.update(category);
-            return true;
-        } catch(SQLException e){
-            WriteLogg.writeLogg(e);
-            e.printStackTrace();
-        }
-        return false;
+        return updateCategoryObject(category);
     }
 
+    /**
+     *
+     * @param categoryId
+     * @param goal
+     * @return
+     */
     public static boolean updateCategoryGoal(int categoryId, int goal){
         DBServiceConnection.makeConnection();
         BudgetCategory category = getBudgetCategory(categoryId);
         category.setGoalAmount(goal);
-        try{
-            Dao<BudgetCategory, Integer> categoryDao = DaoManager.createDao(DBServiceConnection.connectionSource, BudgetCategory.class);
-            categoryDao.update(category);
-            return true;
-        } catch(SQLException e){
-            WriteLogg.writeLogg(e);
-            e.printStackTrace();
-        }
-        return false;
+       return updateCategoryObject(category);
     }
 
+    /**
+     *
+     * @param categoryId
+     * @param used
+     * @return
+     */
     public static boolean updateCategoryUsed(int categoryId, int used){
         DBServiceConnection.makeConnection();
         BudgetCategory category = getBudgetCategory(categoryId);
@@ -154,6 +192,15 @@ public class DBServiceBudget{
         int amount = category.getUsedAmount() + used;
         category.setUsedAmount(amount);
 
+        return updateCategoryObject(category);
+    }
+
+    /**
+     *
+     * @param category
+     * @return
+     */
+    public static boolean updateCategoryObject(BudgetCategory category){
         try{
             Dao<BudgetCategory, Integer> categoryDao = DaoManager.createDao(DBServiceConnection.connectionSource, BudgetCategory.class);
             categoryDao.update(category);
@@ -165,6 +212,11 @@ public class DBServiceBudget{
         return false;
     }
 
+    /**
+     *
+     * @param categoryId
+     * @return
+     */
     public static boolean deleteBudgetCategory(int categoryId){
         DBServiceConnection.makeConnection();
         BudgetCategory category = getBudgetCategory(categoryId);
