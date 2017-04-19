@@ -74,12 +74,10 @@ public class DBServiceBudget{
         return null;
     }
 
-    //TODO fullfør kommentarene herifra!
-
     /**
      * Deletes a budget in the database with the given budgetId.
-     * @param budgetId
-     * @return
+     * @param budgetId an int that is used to retrieve the Budget-object from the database.
+     * @return boolean
      */
     public static boolean deleteBudget(int budgetId) {
         DBServiceConnection.makeConnection();
@@ -99,10 +97,12 @@ public class DBServiceBudget{
 
     /**
      *
-     * @param budgetId
-     * @param category
+     *
+     *
+     * @param budgetId used to retrieve budgetobject
+     * @param category String that defines a category for budgets
      * @param goal
-     * @return
+     * @return boolean
      */
     public static boolean createBudgetCategory(int budgetId, String category, int goal) {
         DBServiceConnection.makeConnection();
