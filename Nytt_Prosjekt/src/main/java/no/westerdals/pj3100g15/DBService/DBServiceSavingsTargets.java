@@ -93,7 +93,7 @@ public class DBServiceSavingsTargets {
     }
 
     public static boolean subtractFromTarget(String accountNumber, int savingsTargetId, BigInteger kroner, int oere) {
-        
+
 
         return false;
     }
