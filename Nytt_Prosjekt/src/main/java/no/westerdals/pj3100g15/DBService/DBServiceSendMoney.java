@@ -41,10 +41,43 @@ public class DBServiceSendMoney {
         return false;
     }
 
+
+    public static boolean lessOereOnSavingsTargetThanSentOere(SavingsTargets savingsTargets, int oere){
+        if(savingsTargets.getSavedOere() < oere){
+            return true;
+        }
+        return false;
+    }
+
+    public static SavingsTargets subtractOneKroneAndAdd100OereToSavingsTargets(SavingsTargets savingsTargets){
+        savingsTargets.setSavedKroner(savingsTargets.getSavedKroner().subtract(BigInteger.ONE));
+        savingsTargets.setSavedOere(savingsTargets.getSavedOere() + 100);
+        return savingsTargets;
+    }
+
+
+
+    public static boolean lessOereOnAccountThanSentOere(Account account, int oere){
+        if(account.getOere() < oere){
+            return true;
+        }
+        return false;
+    }
+
+    public static Account subtractOneKroneAndAdd100OereToAccount(Account account){
+        account.setKroner(account.getKroner().subtract(BigInteger.ONE));
+        account.setOere(account.getOere() + 100);
+        return account;
+    }
+
     public static boolean sendMoneyFromSavingsTargetToAccount(String accountNumber, int savingTargetId, BigInteger kroner, int oere){
         DBServiceConnection.makeConnection();
         SavingsTargets savingsTarget = getSavingsTarget(savingTargetId);
         Account account = getAccount(accountNumber);
+
+        if(lessOereOnSavingsTargetThanSentOere(savingsTarget, oere)){
+            subtractOneKroneAndAdd100OereToSavingsTargets(savingsTarget);
+        }
 
         //Subtracts from savingstarget and adds to account
         savingsTarget = subtractFromTarget(savingsTarget, kroner, oere);
@@ -66,9 +99,13 @@ public class DBServiceSendMoney {
         SavingsTargets savingsTarget = getSavingsTarget(savingsTargetId);
         Account account = getAccount(accountNumber);
 
-        //Subtracts from savingstarget and adds to account
-        savingsTarget = addToTarget(savingsTarget, kroner, oere);
+        if(lessOereOnAccountThanSentOere(account, oere)){
+            account = subtractOneKroneAndAdd100OereToAccount(account);
+        }
+
+        //Subtracts from account and adds to savingstarget
         account = subtractFromAccount(account, kroner, oere);
+        savingsTarget = addToTarget(savingsTarget, kroner, oere);
 
         //Checks if any of the objects is null to avoid nullpointer exception
         if(savingsTarget != null || account != null){
@@ -93,7 +130,7 @@ public class DBServiceSendMoney {
         }
 
         if (sending.getOere() < oere) {
-            sending.setKroner(sending.getKroner().subtract((BigInteger.ONE)));
+            sending.setKroner(sending.getKroner().subtract(BigInteger.ONE));
             sending.setOere(sending.getOere() + 100);
         }
 
