@@ -1,6 +1,7 @@
 package no.westerdals.pj3100g15.RequestMapping;
 
 import no.westerdals.pj3100g15.DBService.DBServiceSavingsTargets;
+import no.westerdals.pj3100g15.DBService.DBServiceSendMoney;
 import no.westerdals.pj3100g15.ORM.SavingsTargets;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +27,6 @@ public class RequestMapSavingsTargets {
     public List<SavingsTargets> getAllSavingsTargetsForUser(
             @PathVariable(value = "customerId") int customerId) {
         List<SavingsTargets> savingsTargets = DBServiceSavingsTargets.getAllSavingsTargetsForUser(customerId);
-        //DBServiceConnection.closeConnection();
         return savingsTargets;
     }
 
@@ -36,12 +36,7 @@ public class RequestMapSavingsTargets {
                                         @PathVariable(value = "customerId") int customerId,
                                         @PathVariable(value = "kroner")BigInteger kroner,
                                         @PathVariable(value = "oere")int oere){
-        if(DBServiceSavingsTargets.createSavingsTarget(kroner,oere,customerId,name)){
-            //DBServiceConnection.closeConnection();
-            return true;
-        }
-        //DBServiceConnection.closeConnection();
-        return false;
+        return DBServiceSavingsTargets.createSavingsTarget(kroner,oere,customerId,name);
     }
 
     // -------------------    Update savings targets under this line    ---------------------
@@ -50,10 +45,7 @@ public class RequestMapSavingsTargets {
     @ResponseBody
     public boolean updateTargetName(@PathVariable(value = "savingsTargetId") int savingsTargetId,
                               @PathVariable(value = "name") String name){
-        if(DBServiceSavingsTargets.updateTargetName(savingsTargetId, name)){
-            return true;
-        }
-        return false;
+        return DBServiceSavingsTargets.updateTargetName(savingsTargetId, name);
     }
 
     @RequestMapping(value = "/updatesavingstarget/{savingsTargetId}/goal/{kroner}/{oere}")
@@ -61,10 +53,7 @@ public class RequestMapSavingsTargets {
     public boolean updateTargetGoal(@PathVariable(value = "savingsTargetId") int savingsTargetId,
                               @PathVariable(value = "kroner") BigInteger kroner,
                               @PathVariable(value = "oere") int oere){
-        if(DBServiceSavingsTargets.updateTargetGoal(savingsTargetId, kroner, oere)){
-            return true;
-        }
-        return false;
+        return DBServiceSavingsTargets.updateTargetGoal(savingsTargetId, kroner, oere);
     }
 
     @RequestMapping(value = "/addtotarget/{accountNo}/{savingsTargetId}/{kroner}/{oere}")
@@ -73,10 +62,7 @@ public class RequestMapSavingsTargets {
                                @PathVariable(value = "savingsTargetId") int savingsTargetId,
                                @PathVariable(value = "kroner") BigInteger kroner,
                                @PathVariable(value = "oere") int oere){
-        if(DBServiceSavingsTargets.addToTarget(accountNumber, savingsTargetId, kroner, oere)){
-            return true;
-        }
-        return false;
+        return DBServiceSendMoney.sendMoneyFromAccountToSavingsTarget(accountNumber, savingsTargetId, kroner, oere);
     }
 
     @RequestMapping(value = "/subtractfromtarget/{accountNo}/{savingsTargetId}/{kroner}/{oere}")
@@ -85,18 +71,12 @@ public class RequestMapSavingsTargets {
                                @PathVariable(value = "savingsTargetId") int savingsTargetId,
                                @PathVariable(value = "kroner") BigInteger kroner,
                                @PathVariable(value = "oere") int oere){
-        if(DBServiceSavingsTargets.subtractFromTarget(accountNumber, savingsTargetId, kroner, oere)){
-            return true;
-        }
-        return false;
+        return DBServiceSendMoney.sendMoneyFromSavingsTargetToAccount(accountNumber, savingsTargetId, kroner, oere);
     }
 
     @RequestMapping(value = "/deletesavingstargets/{savingsTargetsId}")
     @ResponseBody
     public boolean deleteSavingsTarggets(@PathVariable(value = "savingsTargetsId")int savingsTargetsId){
-        if(DBServiceSavingsTargets.deleteSavingsTarget(savingsTargetsId)){
-            return true;
-        }
-        return false;
+        return DBServiceSavingsTargets.deleteSavingsTarget(savingsTargetsId);
     }
 }

@@ -14,6 +14,9 @@ import static no.westerdals.pj3100g15.DBService.DBServiceSavingsTargets.*;
 
 public class DBServiceSendMoney {
 
+
+    //TODO legge validateInput og tilhørende metoder inn i en egen klasse
+
     //Checks if oere is negative or more than 100
     public static boolean validateOere(int oere){
         if (oere < 99 || oere >= 0) {
@@ -55,8 +58,26 @@ public class DBServiceSendMoney {
                 return true;
             }
         }
+        return false;
+    }
 
+    public static boolean sendMoneyFromAccountToSavingsTarget(String accountNumber, int savingsTargetId, BigInteger kroner, int oere) {
+        DBServiceConnection.makeConnection();
+        SavingsTargets savingsTarget = getSavingsTarget(savingsTargetId);
+        Account account = getAccount(accountNumber);
 
+        //Subtracts from savingstarget and adds to account
+        savingsTarget = addToTarget(savingsTarget, kroner, oere);
+        account = subtractFromAccount(account, kroner, oere);
+
+        //Checks if any of the objects is null to avoid nullpointer exception
+        if(savingsTarget != null || account != null){
+
+            //Completes the transaction if updating both the account and the savingstarget is true
+            if(updateSavingsTarget(savingsTarget) && updateAccount(account)){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -103,4 +124,6 @@ public class DBServiceSendMoney {
         }
         return false;
     }
+
+
 }
