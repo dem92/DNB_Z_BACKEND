@@ -12,6 +12,8 @@ import java.util.List;
 
 import static no.westerdals.pj3100g15.DBService.DBServiceAccount.getAccount;
 import static no.westerdals.pj3100g15.DBService.DBServiceAccount.updateAccount;
+import static no.westerdals.pj3100g15.DBService.DBServiceSendMoney.validateInput;
+import static no.westerdals.pj3100g15.DBService.DBServiceSendMoney.validateKroner;
 
 public class DBServiceSavingsTargets {
 
@@ -79,41 +81,23 @@ public class DBServiceSavingsTargets {
     }
 // ---------------------------------- Some changes
 
-    public static boolean addToTarget(String accountNumber, int savingsTargetId, BigInteger kroner, int oere) {
-        DBServiceConnection.makeConnection();
-        SavingsTargets savingsTarget = getSavingsTarget(savingsTargetId);
-        if (validateTargetOere(oere)) {
-            return false;
+    public static SavingsTargets addToTarget(SavingsTargets savingsTarget, BigInteger kroner, int oere) {
+        if (validateInput(kroner, oere)) {
+            if(savingsTarget.getSavedOere() + oere > 99){
+                kroner.add(BigInteger.ONE);
+                savingsTarget.setSavedOere(savingsTarget.getSavedOere() + oere - 100);
+            }else{
+                savingsTarget.setSavedOere(oere+ savingsTarget.getSavedOere());
+            }
+            savingsTarget.setSavedKroner(savingsTarget.getSavedKroner().add(kroner));
         }
-        if(savingsTarget.getSavedOere() + oere > 99){
-            kroner.add(BigInteger.ONE);
-            savingsTarget.setSavedOere(savingsTarget.getSavedOere() + oere - 100);
-        }else{
-            savingsTarget.setSavedOere(oere+ savingsTarget.getSavedOere());
-        }
-        savingsTarget.setSavedKroner(savingsTarget.getSavedKroner().add(kroner));
-
-        return false;
+        return savingsTarget;
     }
 
-    public static boolean subtractFromTarget(String accountNumber, int savingTargetId, BigInteger kroner, int oere) {
-        DBServiceConnection.makeConnection();
-        SavingsTargets savingsTarget = getSavingsTarget(savingTargetId);
-        Account account = getAccount(accountNumber);
-
-        if(validateTargetOere(oere)){
-
-        }
-
-        if(validateTargetKroner(kroner)){
-
-        }
-        if(updateSavingsTarget(savingsTarget)){
-            if(updateAccount(account)){
-                return true;
-            }
-        }
-        return false;
+    public static SavingsTargets subtractFromTarget(SavingsTargets savingsTarget, BigInteger kroner, int oere) {
+        savingsTarget.setSavedOere(savingsTarget.getSavedOere() - oere);
+        savingsTarget.setSavedKroner(savingsTarget.getSavedKroner().subtract(kroner));
+        return savingsTarget;
     }
 
     public static boolean updateTargetName(int savingTargetId, String name) {
@@ -128,36 +112,13 @@ public class DBServiceSavingsTargets {
         DBServiceConnection.makeConnection();
         SavingsTargets savingsTargets = getSavingsTarget(savingsTargetId);
 
-        if (goalOere > 99 || goalOere < 0) {
-            return false;
-        } else {
-            savingsTargets.setGoalOere(goalOere);
-        }
-
-        if(validateTargetKroner(goalKroner)){
+        if(validateInput(goalKroner, goalOere)){
             savingsTargets.setGoalKroner(goalKroner);
+            savingsTargets.setGoalOere(goalOere);
         }
 
         return updateSavingsTarget(savingsTargets);
     }
-
-
-
-    public static boolean validateTargetOere(int oere){
-        if (oere > 99 || oere < 0) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean validateTargetKroner(BigInteger kroner){
-        if(kroner.compareTo(BigInteger.ZERO) >= 0){
-            return true;
-        }
-        return false;
-    }
-
-    // --------------------------------  SomeChanges Stop
 
 
     public static boolean updateSavingsTarget(SavingsTargets savingsTargets) {

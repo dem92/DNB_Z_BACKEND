@@ -1,6 +1,5 @@
 package no.westerdals.pj3100g15.RequestMapping;
 
-import no.westerdals.pj3100g15.DBService.DBServiceConnection;
 import no.westerdals.pj3100g15.DBService.DBServiceLoggedTransaction;
 import no.westerdals.pj3100g15.DBService.DBServiceRecurringTransfer;
 import no.westerdals.pj3100g15.DBService.DBServiceSendMoney;
@@ -27,7 +26,7 @@ public class RequestMapSendMoney {
             @PathVariable(value = "interval") String interval,
             @PathVariable(value = "endDate") long endDate
     ) {
-        if (DBServiceSendMoney.sendMoney(accountNumber, accountNumber2, kroner, oere)) {
+        if (DBServiceSendMoney.sendMoneyBetweenAccounts(accountNumber, accountNumber2, kroner, oere)) {
             DBServiceLoggedTransaction.logTransfer(accountNumber, accountNumber2, kroner, oere, message);
 
             if (recurring)

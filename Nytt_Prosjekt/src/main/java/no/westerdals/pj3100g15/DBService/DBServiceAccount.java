@@ -192,6 +192,25 @@ public class DBServiceAccount {
         return false;
     }
 
+    public static Account subtractFromAccount(Account account, BigInteger kroner, int oere){
+        account.setKroner(account.getKroner().subtract(kroner));
+        account.setOere(account.getOere() - oere);
+        return account;
+    }
+
+    public static Account addToAccount(Account account, BigInteger kroner, int oere){
+        account.setOere(account.getOere() + oere);
+
+        if(account.getOere() + oere > 99){
+            kroner.add(BigInteger.ONE);
+            account.setOere(account.getOere() + oere - 100);
+        }else{
+            account.setOere(oere + account.getOere());
+        }
+        account.setKroner(account.getKroner().add(kroner));
+        return account;
+    }
+
     public static boolean deleteAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
         Account account = getAccount(accountNumber);
