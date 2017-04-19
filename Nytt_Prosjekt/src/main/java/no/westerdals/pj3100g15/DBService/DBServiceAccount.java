@@ -180,6 +180,18 @@ public class DBServiceAccount {
         return false;
     }
 
+    public static boolean updateAccount(Account account){
+        try {
+            Dao<Account, String> accountDao = DaoManager.createDao(DBServiceConnection.connectionSource, Account.class);
+            accountDao.update(account);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            WriteLogg.writeLogg(e);
+        }
+        return false;
+    }
+
     public static boolean deleteAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
         Account account = getAccount(accountNumber);

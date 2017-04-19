@@ -2,12 +2,16 @@ package no.westerdals.pj3100g15.DBService;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import no.westerdals.pj3100g15.ORM.Account;
 import no.westerdals.pj3100g15.ORM.SavingsTargets;
 import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 
 import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.List;
+
+import static no.westerdals.pj3100g15.DBService.DBServiceAccount.getAccount;
+import static no.westerdals.pj3100g15.DBService.DBServiceAccount.updateAccount;
 
 public class DBServiceSavingsTargets {
 
@@ -92,9 +96,23 @@ public class DBServiceSavingsTargets {
         return false;
     }
 
-    public static boolean subtractFromTarget(String accountNumber, int savingsTargetId, BigInteger kroner, int oere) {
+    public static boolean subtractFromTarget(String accountNumber, int savingTargetId, BigInteger kroner, int oere) {
+        DBServiceConnection.makeConnection();
+        SavingsTargets savingsTarget = getSavingsTarget(savingTargetId);
+        Account account = getAccount(accountNumber);
 
+        if(validateTargetOere(oere)){
 
+        }
+
+        if(validateTargetKroner(kroner)){
+
+        }
+        if(updateSavingsTarget(savingsTarget)){
+            if(updateAccount(account)){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -116,17 +134,27 @@ public class DBServiceSavingsTargets {
             savingsTargets.setGoalOere(goalOere);
         }
 
-        if(goalKroner.compareTo(BigInteger.ZERO) >= 0){
+        if(validateTargetKroner(goalKroner)){
             savingsTargets.setGoalKroner(goalKroner);
         }
+
         return updateSavingsTarget(savingsTargets);
     }
+
+
 
     public static boolean validateTargetOere(int oere){
         if (oere > 99 || oere < 0) {
             return false;
         }
         return true;
+    }
+
+    public static boolean validateTargetKroner(BigInteger kroner){
+        if(kroner.compareTo(BigInteger.ZERO) >= 0){
+            return true;
+        }
+        return false;
     }
 
     // --------------------------------  SomeChanges Stop
