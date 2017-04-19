@@ -13,8 +13,10 @@ public class DBServiceBudget{
 
     /**
      *
-     * @param customerId
-     * @return
+     * Creates a budget in a database related to a specified customer.
+     *
+     * @param customerId is used to associate the customer to the budget in the database.
+     * @return boolean
      */
     public static boolean createBudget(int customerId){
         DBServiceConnection.makeConnection();
@@ -34,8 +36,10 @@ public class DBServiceBudget{
 
     /**
      *
-     * @param budgetId
-     * @return
+     * Returns a Budget-object with the specified budgetId from the database.
+     *
+     * @param budgetId is used to find the budget-object in the database with the specified budgetId.
+     * @return Budget (Object)
      */
     public static Budget getBudget(int budgetId){
         DBServiceConnection.makeConnection();
@@ -53,7 +57,9 @@ public class DBServiceBudget{
 
     /**
      *
-     * @return
+     * Retrieves all the Budgets in the database.
+     *
+     * @return 'List<Budget>' a list with budgets.
      */
     public static List<Budget> getAllBudgets() {
         DBServiceConnection.makeConnection();
@@ -68,8 +74,10 @@ public class DBServiceBudget{
         return null;
     }
 
+    //TODO fullfør kommentarene herifra!
+
     /**
-     *
+     * Deletes a budget in the database with the given budgetId.
      * @param budgetId
      * @return
      */
