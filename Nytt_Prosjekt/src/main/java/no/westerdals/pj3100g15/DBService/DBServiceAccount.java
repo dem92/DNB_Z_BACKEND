@@ -181,8 +181,8 @@ public class DBServiceAccount {
 
     /**
      *
-     * @param accountNumber
-     * @return
+     * @param accountNumber is used to get the account with the specified accountnumber.
+     * @return boolean(true/false)
      */
     public static boolean checkAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
@@ -208,36 +208,20 @@ public class DBServiceAccount {
         DBServiceConnection.makeConnection();
         Account account = getAccount(accountNumber);
         account.setMain(main);
-        try {
-            Dao<Account, String> accountStringDao = DaoManager.createDao(DBServiceConnection.connectionSource, Account.class);
-            accountStringDao.update(account);
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            WriteLogg.writeLogg(e);
-        }
-        return false;
+        return updateAccount(account);
     }
 
     /**
      *
      * @param accountNumber
      * @param accountName
-     * @return
+     * @return boolean
      */
     public static boolean updateAccountname(String accountNumber, String accountName) {
         DBServiceConnection.makeConnection();
         Account account = getAccount(accountNumber);
         account.setName(accountName);
-        try {
-            Dao<Account, String> accountStringDao = DaoManager.createDao(DBServiceConnection.connectionSource, Account.class);
-            accountStringDao.update(account);
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            WriteLogg.writeLogg(e);
-        }
-        return false;
+        return updateAccount(account);
     }
 
     /**
