@@ -12,9 +12,14 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DBServiceAccount {
+
+    /**
+     *
+     * @param accountNumber
+     * @return
+     */
     public static BigInteger[] getAccountBalance(String accountNumber) {
         DBServiceConnection.makeConnection();
-
         try {
             Dao<Account, String> accountDao = DaoManager.createDao(DBServiceConnection.connectionSource, Account.class);
 
@@ -33,6 +38,11 @@ public class DBServiceAccount {
         return null;
     }
 
+    /**
+     *
+     * @param customerId
+     * @return
+     */
     public static List<Account> getCustomerAccounts(int customerId) {
         DBServiceConnection.makeConnection();
 
@@ -54,6 +64,11 @@ public class DBServiceAccount {
         return null;
     }
 
+    /**
+     *
+     * @param accountNumber
+     * @return
+     */
     public static Account getAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
 
@@ -69,6 +84,10 @@ public class DBServiceAccount {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public static List<Account> getAllAccounts() {
         DBServiceConnection.makeConnection();
 
@@ -83,6 +102,12 @@ public class DBServiceAccount {
         return null;
     }
 
+    /**
+     *
+     * @param customerId
+     * @param accountType
+     * @return
+     */
     public static boolean addAccount(int customerId, String accountType) {
         DBServiceConnection.makeConnection();
 
@@ -126,6 +151,10 @@ public class DBServiceAccount {
         return false;
     }
 
+    /**
+     *
+     * @return String
+     */
     public static String randomNumber() {
         String accountNo;
         int first = ThreadLocalRandom.current().nextInt(100000, 999999);
@@ -136,6 +165,11 @@ public class DBServiceAccount {
         return accountNo;
     }
 
+    /**
+     *
+     * @param accountNumber
+     * @return
+     */
     public static boolean checkAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
         try {
@@ -150,6 +184,12 @@ public class DBServiceAccount {
         return false;
     }
 
+    /**
+     *
+     * @param accountNumber
+     * @param main
+     * @return
+     */
     public static boolean updateMain(String accountNumber, int main) {
         DBServiceConnection.makeConnection();
         Account account = getAccount(accountNumber);
@@ -165,6 +205,12 @@ public class DBServiceAccount {
         return false;
     }
 
+    /**
+     *
+     * @param accountNumber
+     * @param accountName
+     * @return
+     */
     public static boolean updateAccountname(String accountNumber, String accountName) {
         DBServiceConnection.makeConnection();
         Account account = getAccount(accountNumber);
@@ -180,7 +226,12 @@ public class DBServiceAccount {
         return false;
     }
 
-    public static boolean updateAccount(Account account){
+    /**
+     *
+     * @param account
+     * @return
+     */
+    public static boolean updateAccount(Account account) {
         try {
             Dao<Account, String> accountDao = DaoManager.createDao(DBServiceConnection.connectionSource, Account.class);
             accountDao.update(account);
@@ -192,25 +243,44 @@ public class DBServiceAccount {
         return false;
     }
 
-    public static Account subtractFromAccount(Account account, BigInteger kroner, int oere){
+    /**
+     *
+     * @param account
+     * @param kroner
+     * @param oere
+     * @return
+     */
+    public static Account subtractFromAccount(Account account, BigInteger kroner, int oere) {
         account.setKroner(account.getKroner().subtract(kroner));
         account.setOere(account.getOere() - oere);
         return account;
     }
 
-    public static Account addToAccount(Account account, BigInteger kroner, int oere){
+    /**
+     *
+     * @param account
+     * @param kroner
+     * @param oere
+     * @return
+     */
+    public static Account addToAccount(Account account, BigInteger kroner, int oere) {
         account.setOere(account.getOere() + oere);
 
-        if(account.getOere() + oere > 99){
+        if (account.getOere() + oere > 99) {
             kroner.add(BigInteger.ONE);
             account.setOere(account.getOere() + oere - 100);
-        }else{
+        } else {
             account.setOere(oere + account.getOere());
         }
         account.setKroner(account.getKroner().add(kroner));
         return account;
     }
 
+    /**
+     *
+     * @param accountNumber
+     * @return
+     */
     public static boolean deleteAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
         Account account = getAccount(accountNumber);
@@ -225,14 +295,25 @@ public class DBServiceAccount {
         return false;
     }
 
-    public static boolean lessOereOnAccountThanSentOere(Account account, int oere){
-        if(account.getOere() < oere){
+    /**
+     *
+     * @param account
+     * @param oere
+     * @return
+     */
+    public static boolean lessOereOnAccountThanSentOere(Account account, int oere) {
+        if (account.getOere() < oere) {
             return true;
         }
         return false;
     }
 
-    public static Account subtractOneKroneAndAdd100OereToAccount(Account account){
+    /**
+     *
+     * @param account
+     * @return
+     */
+    public static Account subtractOneKroneAndAdd100OereToAccount(Account account) {
         account.setKroner(account.getKroner().subtract(BigInteger.ONE));
         account.setOere(account.getOere() + 100);
         return account;
