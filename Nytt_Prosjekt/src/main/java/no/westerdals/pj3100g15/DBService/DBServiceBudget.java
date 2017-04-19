@@ -139,8 +139,8 @@ public class DBServiceBudget{
         BudgetCategory category = getBudgetCategory(categoryId);
 
         int amount = category.getUsedAmount() + used;
-
         category.setUsedAmount(amount);
+
         try{
             Dao<BudgetCategory, Integer> categoryDao = DaoManager.createDao(DBServiceConnection.connectionSource, BudgetCategory.class);
             categoryDao.update(category);
