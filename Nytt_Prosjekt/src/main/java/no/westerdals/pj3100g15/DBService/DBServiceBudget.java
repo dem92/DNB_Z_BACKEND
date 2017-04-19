@@ -151,4 +151,18 @@ public class DBServiceBudget{
         }
         return false;
     }
+
+    public static boolean deleteBudgetCategory(int categoryId){
+        DBServiceConnection.makeConnection();
+        BudgetCategory category = getBudgetCategory(categoryId);
+        try {
+            Dao<BudgetCategory, Integer> categoryDao = DaoManager.createDao(DBServiceConnection.connectionSource, BudgetCategory.class);
+            categoryDao.delete(category);
+            return true;
+        } catch (SQLException e) {
+            WriteLogg.writeLogg(e);
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
