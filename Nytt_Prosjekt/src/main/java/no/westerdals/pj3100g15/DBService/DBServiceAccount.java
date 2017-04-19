@@ -15,8 +15,10 @@ public class DBServiceAccount {
 
     /**
      *
-     * @param accountNumber
-     * @return
+     * This method is used to get the balance of an account.
+     *
+     * @param accountNumber is a accountnumber pointing to a specific account.
+     * @return an array containing the kroner-value of the account on place 0 and the amount of oere in place 1 in the array.
      */
     public static BigInteger[] getAccountBalance(String accountNumber) {
         DBServiceConnection.makeConnection();
@@ -39,9 +41,12 @@ public class DBServiceAccount {
     }
 
     /**
+     *This method creates a DAO-object to the Customer-table in the database. It uses that connection to query for a list customers.
+     * Another DAO-object is created to the account-class.
+     * It then uses the first object in the customer-list to query for all of its accounts.
      *
-     * @param customerId
-     * @return
+     * @param customerId The specific integer for a customer in the database.
+     * @return a list containing all of the accounts that the customer has.
      */
     public static List<Account> getCustomerAccounts(int customerId) {
         DBServiceConnection.makeConnection();
@@ -66,8 +71,8 @@ public class DBServiceAccount {
 
     /**
      *
-     * @param accountNumber
-     * @return
+     * @param accountNumber The accountnumber is needed to get the account-object with the specified accountnumber.
+     * @return Account-object with specified accountnumber.
      */
     public static Account getAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
@@ -86,7 +91,7 @@ public class DBServiceAccount {
 
     /**
      *
-     * @return
+     * @return a list of all the accounts in the database.
      */
     public static List<Account> getAllAccounts() {
         DBServiceConnection.makeConnection();
@@ -103,10 +108,17 @@ public class DBServiceAccount {
     }
 
     /**
+     * This method creates an account associated with an already existing user in the database.
+     * It utilises the randomNumber()-method to create a random accountnumber.
+     * It also checks if the accountnumber is available or not.
+     * It determines the interest of the account based on what type of account it is.
+     * If the account is a "Brukskonto", the account is set as a "main" account.
+     * This should also be set by the users existing accounts, but it was to timeconsuming to implement.
      *
-     * @param customerId
-     * @param accountType
-     * @return
+     * @param customerId is needed to associate the new account to the customer.
+     * @param accountType This sets the type of the account. It is usually "sparekonto" or "brukskonto".
+     *                    It determines the rent on the account and also the rules applying to it.
+     * @return It returns a boolean (true/false), so that the user can know if the account is succesfully mad or not.
      */
     public static boolean addAccount(int customerId, String accountType) {
         DBServiceConnection.makeConnection();
@@ -153,7 +165,9 @@ public class DBServiceAccount {
 
     /**
      *
-     * @return String
+     * This method is used to generate random accountnumbers.
+     *
+     * @return a number created of two random numbers with values between 100000 and 999999
      */
     public static String randomNumber() {
         String accountNo;
