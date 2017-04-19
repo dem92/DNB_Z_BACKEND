@@ -180,9 +180,10 @@ public class DBServiceAccount {
     }
 
     /**
+     * Returns true/false based on if the account with the specified accountnumber exists or not.
      *
      * @param accountNumber is used to get the account with the specified accountnumber.
-     * @return boolean(true/false)
+     * @return boolean
      */
     public static boolean checkAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
@@ -200,9 +201,12 @@ public class DBServiceAccount {
 
     /**
      *
-     * @param accountNumber
-     * @param main
-     * @return
+     * Used to update the status of the account.
+     * The account can be 0(main account) or 1(not main account)
+     *
+     * @param accountNumber is used to get the account in DB with the specified accountnumber.
+     * @param main indicates if the account is the main account of the user.
+     * @return boolean
      */
     public static boolean updateMain(String accountNumber, int main) {
         DBServiceConnection.makeConnection();
@@ -213,8 +217,10 @@ public class DBServiceAccount {
 
     /**
      *
-     * @param accountNumber
-     * @param accountName
+     * Is used to update the name of the account.
+     *
+     * @param accountNumber makes it possible to get the account-object related to the accountnumber.
+     * @param accountName the new name of the account.
      * @return boolean
      */
     public static boolean updateAccountname(String accountNumber, String accountName) {
@@ -225,9 +231,10 @@ public class DBServiceAccount {
     }
 
     /**
+     * Updates an account-object in the database
      *
-     * @param account
-     * @return
+     * @param account the updated account to be saved in the database.
+     * @return boolean
      */
     public static boolean updateAccount(Account account) {
         try {
@@ -243,10 +250,12 @@ public class DBServiceAccount {
 
     /**
      *
-     * @param account
-     * @param kroner
-     * @param oere
-     * @return
+     * Subtracts the given amount from the account-object and returns the accountobject.
+     *
+     * @param account the account object which is going to be changed.
+     * @param kroner amount of kroner the account will have less of after the transaction.
+     * @param oere amount of oere the account will have less of.
+     * @return Account
      */
     public static Account subtractFromAccount(Account account, BigInteger kroner, int oere) {
         account.setKroner(account.getKroner().subtract(kroner));
@@ -255,6 +264,8 @@ public class DBServiceAccount {
     }
 
     /**
+     *
+     *
      *
      * @param account
      * @param kroner
