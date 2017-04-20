@@ -16,7 +16,6 @@ public class DBServiceLoggedTransaction {
             Dao<LoggedTransaction, String> transactionDao = DaoManager.createDao(DBServiceConnection.connectionSource, LoggedTransaction.class);
             List<LoggedTransaction> transactions = transactionDao.queryForEq("Avsenderkonto", accountNumber);
             transactions = sortTransactions(transactions);
-
             transactions.addAll(transactionDao.queryForEq("Mottakerkonto", accountNumber));
             return transactions;
         } catch (SQLException e) {

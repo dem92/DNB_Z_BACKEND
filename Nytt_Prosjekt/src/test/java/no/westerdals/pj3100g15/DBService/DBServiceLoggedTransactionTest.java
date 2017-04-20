@@ -4,7 +4,6 @@ import no.westerdals.pj3100g15.ORM.LoggedTransaction;
 import org.junit.Test;
 
 import java.math.BigInteger;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,9 @@ import static no.westerdals.pj3100g15.DBService.DBServiceLoggedTransaction.sortT
 import static org.junit.Assert.assertEquals;
 
 public class DBServiceLoggedTransactionTest {
-
+    /**
+     * Tests if the sortingmethod works...
+     */
     @Test
     public void testSortMethod(){
         List<LoggedTransaction> transactions = new ArrayList<>();
