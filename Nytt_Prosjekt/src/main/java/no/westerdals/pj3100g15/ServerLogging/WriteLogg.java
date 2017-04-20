@@ -4,7 +4,11 @@ import java.io.*;
 import java.util.Calendar;
 
 public class WriteLogg {
-
+    /**
+     * Creates a textfile, if it does not exists, and writes data about the exception.
+     * It writes when, what exception it is, the stacktrace and the description of the exception to the file.
+     * @param exception Exception-object
+     */
     public static void writeLogg(Exception exception) {
         String filename = "errormessages.txt";
         Calendar calendar = Calendar.getInstance();
