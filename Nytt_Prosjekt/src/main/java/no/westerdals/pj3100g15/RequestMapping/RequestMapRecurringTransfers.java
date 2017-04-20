@@ -24,9 +24,7 @@ public class RequestMapRecurringTransfers {
     @ResponseBody
     public List<RecurringTransfer> getAllRecurringTransfersForAccount(
             @PathVariable(value = "accountNumber") String accountNumber) {
-        List<RecurringTransfer> recurringTransfers = DBServiceRecurringTransfer.getAllRecurringTransfersForAccount(accountNumber);
-        //DBServiceConnection.closeConnection();
-        return recurringTransfers;
+        return DBServiceRecurringTransfer.getAllRecurringTransfersForAccount(accountNumber);
     }
 
     /**
@@ -47,7 +45,6 @@ public class RequestMapRecurringTransfers {
         for (String accountNumber : accountNumbers) {
             recurringTransfers.addAll(DBServiceRecurringTransfer.getAllRecurringTransfersForAccount(accountNumber));
         }
-        //DBServiceConnection.closeConnection();
         return recurringTransfers;
     }
 }

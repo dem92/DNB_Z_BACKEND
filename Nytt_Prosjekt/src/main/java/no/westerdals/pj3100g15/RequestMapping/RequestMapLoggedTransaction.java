@@ -50,7 +50,6 @@ public class RequestMapLoggedTransaction {
                 .sorted(Comparator.comparing(LoggedTransaction::getId))
                 .collect(Collectors.toList());
         Collections.reverse(cards);
-        //DBServiceConnection.closeConnection();
         return cards;
     }
 
