@@ -99,11 +99,13 @@ public class DBServiceSendMoney {
     /**
      * Is used to send money between accounts in the database.
      *
-     * @param accountNumber
-     * @param accountNumber2
-     * @param kroner
-     * @param oere
-     * @return
+     * @param accountNumber is used to get the account with the specified accountnumber from the database.
+     *                      The money will be transfered FROM this account(sending).
+     * @param accountNumber2 is used to get the account with the specified accountnumber from the database.
+     *                       The money will be transfered TO this account(receiving).
+     * @param kroner the amount of money being sent.
+     * @param oere the amount of oere being sent.
+     * @return boolean
      */
     public static boolean sendMoneyBetweenAccounts(String accountNumber, String accountNumber2, BigInteger kroner, int oere) {
         DBServiceConnection.makeConnection();
