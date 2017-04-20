@@ -17,6 +17,7 @@ public class BudgetCategory {
     private int usedAmount;
 
     public BudgetCategory() {
+        //Left empty on purpose
     }
 
     public BudgetCategory(int budgetId, String category, int goalAmount) {

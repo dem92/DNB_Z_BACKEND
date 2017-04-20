@@ -31,6 +31,7 @@ public class SavingsTargets {
     private boolean done;
 
     public SavingsTargets() {
+        //Left empty on purpose
 
     }
 

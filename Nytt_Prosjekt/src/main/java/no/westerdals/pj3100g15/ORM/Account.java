@@ -30,6 +30,7 @@ public class Account {
     private String name;
 
     public Account() {
+        //Left empty on purpose
     }
 
     public Account(String accountNumber, int kundenummer, BigInteger kroner, int oere, double interest) {

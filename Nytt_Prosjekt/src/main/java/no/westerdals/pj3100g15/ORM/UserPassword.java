@@ -14,6 +14,7 @@ public class UserPassword {
     private String passwordPlain;
 
     public UserPassword() {
+        //Left empty on purpose
     }
 
     public String getCustomerID() {

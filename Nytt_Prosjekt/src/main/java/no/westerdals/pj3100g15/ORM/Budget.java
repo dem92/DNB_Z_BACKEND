@@ -11,6 +11,7 @@ public class Budget {
     private int customerId;
 
     public Budget() {
+        //Left empty on purpose
     }
 
     public Budget(int id, int customerId) {

@@ -33,6 +33,7 @@ public class RecurringTransfer {
     private boolean active;
 
     public RecurringTransfer() {
+        //Left empty on purpose
     }
 
     public RecurringTransfer(int id, String sendingAccount, String receivingAccount, int customerId, BigInteger kroner, int oere, String message, long nextTransfer, String intervall, long endDate, boolean active) {

@@ -29,6 +29,7 @@ public class LoggedTransaction {
     private int receiverID;
 
     public LoggedTransaction() {
+        //Left empty on purpose
     }
 
     public LoggedTransaction(int id, String sendingAccount, String recievingAccount, long timestamp, BigInteger kroner, int oere, String message_kid, String transactionType, int senderID, int receiverID) {
