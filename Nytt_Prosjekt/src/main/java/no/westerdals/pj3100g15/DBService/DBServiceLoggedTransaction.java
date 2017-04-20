@@ -26,14 +26,13 @@ public class DBServiceLoggedTransaction {
         return null;
     }
 
-    private List<LoggedTransaction> sortTransactions(List<LoggedTransaction> transactions){
+    public static List<LoggedTransaction> sortTransactions(List<LoggedTransaction> transactions){
         for(int i = 0; i < transactions.size(); i++){
-            for(int j = 1; j < transactions.size(); j++){
+            for(int j = 0; j < transactions.size(); j++){
                 if(transactions.get(i).getTimestamp() < transactions.get(j).getTimestamp()){
-
                     LoggedTransaction temp = transactions.get(i);
-                    transactions.get(i) = transactions.get(j);
-                    transactions.get(j) = temp;
+                    transactions.set(i, transactions.get(j));
+                    transactions.set(j, temp);
                 }
             }
         }
