@@ -18,6 +18,7 @@ public class RequestMapLoggedTransaction {
 
     /**
      * This request map runs a method that gets all transfers between a customers own accounts
+     *
      * @param accountNumber is the account number for an account
      * @return a List<> of LoggedTransactions marked as "transfer" in the transaction type-column in the database
      */
@@ -36,6 +37,7 @@ public class RequestMapLoggedTransaction {
 
     /**
      * This request map runs a method that gets all card transactions from a customers account
+     *
      * @param accountNumber is the account number for an account
      * @return a List<> of LoggedTransactions marked as "card" in the transaction type-column in the database
      */
@@ -54,6 +56,7 @@ public class RequestMapLoggedTransaction {
 
     /**
      * This request map runs a method that gets all payments from a customers account
+     *
      * @param accountNumber is the account number for an account
      * @return a List<> of LoggedTransactions marked as "payment" in the transaction type-column in the database
      */
@@ -72,6 +75,7 @@ public class RequestMapLoggedTransaction {
 
     /**
      * This request map runs a method that gets all transactions from a customers account
+     *
      * @param accountNumber is the account number for an account
      * @return a List<> of all LoggedTransactions for an account
      */
