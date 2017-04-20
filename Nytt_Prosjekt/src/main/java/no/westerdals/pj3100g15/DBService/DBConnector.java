@@ -12,13 +12,12 @@ public class DBConnector {
 
     /**
      * This method generates the connection to the database.
-     *
      * @return ConnectionSource - A timed connection to the database based on a String username, String password and a String url.
      */
     public static ConnectionSource makeConnection() {
 
-        //Hardcoded usernames and passwords because of lack of time. This is the worst security EVER, but it works...
-        //Should have used a propertiesfile.
+        //Hardcoded usernames and passwords is used because of lack of time. This is the worst security EVER, but it works...
+        //Should have used a propertiesfile...
         String userName = "daheva15_MainUsr";
         String password = "PJ3100gruppe15!";
         String databaseUrl = "jdbc:mysql://tek.westerdals.no:3306/daheva15_PJ3100_gruppe15";
