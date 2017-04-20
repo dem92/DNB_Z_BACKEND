@@ -141,6 +141,13 @@ public class DBServiceSavingsTargets {
         return savingsTargets;
     }
 
+    /**
+     * Checks if the savingsTarget has more kroner and oere than its goal
+     * or checks if the kroner is larger and the oere is less than the goal.
+     *
+     * @param savingsTarget is the savingstarget object.
+     * @return boolean
+     */
     public static boolean checkIfTargetIsDone(SavingsTargets savingsTarget){
 
         //Checks if the savingstarget has more than or the same kroner/oere compared to the goal
