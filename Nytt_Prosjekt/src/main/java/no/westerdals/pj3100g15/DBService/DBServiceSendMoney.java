@@ -17,31 +17,38 @@ public class DBServiceSendMoney {
     /**
      * Sends money from a savingstarget to an account.
      *
-     * @param accountNumber is used to get the specified account from the database.
+     * @param accountNumber  is used to get the specified account from the database.
      * @param savingTargetId is used to get the specified savingstarget from the database.
-     * @param kroner the amount of kroner that is being transfered.
-     * @param oere the amount of oere that is being transfered.
+     * @param kroner         the amount of kroner that is being transfered.
+     * @param oere           the amount of oere that is being transfered.
      * @return boolean
      */
     public static boolean sendMoneyFromSavingsTargetToAccount(String accountNumber, int savingTargetId, BigInteger kroner, int oere) {
         DBServiceConnection.makeConnection();
         SavingsTargets savingsTarget = getSavingsTarget(savingTargetId);
         Account account = getAccount(accountNumber);
+        boolean hasMoney = false;
 
-        if (lessOereOnSavingsTargetThanSentOere(savingsTarget, oere)) {
-            subtractOneKroneAndAdd100OereToSavingsTargets(savingsTarget);
+        if (ValidateInput.validateInput(kroner, oere) && savingsTarget.getSavedKroner().subtract(kroner).compareTo(BigInteger.ZERO) >= 0) {
+            hasMoney = true;
         }
 
-        //Subtracts from savingstarget and adds to account
-        savingsTarget = subtractFromTarget(savingsTarget, kroner, oere);
-        account = addToAccount(account, kroner, oere);
+        if (hasMoney) {
+            if (lessOereOnSavingsTargetThanSentOere(savingsTarget, oere)) {
+                subtractOneKroneAndAdd100OereToSavingsTargets(savingsTarget);
+            }
 
-        //Checks if any of the objects is null to avoid nullpointer exception
-        if (savingsTarget != null || account != null) {
+            //Subtracts from savingstarget and adds to account
+            savingsTarget = subtractFromTarget(savingsTarget, kroner, oere);
+            account = addToAccount(account, kroner, oere);
 
-            //Completes the transaction if updating both the account and the savingstarget is true
-            if (updateSavingsTarget(savingsTarget) && updateAccount(account)) {
-                return true;
+            //Checks if any of the objects is null to avoid nullpointer exception
+            if (savingsTarget != null || account != null) {
+
+                //Completes the transaction if updating both the account and the savingstarget is true
+                if (updateSavingsTarget(savingsTarget) && updateAccount(account)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -51,46 +58,54 @@ public class DBServiceSendMoney {
      * Sends money from account to savingstarget. If the savingstarget is done, the savingstarget marks itself as done and transfers the
      * overflowing money back to the account.
      *
-     * @param accountNumber used to get the specified accountobject in the database.
+     * @param accountNumber   used to get the specified accountobject in the database.
      * @param savingsTargetId used to get the specified svingstarget in the database.
-     * @param kroner the amount of kroner that is being transfered.
-     * @param oere the amount of oere that is being transfered.
+     * @param kroner          the amount of kroner that is being transfered.
+     * @param oere            the amount of oere that is being transfered.
      * @return boolean
      */
     public static boolean sendMoneyFromAccountToSavingsTarget(String accountNumber, int savingsTargetId, BigInteger kroner, int oere) {
         DBServiceConnection.makeConnection();
         SavingsTargets savingsTarget = getSavingsTarget(savingsTargetId);
         Account account = getAccount(accountNumber);
+        boolean hasMoney = false;
 
-        if (lessOereOnAccountThanSentOere(account, oere)) {
-            account = subtractOneKroneAndAdd100OereToAccount(account);
+        if (ValidateInput.validateInput(kroner, oere) && account.getKroner().subtract(kroner).compareTo(BigInteger.ZERO) >= 0) {
+            hasMoney = true;
         }
 
-        //Subtracts from account and adds to savingstarget
-        account = subtractFromAccount(account, kroner, oere);
-        savingsTarget = addToTarget(savingsTarget, kroner, oere);
+        if (hasMoney) {
 
-        //Checks if any of the objects is null to avoid nullpointer exception
-        if (savingsTarget != null || account != null) {
+            if (lessOereOnAccountThanSentOere(account, oere)) {
+                account = subtractOneKroneAndAdd100OereToAccount(account);
+            }
 
-            //Completes the transaction if updating both the account and the savingstarget is true
-            if (updateSavingsTarget(savingsTarget) && updateAccount(account)) {
+            //Subtracts from account and adds to savingstarget
+            account = subtractFromAccount(account, kroner, oere);
+            savingsTarget = addToTarget(savingsTarget, kroner, oere);
 
-                //Checks the savingstargets status
-                if (checkIfTargetIsDone(savingsTarget)) {
+            //Checks if any of the objects is null to avoid nullpointer exception
+            if (savingsTarget != null || account != null) {
 
-                    //Sets the savingstarget to "Done" and checks if the transaction to the database has gone well
-                    if (targetIsDone(savingsTarget)) {
+                //Completes the transaction if updating both the account and the savingstarget is true
+                if (updateSavingsTarget(savingsTarget) && updateAccount(account)) {
 
-                        //Gets the overflowing money from the savingstarget
-                        BigInteger overflowingKroner = getOverflowingKronerOfDoneSavingsTarget(savingsTarget);
-                        int overFlowingOere = getOverflowingOereOfDoneSavingsTarget(savingsTarget);
+                    //Checks the savingstargets status
+                    if (checkIfTargetIsDone(savingsTarget)) {
 
-                        //Sends the money back to the the account it was sent from
-                        sendMoneyFromSavingsTargetToAccount(accountNumber, savingsTargetId, overflowingKroner, overFlowingOere);
+                        //Sets the savingstarget to "Done" and checks if the transaction to the database has gone well
+                        if (targetIsDone(savingsTarget)) {
+
+                            //Gets the overflowing money from the savingstarget
+                            BigInteger overflowingKroner = getOverflowingKronerOfDoneSavingsTarget(savingsTarget);
+                            int overFlowingOere = getOverflowingOereOfDoneSavingsTarget(savingsTarget);
+
+                            //Sends the money back to the the account it was sent from
+                            sendMoneyFromSavingsTargetToAccount(accountNumber, savingsTargetId, overflowingKroner, overFlowingOere);
+                        }
                     }
+                    return true;
                 }
-                return true;
             }
         }
         return false;
@@ -99,12 +114,12 @@ public class DBServiceSendMoney {
     /**
      * Is used to send money between accounts in the database.
      *
-     * @param accountNumber is used to get the account with the specified accountnumber from the database.
-     *                      The money will be transfered FROM this account(sending).
+     * @param accountNumber  is used to get the account with the specified accountnumber from the database.
+     *                       The money will be transfered FROM this account(sending).
      * @param accountNumber2 is used to get the account with the specified accountnumber from the database.
      *                       The money will be transfered TO this account(receiving).
-     * @param kroner the amount of money being sent.
-     * @param oere the amount of oere being sent.
+     * @param kroner         the amount of money being sent.
+     * @param oere           the amount of oere being sent.
      * @return boolean
      */
     public static boolean sendMoneyBetweenAccounts(String accountNumber, String accountNumber2, BigInteger kroner, int oere) {
@@ -112,6 +127,10 @@ public class DBServiceSendMoney {
         Account sending = DBServiceAccount.getAccount(accountNumber);
         Account recieving = DBServiceAccount.getAccount(accountNumber2);
         boolean hasMoney = false;
+
+        if (sending.getAccountNumber().equals(recieving.getAccountNumber())) {
+            return false;
+        }
 
         if (oere > 99 || oere < 0) {
             return false;

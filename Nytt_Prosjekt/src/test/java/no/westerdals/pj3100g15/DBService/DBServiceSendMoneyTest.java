@@ -21,5 +21,10 @@ public class DBServiceSendMoneyTest {
         assertTrue(DBServiceSendMoney.sendMoneyFromSavingsTargetToAccount("63454037373", 100, BigInteger.valueOf(5),0));
     }
 
+    @Test
+    public void testSendMoneyToSavingsTargetToCompleteIt(){
+        assertFalse(DBServiceSendMoney.sendMoneyFromAccountToSavingsTarget("77926693162", 102,BigInteger.valueOf(999999999), 0));
+    }
+
 
 }
