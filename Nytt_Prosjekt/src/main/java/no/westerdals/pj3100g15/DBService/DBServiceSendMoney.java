@@ -14,7 +14,15 @@ import static no.westerdals.pj3100g15.DBService.DBServiceAccount.*;
 import static no.westerdals.pj3100g15.DBService.DBServiceSavingsTargets.*;
 
 public class DBServiceSendMoney {
-
+    /**
+     * Sends money from a savingstarget to an account.
+     *
+     * @param accountNumber is used to get the specified account from the database.
+     * @param savingTargetId is used to get the specified savingstarget from the database.
+     * @param kroner the amount of kroner that is being transfered.
+     * @param oere the amount of oere that is being transfered.
+     * @return boolean
+     */
     public static boolean sendMoneyFromSavingsTargetToAccount(String accountNumber, int savingTargetId, BigInteger kroner, int oere) {
         DBServiceConnection.makeConnection();
         SavingsTargets savingsTarget = getSavingsTarget(savingTargetId);
