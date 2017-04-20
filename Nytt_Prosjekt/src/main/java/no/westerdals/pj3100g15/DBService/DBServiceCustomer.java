@@ -111,6 +111,12 @@ public class DBServiceCustomer {
         return false;
     }
 
+    /**
+     * Used to update the first name of a customer in the database.
+     * @param customerId is used to get the user in the database.
+     * @param firstname is used to set the new firstname of the user.
+     * @return boolean if the databasetransaction is succesfull.
+     */
     public static boolean updateFirstname(int customerId, String firstname) {
         DBServiceConnection.makeConnection();
         Customer customer = getCustomer(customerId);
