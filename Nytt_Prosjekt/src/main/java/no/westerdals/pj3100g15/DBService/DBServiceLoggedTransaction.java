@@ -15,6 +15,8 @@ public class DBServiceLoggedTransaction {
         try {
             Dao<LoggedTransaction, String> transactionDao = DaoManager.createDao(DBServiceConnection.connectionSource, LoggedTransaction.class);
             List<LoggedTransaction> transactions = transactionDao.queryForEq("Avsenderkonto", accountNumber);
+            transactions = sortTransactions(transactions);
+
             transactions.addAll(transactionDao.queryForEq("Mottakerkonto", accountNumber));
             return transactions;
         } catch (SQLException e) {
@@ -22,6 +24,22 @@ public class DBServiceLoggedTransaction {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private List<LoggedTransaction> sortTransactions(List<LoggedTransaction> transactions){
+        for(int i = 0; i < transactions.size(); i++){
+            for(int j = 1; j < transactions.size(); j++){
+                if(transactions.get(i).getTimestamp() < transactions.get(j).getTimestamp()){
+
+                    LoggedTransaction temp = transactions.get(i);
+                    transactions.get(i) = transactions.get(j);
+                    transactions.get(j) = temp;
+                }
+            }
+        }
+
+
+        return transactions;
     }
 
     public static boolean logTransfer(String accountNumber, String accountNumber2, BigInteger kroner, int oere, String message) {
