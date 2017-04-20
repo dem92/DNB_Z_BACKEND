@@ -75,7 +75,7 @@ public class DBServiceSendMoney {
         Account account = getAccount(accountNumber);
         boolean hasMoney = false;
 
-        if(savingsTarget == null || account == null){
+        if (savingsTarget == null || account == null) {
             return false;
         }
 

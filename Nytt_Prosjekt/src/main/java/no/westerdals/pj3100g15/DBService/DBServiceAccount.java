@@ -14,7 +14,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DBServiceAccount {
 
     /**
-     *
      * This method is used to get the balance of an account.
      *
      * @param accountNumber is a accountnumber pointing to a specific account.
@@ -41,7 +40,7 @@ public class DBServiceAccount {
     }
 
     /**
-     *This method creates a DAO-object to the Customer-table in the database. It uses that connection to query for a list customers.
+     * This method creates a DAO-object to the Customer-table in the database. It uses that connection to query for a list customers.
      * Another DAO-object is created to the account-class.
      * It then uses the first object in the customer-list to query for all of its accounts.
      *
@@ -70,7 +69,6 @@ public class DBServiceAccount {
     }
 
     /**
-     *
      * @param accountNumber The accountnumber is needed to get the account-object with the specified accountnumber.
      * @return Account-object with specified accountnumber.
      */
@@ -90,7 +88,6 @@ public class DBServiceAccount {
     }
 
     /**
-     *
      * @return a list of all the accounts in the database.
      */
     public static List<Account> getAllAccounts() {
@@ -115,7 +112,7 @@ public class DBServiceAccount {
      * If the account is a "Brukskonto", the account is set as a "main" account.
      * This should also be set by the users existing accounts, but it was to timeconsuming to implement.
      *
-     * @param customerId is needed to associate the new account to the customer.
+     * @param customerId  is needed to associate the new account to the customer.
      * @param accountType This sets the type of the account. It is usually "sparekonto" or "brukskonto".
      *                    It determines the rent on the account and also the rules applying to it.
      * @return It returns a boolean (true/false), so that the user can know if the account is succesfully mad or not.
@@ -164,7 +161,6 @@ public class DBServiceAccount {
     }
 
     /**
-     *
      * This method is used to generate random accountnumbers.
      *
      * @return a number created of two random numbers with values between 100000 and 999999
@@ -200,12 +196,11 @@ public class DBServiceAccount {
     }
 
     /**
-     *
      * Used to update the status of the account.
      * The account can be 0(main account) or 1(not main account)
      *
      * @param accountNumber is used to get the account in DB with the specified accountnumber.
-     * @param main indicates if the account is the main account of the user.
+     * @param main          indicates if the account is the main account of the user.
      * @return boolean
      */
     public static boolean updateMain(String accountNumber, int main) {
@@ -216,11 +211,10 @@ public class DBServiceAccount {
     }
 
     /**
-     *
      * Is used to update the name of the account.
      *
      * @param accountNumber makes it possible to get the account-object related to the accountnumber.
-     * @param accountName the new name of the account.
+     * @param accountName   the new name of the account.
      * @return boolean
      */
     public static boolean updateAccountname(String accountNumber, String accountName) {
@@ -249,12 +243,11 @@ public class DBServiceAccount {
     }
 
     /**
-     *
      * Subtracts the given amount from the account-object and returns the accountobject.
      *
      * @param account the account object which is going to be changed.
-     * @param kroner amount of kroner the account will have less of after the transaction.
-     * @param oere amount of oere the account will have less of.
+     * @param kroner  amount of kroner the account will have less of after the transaction.
+     * @param oere    amount of oere the account will have less of.
      * @return Account
      */
     public static Account subtractFromAccount(Account account, BigInteger kroner, int oere) {
@@ -264,12 +257,11 @@ public class DBServiceAccount {
     }
 
     /**
-     *
      * Add money to a account object and returns it.
      *
      * @param account is the accountobject which is being added to.
-     * @param kroner is the amount of kroner being added.
-     * @param oere is the amount of oere being added.
+     * @param kroner  is the amount of kroner being added.
+     * @param oere    is the amount of oere being added.
      * @return Account
      */
     public static Account addToAccount(Account account, BigInteger kroner, int oere) {
@@ -286,7 +278,6 @@ public class DBServiceAccount {
     }
 
     /**
-     *
      * Deletes a account with the specified accountnumber.
      *
      * @param accountNumber is used to find the account-object associated with the number in the database.
@@ -307,22 +298,17 @@ public class DBServiceAccount {
     }
 
     /**
-     *
      * Checks whether the accountobject has less oere than is being withdrawn from it.
      *
      * @param account is the accountobject being checked.
-     * @param oere is the amount of oere.
+     * @param oere    is the amount of oere.
      * @return boolean
      */
     public static boolean lessOereOnAccountThanSentOere(Account account, int oere) {
-        if (account.getOere() < oere) {
-            return true;
-        }
-        return false;
+        return account.getOere() < oere;
     }
 
     /**
-     *
      * Is used to convert one krone to 100 oere on the accountobject.
      *
      * @param account is the accountobject being changed.

@@ -57,11 +57,12 @@ public class DBServiceLoggedTransaction {
 
     /**
      * This method creates a logTransfer-object and persists it to the database.
-     * @param accountNumber is the number to the sending account.
+     *
+     * @param accountNumber  is the number to the sending account.
      * @param accountNumber2 is the number to the receiving account.
-     * @param kroner is the amount of kroner being sent from the one account to the other.
-     * @param oere is the amount of oere being sent from the one account to the other.
-     * @param message is the message/KID associated with the transaction.
+     * @param kroner         is the amount of kroner being sent from the one account to the other.
+     * @param oere           is the amount of oere being sent from the one account to the other.
+     * @param message        is the message/KID associated with the transaction.
      * @return boolean
      */
     public static boolean logTransfer(String accountNumber, String accountNumber2, BigInteger kroner, int oere, String message) {

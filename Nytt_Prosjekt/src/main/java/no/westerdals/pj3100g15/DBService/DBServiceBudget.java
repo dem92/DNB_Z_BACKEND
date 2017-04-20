@@ -153,8 +153,9 @@ public class DBServiceBudget {
 
     /**
      * is used to update the categorys name in the database.
+     *
      * @param categoryId specifies the category that is to be changed.
-     * @param name the new name of the category
+     * @param name       the new name of the category
      * @return boolean
      */
     public static boolean updateCategoryName(int categoryId, String name) {
@@ -166,8 +167,9 @@ public class DBServiceBudget {
 
     /**
      * Used to update the categorygoal
+     *
      * @param categoryId specifies the id of the category to be changed.
-     * @param goal the new goal.
+     * @param goal       the new goal.
      * @return boolean
      */
     public static boolean updateCategoryGoal(int categoryId, int goal) {
@@ -177,9 +179,11 @@ public class DBServiceBudget {
         return updateCategoryObject(category);
     }
 
-    /** update the how many times the category is used. The amount of times is just added to the current amount.
+    /**
+     * update the how many times the category is used. The amount of times is just added to the current amount.
+     *
      * @param categoryId specifies which category in the database.
-     * @param used the amount of additional times it is used.
+     * @param used       the amount of additional times it is used.
      * @return boolean
      */
     public static boolean updateCategoryUsed(int categoryId, int used) {
@@ -189,7 +193,9 @@ public class DBServiceBudget {
         return updateCategoryObject(category);
     }
 
-    /**Utilmethod to update the whole Budgetcategoryobject in the database.
+    /**
+     * Utilmethod to update the whole Budgetcategoryobject in the database.
+     *
      * @param category is the object to be updated.
      * @return boolean
      */
@@ -205,7 +211,9 @@ public class DBServiceBudget {
         return false;
     }
 
-    /** Deletes the budgetcategory with the given ID in the database.
+    /**
+     * Deletes the budgetcategory with the given ID in the database.
+     *
      * @param categoryId specifies which category to retrieve from the database.
      * @return boolean
      */

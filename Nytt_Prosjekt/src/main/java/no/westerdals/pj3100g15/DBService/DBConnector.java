@@ -27,13 +27,12 @@ public class DBConnector {
     }
 
     /**
-     *
      * This method creates a connectionsource with a timelimit for 5 minutes from a JdbcPooledConnectionSource.
      * The Connectionsource will automaticly get destroyed after 5 minutes. The access of the method is private.
      *
-     * @param user          A String with the name of the user connected to the database
-     * @param password      A String with the password for the database
-     * @param databaseUrl   The url to a specific database
+     * @param user        A String with the name of the user connected to the database
+     * @param password    A String with the password for the database
+     * @param databaseUrl The url to a specific database
      * @return returns a connectionsource-object that makes it possible to talk to the database.
      */
     private static ConnectionSource connectToDatabase(String user, String password, String databaseUrl) {

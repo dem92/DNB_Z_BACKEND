@@ -16,7 +16,6 @@ public class DBServiceCustomer {
     }
 
     /**
-     *
      * This method creates a connection to the database and retrieves all customers in the database.
      *
      * @return 'List<Customer>' a list with customers.
@@ -46,8 +45,8 @@ public class DBServiceCustomer {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(DBServiceConnection.connectionSource, Customer.class);
             List<Customer> customer = customerDao.queryForEq("Kundenummer", customerId);
 
-           // if (customer.size() != 1)
-           //     return null;
+            // if (customer.size() != 1)
+            //     return null;
 
             return customer.get(0);
         } catch (SQLException e) {
@@ -58,17 +57,15 @@ public class DBServiceCustomer {
     }
 
     /**
-     *
      * Creates a customerobject and sets all the parameters needed to persist it to the database.
      * It Hardcodes the postalcode, phonenumber, score and address-field,
      * because it is not as important and can be changed at a later point
      * by the user.
      *
-     *
-     * @param firstName is set as the firstname of the customer-object
-     * @param surname is set as the surname for the customer-object
+     * @param firstName      is set as the firstname of the customer-object
+     * @param surname        is set as the surname for the customer-object
      * @param birthDayNumber is set as the birthdaynumber to the customer-object
-     * @param email is set as the email-parameter to the customer-object
+     * @param email          is set as the email-parameter to the customer-object
      * @return boolean
      */
     public static boolean addCustomer(String firstName, String surname, String birthDayNumber, String email) {
@@ -96,10 +93,11 @@ public class DBServiceCustomer {
 
     /**
      * Utilmethod to persist a customer with changed values.
+     *
      * @param customer the object that is changed
      * @return boolean
      */
-    private static boolean updateCustomer(Customer customer){
+    private static boolean updateCustomer(Customer customer) {
         try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(DBServiceConnection.connectionSource, Customer.class);
             customerDao.update(customer);
@@ -113,8 +111,9 @@ public class DBServiceCustomer {
 
     /**
      * Used to update the first name of a customer in the database.
+     *
      * @param customerId is used to get the user in the database.
-     * @param firstname is used to set the new firstname of the user.
+     * @param firstname  is used to set the new firstname of the user.
      * @return boolean if the databasetransaction is succesfull.
      */
     public static boolean updateFirstname(int customerId, String firstname) {
@@ -125,11 +124,10 @@ public class DBServiceCustomer {
     }
 
     /**
-     *
      * This method is used to update the surname of a customer in the database.
      *
      * @param customerId is used to decide which user is retrieved from the database.
-     * @param surname is the new surname.
+     * @param surname    is the new surname.
      * @return boolean
      */
     public static boolean updateSurname(int customerId, String surname) {
@@ -140,11 +138,10 @@ public class DBServiceCustomer {
     }
 
     /**
-     *
      * This method is used to update the address of a customer in the database.
      *
      * @param customerId is used to decide which user is retrieved from the database.
-     * @param address is the new address.
+     * @param address    is the new address.
      * @return boolean
      */
     public static boolean updateAddress(int customerId, String address) {
@@ -155,7 +152,6 @@ public class DBServiceCustomer {
     }
 
     /**
-     *
      * This method is used to update the postalcode of a customer in the database.
      *
      * @param customerId is used to decide which user is retrieved from the database.
@@ -170,11 +166,10 @@ public class DBServiceCustomer {
     }
 
     /**
-     *
      * This method is used to update the mail of a customer in the database.
      *
      * @param customerId is used to decide which user is retrieved from the database.
-     * @param mail is the new mail.
+     * @param mail       is the new mail.
      * @return boolean
      */
     public static boolean updateEmail(int customerId, String mail) {
@@ -185,10 +180,9 @@ public class DBServiceCustomer {
     }
 
     /**
-     *
      * This method is used to update the phonenumber of a customer in the database.
      *
-     * @param customerId is used to decide which user is retrieved from the database.
+     * @param customerId  is used to decide which user is retrieved from the database.
      * @param phoneNumber is the new phonenumber.
      * @return boolean
      */

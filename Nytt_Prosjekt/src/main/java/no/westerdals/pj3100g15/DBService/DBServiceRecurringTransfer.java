@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 public class DBServiceRecurringTransfer {
+
     public static List<RecurringTransfer> getAllRecurringTransfersForAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
         try {
@@ -24,7 +25,7 @@ public class DBServiceRecurringTransfer {
         return null;
     }
 
-    public static void addRecurringTransfer(String sendingAccount, String receivingAccount, BigInteger kroner, int oere, String message, String interval, long endDate){
+    public static void addRecurringTransfer(String sendingAccount, String receivingAccount, BigInteger kroner, int oere, String message, String interval, long endDate) {
         DBServiceConnection.makeConnection();
 
         RecurringTransfer recurringTransfer = new RecurringTransfer();
