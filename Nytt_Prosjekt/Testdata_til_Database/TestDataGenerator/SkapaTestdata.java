@@ -1,5 +1,6 @@
 package no.westerdals.pj3100g15.TestDataGenerator;
 
+//This class is commented out, but not deleted because it
 public class SkapaTestdata {
 /*
     public static void main(String[] args) {
