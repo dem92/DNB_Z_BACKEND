@@ -6,9 +6,14 @@ import no.westerdals.pj3100g15.ORM.Customer;
 import no.westerdals.pj3100g15.ServerLogging.WriteLogg;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class DBServiceCustomer {
+
+    private DBServiceCustomer() {
+    }
 
     /**
      *
@@ -20,13 +25,12 @@ public class DBServiceCustomer {
         DBServiceConnection.makeConnection();
         try {
             Dao<Customer, String> customerDao = DaoManager.createDao(DBServiceConnection.connectionSource, Customer.class);
-            List<Customer> customers = customerDao.queryForAll();
-            return customers;
+            return customerDao.queryForAll();
         } catch (SQLException e) {
             WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
 
     /**
@@ -42,15 +46,15 @@ public class DBServiceCustomer {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(DBServiceConnection.connectionSource, Customer.class);
             List<Customer> customer = customerDao.queryForEq("Kundenummer", customerId);
 
-            if (customer.size() != 1)
-                return null;
+           // if (customer.size() != 1)
+           //     return null;
 
             return customer.get(0);
         } catch (SQLException e) {
             WriteLogg.writeLogg(e);
             e.printStackTrace();
         }
-        return null;
+        return new Customer();
     }
 
     /**
@@ -61,11 +65,11 @@ public class DBServiceCustomer {
      * by the user.
      *
      *
-     * @param firstName
-     * @param surname
-     * @param birthDayNumber
-     * @param email
-     * @return
+     * @param firstName is set as the firstname of the customer-object
+     * @param surname is set as the surname for the customer-object
+     * @param birthDayNumber is set as the birthdaynumber to the customer-object
+     * @param email is set as the email-parameter to the customer-object
+     * @return boolean
      */
     public static boolean addCustomer(String firstName, String surname, String birthDayNumber, String email) {
         DBServiceConnection.makeConnection();
@@ -95,7 +99,7 @@ public class DBServiceCustomer {
      * @param customer the object that is changed
      * @return boolean
      */
-    public static boolean updateCustomer(Customer customer){
+    private static boolean updateCustomer(Customer customer){
         try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(DBServiceConnection.connectionSource, Customer.class);
             customerDao.update(customer);
