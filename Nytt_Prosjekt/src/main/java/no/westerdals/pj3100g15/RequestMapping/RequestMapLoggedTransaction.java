@@ -31,7 +31,6 @@ public class RequestMapLoggedTransaction {
                 .sorted(Comparator.comparing(LoggedTransaction::getId))
                 .collect(Collectors.toList());
         Collections.reverse(transfers);
-        //DBServiceConnection.closeConnection();
         return transfers;
     }
 
@@ -68,7 +67,6 @@ public class RequestMapLoggedTransaction {
                 .sorted(Comparator.comparing(LoggedTransaction::getId))
                 .collect(Collectors.toList());
         Collections.reverse(payments);
-        //DBServiceConnection.closeConnection();
         return payments;
     }
 
@@ -85,7 +83,6 @@ public class RequestMapLoggedTransaction {
                 .sorted(Comparator.comparing(LoggedTransaction::getId))
                 .collect(Collectors.toList());
         Collections.reverse(transactions);
-        //DBServiceConnection.closeConnection();
         return transactions;
     }
 }

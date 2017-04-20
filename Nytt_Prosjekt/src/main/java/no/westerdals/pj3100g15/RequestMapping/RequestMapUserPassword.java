@@ -18,8 +18,6 @@ public class RequestMapUserPassword {
     @RequestMapping(value = "/user/{id}/auth", method = RequestMethod.GET)
     @ResponseBody
     public String[] getPasswords(@PathVariable(value = "id") String birthdayNumber) {
-        String[] password = DBServiceUserPassword.getPassword(birthdayNumber);
-        //DBServiceConnection.closeConnection();
-        return password;
+        return DBServiceUserPassword.getPassword(birthdayNumber);
     }
 }

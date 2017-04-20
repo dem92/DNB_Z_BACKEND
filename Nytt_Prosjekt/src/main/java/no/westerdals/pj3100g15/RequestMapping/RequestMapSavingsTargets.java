@@ -58,8 +58,6 @@ public class RequestMapSavingsTargets {
         return DBServiceSavingsTargets.createSavingsTarget(kroner, oere, customerId, name);
     }
 
-    // -------------------    Update savings targets under this line    ---------------------
-
     /**
      * This request map runs a method that updates a savings targets name
      *
