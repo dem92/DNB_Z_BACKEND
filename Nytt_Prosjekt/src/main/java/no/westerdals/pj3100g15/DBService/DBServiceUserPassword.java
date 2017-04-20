@@ -9,6 +9,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DBServiceUserPassword {
+    /**
+     * Returns an array with the password in hashed format(MD5) and the plaintext password to be compared with the submitted password.
+     * This is UNSECURE!!!
+     * @param birthdayNumber is used to find the correct password associated with the customer with the given birthdaynumber.
+     * @return an Array with the hashed password and the password in plain text.
+     */
     public static String[] getPassword(String birthdayNumber) {
         DBServiceConnection.makeConnection();
 

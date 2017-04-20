@@ -39,6 +39,7 @@ public class DBConnector {
         try {
             JdbcPooledConnectionSource connectionSource =
                     new JdbcPooledConnectionSource(databaseUrl, user, password);
+            //Makes the connectionsource close automaticly after 5 minutes.
             connectionSource.setMaxConnectionAgeMillis(5 * 60 * 1000);
             return connectionSource;
         } catch (Exception e) {

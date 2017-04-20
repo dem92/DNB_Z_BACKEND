@@ -12,6 +12,11 @@ import java.util.Random;
 
 public class DBServiceRecurringTransfer {
 
+    /**
+     * Returns all the recurring transfers associated with the account with the specified accountnumber in the database.
+     * @param accountNumber is the number needed to retrieve the Account-object from the DB.
+     * @return a list with all the RecurringTransfers.
+     */
     public static List<RecurringTransfer> getAllRecurringTransfersForAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
         try {
@@ -25,6 +30,16 @@ public class DBServiceRecurringTransfer {
         return null;
     }
 
+    /**
+     * Creates a recurringtransfer from an account to another.
+     * @param sendingAccount is the accountNumber of the sendingaccount.
+     * @param receivingAccount is the accountnumber for the receivingaccount.
+     * @param kroner is the amount of kroner being transfered.
+     * @param oere is the amount of oere being transfered.
+     * @param message is the message associated with the recurring transfer.
+     * @param interval determines how often the transfer is going to happend.
+     * @param endDate is the date that stops this recurring transfer.
+     */
     public static void addRecurringTransfer(String sendingAccount, String receivingAccount, BigInteger kroner, int oere, String message, String interval, long endDate) {
         DBServiceConnection.makeConnection();
 
