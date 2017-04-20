@@ -75,7 +75,6 @@ public class DBServiceSavingsTargets {
         }
         return false;
     }
-// ---------------------------------- Some changes
 
     public static SavingsTargets addToTarget(SavingsTargets savingsTarget, BigInteger kroner, int oere) {
         if (validateInput(kroner, oere)) {
@@ -140,5 +139,61 @@ public class DBServiceSavingsTargets {
         savingsTargets.setSavedKroner(savingsTargets.getSavedKroner().subtract(BigInteger.ONE));
         savingsTargets.setSavedOere(savingsTargets.getSavedOere() + 100);
         return savingsTargets;
+    }
+
+    public static boolean checkIfTargetIsDone(SavingsTargets savingsTarget){
+
+        //Checks if the savingstarget has more than or the same kroner/oere compared to the goal
+        if(savingsTarget.getSavedKroner().compareTo(savingsTarget.getGoalKroner()) >= 0 && savingsTarget.getSavedOere() >= savingsTarget.getGoalOere()){
+            return true;
+        }
+
+        //Checks if the savingstarget has more kroner and less oere than its goals
+        else if(savingsTarget.getSavedKroner().compareTo(savingsTarget.getGoalKroner()) > 0 && savingsTarget.getSavedOere() < savingsTarget.getGoalOere()){
+            subtractOneKroneAndAdd100OereToSavingsTargets(savingsTarget);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * This method sets the "isDone"-parameter in a savingstargets to done.
+     * Returns true if the update in the database is complete.
+     *
+     * @param savingsTargets is a savingstargets-object.
+     * @return boolean
+     */
+    public static boolean targetIsDone(SavingsTargets savingsTargets){
+        savingsTargets.setDone(true);
+        return updateSavingsTarget(savingsTargets);
+    }
+
+    /**
+     * Gets the overflowing kroner when comparing the goal to the saved kroner on the savingstarget.
+     *
+     * @param savingsTargets is used to check the goal to the actually saved kroner
+     * @return Biginteger
+     */
+    public static BigInteger getOverflowingKronerOfDoneSavingsTarget(SavingsTargets savingsTargets){
+        if(savingsTargets.getGoalKroner().compareTo(savingsTargets.getSavedKroner()) < 0){
+            return savingsTargets.getSavedKroner().subtract(savingsTargets.getGoalKroner());
+        }
+        return BigInteger.ZERO;
+    }
+
+    /**
+     * Gets the overflowing oere when comparing the goal to the saved oere one the savingstarget.
+     *
+     *
+     * @param savingsTargets
+     * @return Integer
+     */
+    public static int getOverflowingOereOfDoneSavingsTarget(SavingsTargets savingsTargets){
+        if(savingsTargets.getGoalOere() < savingsTargets.getSavedOere()){
+            return savingsTargets.getSavedOere() - savingsTargets.getGoalOere();
+        }
+        return 0;
+
     }
 }
