@@ -27,6 +27,11 @@ public class DBServiceSendMoney {
         DBServiceConnection.makeConnection();
         SavingsTargets savingsTarget = getSavingsTarget(savingTargetId);
         Account account = getAccount(accountNumber);
+
+        if (savingsTarget == null || account == null) {
+            return false;
+        }
+
         boolean hasMoney = false;
 
         if (ValidateInput.validateInput(kroner, oere) && savingsTarget.getSavedKroner().subtract(kroner).compareTo(BigInteger.ZERO) >= 0) {
@@ -69,6 +74,10 @@ public class DBServiceSendMoney {
         SavingsTargets savingsTarget = getSavingsTarget(savingsTargetId);
         Account account = getAccount(accountNumber);
         boolean hasMoney = false;
+
+        if(savingsTarget == null || account == null){
+            return false;
+        }
 
         if (ValidateInput.validateInput(kroner, oere) && account.getKroner().subtract(kroner).compareTo(BigInteger.ZERO) >= 0) {
             hasMoney = true;
@@ -125,10 +134,14 @@ public class DBServiceSendMoney {
     public static boolean sendMoneyBetweenAccounts(String accountNumber, String accountNumber2, BigInteger kroner, int oere) {
         DBServiceConnection.makeConnection();
         Account sending = DBServiceAccount.getAccount(accountNumber);
-        Account recieving = DBServiceAccount.getAccount(accountNumber2);
+        Account receiving = DBServiceAccount.getAccount(accountNumber2);
         boolean hasMoney = false;
 
-        if (sending.getAccountNumber().equals(recieving.getAccountNumber())) {
+        if (sending == null || receiving == null) {
+            return false;
+        }
+
+        if (sending.getAccountNumber().equals(receiving.getAccountNumber())) {
             return false;
         }
 
@@ -147,16 +160,16 @@ public class DBServiceSendMoney {
         if (hasMoney) {
             sending.setOere(sending.getOere() - oere);
             sending.setKroner(sending.getKroner().subtract(kroner));
-            recieving.setKroner(recieving.getKroner().add(kroner));
-            recieving.setOere(recieving.getOere() + oere);
-            if (recieving.getOere() > 99) {
-                recieving.setKroner(recieving.getKroner().add(BigInteger.ONE));
-                recieving.setOere(recieving.getOere() - 100);
+            receiving.setKroner(receiving.getKroner().add(kroner));
+            receiving.setOere(receiving.getOere() + oere);
+            if (receiving.getOere() > 99) {
+                receiving.setKroner(receiving.getKroner().add(BigInteger.ONE));
+                receiving.setOere(receiving.getOere() - 100);
             }
             try {
                 Dao<Account, String> accountDao = DaoManager.createDao(DBServiceConnection.connectionSource, Account.class);
                 accountDao.update(sending);
-                accountDao.update(recieving);
+                accountDao.update(receiving);
                 return true;
             } catch (SQLException e) {
                 e.printStackTrace();
