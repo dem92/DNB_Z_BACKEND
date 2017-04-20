@@ -13,6 +13,12 @@ import java.util.List;
 
 @Controller
 public class RequestMapCustomer {
+
+    /**
+     * This request map runs a method to get a customer
+     * @param customerId is a unique ID for a customer
+     * @return a Customer-object
+     */
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Customer getCustomer(@PathVariable(value = "id") int customerId) {
@@ -21,6 +27,10 @@ public class RequestMapCustomer {
         return customer;
     }
 
+    /**
+     * This request map runs a method that gets all customers
+     * @return a List<> of Customer-objects
+     */
     @RequestMapping(value = "/user/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Customer> getAllCustomers() {
@@ -29,6 +39,14 @@ public class RequestMapCustomer {
         return customers;
     }
 
+    /**
+     * This request map runs a method to create a new customer
+     * @param firstName is the firstname for the new customer
+     * @param surName is the surname for the new customer
+     * @param birthdaynumber is the social security number for the new customer
+     * @param email is the new customers email adress
+     * @return a boolean to see if the customer was successfully created
+     */
     @RequestMapping(value = "/newuser/{firstname}/{surname}/{email}/{birthdaynumber}", method = RequestMethod.GET)
     @ResponseBody
     public boolean createNewUser(
@@ -46,6 +64,12 @@ public class RequestMapCustomer {
 
     // -------------------    Oppdatere customer under denne streken   ---------------------
 
+    /**
+     * This request map runs a method that updates the customers surname
+     * @param customerId is a unique ID for the customer
+     * @param surname is a string for the new surname
+     * @return a boolean to see if the change was successful
+     */
     @RequestMapping(value = "/updateuser/{customerid}/surname/{surname}")
     @ResponseBody
     public boolean updateCustomerSurname(@PathVariable(value = "customerid") int customerId,
@@ -60,6 +84,12 @@ public class RequestMapCustomer {
         }
     }
 
+    /**
+     * This request map runs a method that updates the customers firstname
+     * @param customerId is a unique ID for the customer
+     * @param firstName is a string for the new firstname
+     * @return a boolean to see if the change was successful
+     */
     @RequestMapping(value = "/updateuser/{customerid}/firstname/{firstname}")
     @ResponseBody
     public boolean updateCustomerFirstName(@PathVariable(value = "customerid") int customerId,
@@ -74,6 +104,12 @@ public class RequestMapCustomer {
         }
     }
 
+    /**
+     * This request map runs a method that updates the customers address
+     * @param customerId is a unique ID for the customer
+     * @param address is a string for the new address
+     * @return a boolean to see if the change was successful
+     */
     @RequestMapping(value = "/updateuser/{customerid}/address/{address}")
     @ResponseBody
     public boolean updateCustomerAddress(@PathVariable(value = "customerid") int customerId,
@@ -88,6 +124,12 @@ public class RequestMapCustomer {
         }
     }
 
+    /**
+     * This request map runs a method that updates the customers postal code
+     * @param customerId is a unique ID for the customer
+     * @param postalCode is an int for the new postal code
+     * @return a boolean to see if the change was successful
+     */
     @RequestMapping(value = "/updateuser/{customerid}/postalcode/{postalcode}")
     @ResponseBody
     public boolean updateCustomerPostalCode(@PathVariable(value = "customerid") int customerId,
@@ -102,6 +144,12 @@ public class RequestMapCustomer {
         }
     }
 
+    /**
+     * This request map runs a method that updates the customers email address
+     * @param customerId is a unique ID for the customer
+     * @param email is a string for the new email address
+     * @return a boolean to see if the change was successful
+     */
     @RequestMapping(value = "/updateuser/{customerid}/email/{email}")
     @ResponseBody
     public boolean updateCustomerEmail(@PathVariable(value = "customerid") int customerId,
@@ -116,6 +164,12 @@ public class RequestMapCustomer {
         }
     }
 
+    /**
+     * This request map runs a method that updates the customers phone number
+     * @param customerId is a unique ID for the customer
+     * @param phone is an int for the new phone number
+     * @return a boolean to see if the change was successful
+     */
     @RequestMapping(value = "/updateuser/{customerid}/phonenumber/{phone}")
     @ResponseBody
     public boolean updateCustomerPhone(@PathVariable(value = "customerid") int customerId,
@@ -130,6 +184,11 @@ public class RequestMapCustomer {
         }
     }
 
+    /**
+     * This request map runs a method that deletes a customer from the database
+     * @param customerId is a unique ID for the customer
+     * @return a boolean to see if the customer was successfully deleted
+     */
     @RequestMapping(value = "/deleteuser/{customerid}")
     @ResponseBody
     public boolean deleteCustomer(@PathVariable(value = "customerid") int customerId) {

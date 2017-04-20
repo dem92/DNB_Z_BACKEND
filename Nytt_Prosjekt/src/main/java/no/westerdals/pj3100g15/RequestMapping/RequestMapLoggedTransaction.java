@@ -1,6 +1,5 @@
 package no.westerdals.pj3100g15.RequestMapping;
 
-import no.westerdals.pj3100g15.DBService.DBServiceConnection;
 import no.westerdals.pj3100g15.DBService.DBServiceLoggedTransaction;
 import no.westerdals.pj3100g15.ORM.LoggedTransaction;
 import org.springframework.stereotype.Controller;
@@ -17,6 +16,11 @@ import java.util.stream.Collectors;
 @Controller
 public class RequestMapLoggedTransaction {
 
+    /**
+     * This request map runs a method that gets all transfers between a customers own accounts
+     * @param accountNumber is the account number for an account
+     * @return a List<> of LoggedTransactions marked as "transfer" in the transaction type-column in the database
+     */
     @RequestMapping(value = "/{accountNumber}/transfer")
     @ResponseBody
     public List<LoggedTransaction> getTransferFromAccount(
@@ -31,6 +35,11 @@ public class RequestMapLoggedTransaction {
         return transfers;
     }
 
+    /**
+     * This request map runs a method that gets all card transactions from a customers account
+     * @param accountNumber is the account number for an account
+     * @return a List<> of LoggedTransactions marked as "card" in the transaction type-column in the database
+     */
     @RequestMapping(value = "/{accountNumber}/card")
     @ResponseBody
     public List<LoggedTransaction> getCardFromAccount(
@@ -45,7 +54,11 @@ public class RequestMapLoggedTransaction {
         return cards;
     }
 
-
+    /**
+     * This request map runs a method that gets all payments from a customers account
+     * @param accountNumber is the account number for an account
+     * @return a List<> of LoggedTransactions marked as "payment" in the transaction type-column in the database
+     */
     @RequestMapping(value = "/{accountNumber}/payment")
     @ResponseBody
     public List<LoggedTransaction> getPaymentFromAccount(
@@ -60,6 +73,11 @@ public class RequestMapLoggedTransaction {
         return payments;
     }
 
+    /**
+     * This request map runs a method that gets all transactions from a customers account
+     * @param accountNumber is the account number for an account
+     * @return a List<> of all LoggedTransactions for an account
+     */
     @RequestMapping(value = "/{accountNumber}/all", method = RequestMethod.GET)
     @ResponseBody
     public List<LoggedTransaction> getAllLoggedTransactionsFromAccount(

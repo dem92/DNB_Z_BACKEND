@@ -14,6 +14,18 @@ import java.math.BigInteger;
 @Controller
 public class RequestMapSendMoney {
 
+    /**
+     * This request map runs a method for sending money
+     * @param message is a string with either a message or a KID-number
+     * @param accountNumber is the account number for the senders account
+     * @param accountNumber2 is the account number for the recievers account
+     * @param kroner is the amount (kroner) being sent
+     * @param oere is the amount (øre) being sent
+     * @param recurring is a boolean to specify if it's a recurring transfer (true) or just a one-time-transfer (false)
+     * @param interval if the payment is a recurring transfer you can specify how often it should occur
+     * @param endDate if the payment is a recurring transfer you can specify the date for when it should stop
+     * @return a boolean to see if the transfer was successful
+     */
     @RequestMapping(value = "/sendmoney/{message}/{sendersAccount}/{recieversAccount}/{kroner}/{oere}/{recurring}/{interval}/{endDate}", method = RequestMethod.GET)
     @ResponseBody
     public boolean sendMoney(
