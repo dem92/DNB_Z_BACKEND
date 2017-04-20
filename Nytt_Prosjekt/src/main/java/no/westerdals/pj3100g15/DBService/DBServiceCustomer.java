@@ -124,6 +124,14 @@ public class DBServiceCustomer {
         return updateCustomer(customer);
     }
 
+    /**
+     *
+     * This method is used to update the surname of a customer in the database.
+     *
+     * @param customerId is used to decide which user is retrieved from the database.
+     * @param surname is the new surname.
+     * @return boolean
+     */
     public static boolean updateSurname(int customerId, String surname) {
         DBServiceConnection.makeConnection();
         Customer customer = getCustomer(customerId);
@@ -131,6 +139,14 @@ public class DBServiceCustomer {
         return updateCustomer(customer);
     }
 
+    /**
+     *
+     * This method is used to update the address of a customer in the database.
+     *
+     * @param customerId is used to decide which user is retrieved from the database.
+     * @param address is the new address.
+     * @return boolean
+     */
     public static boolean updateAddress(int customerId, String address) {
         DBServiceConnection.makeConnection();
         Customer customer = getCustomer(customerId);
@@ -138,6 +154,14 @@ public class DBServiceCustomer {
         return updateCustomer(customer);
     }
 
+    /**
+     *
+     * This method is used to update the postalcode of a customer in the database.
+     *
+     * @param customerId is used to decide which user is retrieved from the database.
+     * @param postalcode is the new postalcode.
+     * @return boolean
+     */
     public static boolean updatePostalcode(int customerId, int postalcode) {
         DBServiceConnection.makeConnection();
         Customer customer = getCustomer(customerId);
@@ -145,6 +169,14 @@ public class DBServiceCustomer {
         return updateCustomer(customer);
     }
 
+    /**
+     *
+     * This method is used to update the mail of a customer in the database.
+     *
+     * @param customerId is used to decide which user is retrieved from the database.
+     * @param mail is the new mail.
+     * @return boolean
+     */
     public static boolean updateEmail(int customerId, String mail) {
         DBServiceConnection.makeConnection();
         Customer customer = getCustomer(customerId);
@@ -152,6 +184,14 @@ public class DBServiceCustomer {
         return updateCustomer(customer);
     }
 
+    /**
+     *
+     * This method is used to update the phonenumber of a customer in the database.
+     *
+     * @param customerId is used to decide which user is retrieved from the database.
+     * @param phoneNumber is the new phonenumber.
+     * @return boolean
+     */
     public static boolean updatePhone(int customerId, int phoneNumber) {
         DBServiceConnection.makeConnection();
         Customer customer = getCustomer(customerId);
@@ -159,6 +199,12 @@ public class DBServiceCustomer {
         return updateCustomer(customer);
     }
 
+    /**
+     * Is used to delete a customer in the database.
+     *
+     * @param customerId specifies the customer in the database.
+     * @return boolean
+     */
     public static boolean deleteUser(int customerId) {
         DBServiceConnection.makeConnection();
         Customer customer = getCustomer(customerId);
@@ -173,6 +219,12 @@ public class DBServiceCustomer {
         return false;
     }
 
+    /**
+     * Can be used to check if a user exists in the database.
+     *
+     * @param customerId specifies which customer.
+     * @return boolean
+     */
     public static boolean checkCustomer(int customerId) {
         DBServiceConnection.makeConnection();
         try {
