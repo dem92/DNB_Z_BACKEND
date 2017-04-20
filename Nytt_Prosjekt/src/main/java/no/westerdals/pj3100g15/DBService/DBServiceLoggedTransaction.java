@@ -10,6 +10,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DBServiceLoggedTransaction {
+
+    /**
+     * If you want to retrieve all the transactions a user have, you can use this method...
+     * @param accountNumber specifies which account.
+     * @return a list with LoggedTransaction-objects
+     */
     public static List<LoggedTransaction> getAllLoggedTransactionsFromAccount(String accountNumber) {
         DBServiceConnection.makeConnection();
         try {
