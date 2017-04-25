@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2017. Group 15, PJ-3100, Westerdals Oslo ACT
+ */
+
 package no.westerdals.pj3100g15.DBService;
 
 import com.j256.ormlite.jdbc.JdbcConnectionSource;

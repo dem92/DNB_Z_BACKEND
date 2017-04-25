@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2017. Group 15, PJ-3100, Westerdals Oslo ACT
+ */
+
 //
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
