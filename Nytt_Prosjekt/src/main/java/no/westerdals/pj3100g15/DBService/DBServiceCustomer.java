@@ -48,10 +48,6 @@ public class DBServiceCustomer {
         try {
             Dao<Customer, Integer> customerDao = DaoManager.createDao(DBServiceConnection.connectionSource, Customer.class);
             List<Customer> customer = customerDao.queryForEq("Kundenummer", customerId);
-
-            // if (customer.size() != 1)
-            //     return null;
-
             return customer.get(0);
         } catch (SQLException e) {
             WriteLogg.writeLogg(e);
@@ -213,27 +209,6 @@ public class DBServiceCustomer {
         } catch (SQLException e) {
             WriteLogg.writeLogg(e);
             e.printStackTrace();
-        }
-        return false;
-    }
-
-    /**
-     * Can be used to check if a user exists in the database.
-     *
-     * @param customerId specifies which customer.
-     * @return boolean
-     */
-    public static boolean checkCustomer(int customerId) {
-        DBServiceConnection.makeConnection();
-        try {
-            Dao<Customer, Integer> customerDao = DaoManager.createDao(DBServiceConnection.connectionSource, Customer.class);
-            if (customerDao.idExists(customerId)) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            WriteLogg.writeLogg(e);
-            return false;
         }
         return false;
     }
