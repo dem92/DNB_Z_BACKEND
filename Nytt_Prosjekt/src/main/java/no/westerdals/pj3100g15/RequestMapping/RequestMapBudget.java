@@ -29,7 +29,7 @@ public class RequestMapBudget {
     @RequestMapping(value = "/newbudget/{userid}", method = RequestMethod.GET)
     @ResponseBody
     public boolean createBudget(@PathVariable(value = "userid") int userId) {
-        return createBudget(userId);
+        return DBServiceBudget.createBudget(userId);
     }
 
     /**
@@ -41,7 +41,7 @@ public class RequestMapBudget {
     @RequestMapping(value = "/budget/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Budget getBudget(@PathVariable(value = "id") int budgetId) {
-        return getBudget(budgetId);
+        return DBServiceBudget.getBudget(budgetId);
     }
 
     /**
@@ -52,7 +52,7 @@ public class RequestMapBudget {
     @RequestMapping(value = "/budget/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Budget> getAllBudgets() {
-        return getAllBudgets();
+        return DBServiceBudget.getAllBudgets();
     }
 
     /**
@@ -64,7 +64,7 @@ public class RequestMapBudget {
     @RequestMapping(value = "/deletebudget/{id}", method = RequestMethod.GET)
     @ResponseBody
     public boolean deleteBudget(@PathVariable(value = "id") int budgetId) {
-        return deleteBudget(budgetId);
+        return DBServiceBudget.deleteBudget(budgetId);
     }
 
     /**
@@ -81,7 +81,7 @@ public class RequestMapBudget {
             @PathVariable(value = "budgetid") int budgetId,
             @PathVariable(value = "name") String category,
             @PathVariable(value = "goal") int goal) {
-        return createBudgetCategory(budgetId, category, goal);
+        return DBServiceBudget.createBudgetCategory(budgetId, category, goal);
     }
 
     /**
@@ -93,7 +93,7 @@ public class RequestMapBudget {
     @RequestMapping(value = "/budgetcategory/{id}")
     @ResponseBody
     public BudgetCategory getBudgetCategory(@PathVariable(value = "id") int id) {
-        return getBudgetCategory(id);
+        return DBServiceBudget.getBudgetCategory(id);
     }
 
     /**
@@ -119,7 +119,7 @@ public class RequestMapBudget {
     @ResponseBody
     public boolean updateCategoryName(@PathVariable(value = "id") int id,
                                       @PathVariable(value = "name") String name) {
-        return updateCategoryName(id, name);
+        return DBServiceBudget.updateCategoryName(id, name);
     }
 
     /**
@@ -133,7 +133,7 @@ public class RequestMapBudget {
     @ResponseBody
     public boolean updateCategoryGoal(@PathVariable(value = "id") int id,
                                       @PathVariable(value = "goal") int goal) {
-        return updateCategoryGoal(id, goal);
+        return DBServiceBudget.updateCategoryGoal(id, goal);
     }
 
     /**
@@ -147,7 +147,7 @@ public class RequestMapBudget {
     @ResponseBody
     public boolean updateCategoryUsed(@PathVariable(value = "id") int id,
                                       @PathVariable(value = "used") int used) {
-        return updateCategoryUsed(id, used);
+        return DBServiceBudget.updateCategoryUsed(id, used);
     }
 
     /**
@@ -159,6 +159,6 @@ public class RequestMapBudget {
     @RequestMapping(value = "/deletebudgetitem/{id}", method = RequestMethod.GET)
     @ResponseBody
     public boolean deleteBudgetCategory(@PathVariable(value = "id") int categoryId) {
-        return deleteBudgetCategory(categoryId);
+        return DBServiceBudget.deleteBudgetCategory(categoryId);
     }
 }
