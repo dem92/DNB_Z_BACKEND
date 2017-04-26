@@ -20,16 +20,4 @@ public class DBServiceConnection {
         if (connectionSource == null)
             connectionSource = DBConnector.makeConnection();
     }
-
-    /**
-     * This method is not needed because the connections to the database is timed out.
-     */
-    public static void closeConnection() {
-        try {
-            connectionSource.close();
-        } catch (IOException e) {
-            WriteLogg.writeLogg(e);
-            e.printStackTrace();
-        }
-    }
 }
