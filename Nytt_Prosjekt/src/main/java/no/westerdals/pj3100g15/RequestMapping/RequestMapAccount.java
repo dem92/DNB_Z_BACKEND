@@ -5,7 +5,6 @@
 package no.westerdals.pj3100g15.RequestMapping;
 
 import no.westerdals.pj3100g15.DBService.DBServiceAccount;
-import no.westerdals.pj3100g15.DBService.DBServiceConnection;
 import no.westerdals.pj3100g15.ORM.Account;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-
-import static no.westerdals.pj3100g15.DBService.DBServiceAccount.*;
 
 @Controller
 public class RequestMapAccount {
@@ -28,7 +25,7 @@ public class RequestMapAccount {
     @RequestMapping(value = "/user/account/{accountID}", method = RequestMethod.GET)
     @ResponseBody
     public Account getAccount(@PathVariable(value = "accountID") String account) {
-        return getAccount(account);
+        return DBServiceAccount.getAccount(account);
     }
 
     /**
@@ -39,7 +36,7 @@ public class RequestMapAccount {
     @RequestMapping(value = "/user/{id}/account/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Account> getAccounts(@PathVariable(value = "id") int customerId) {
-        return getCustomerAccounts(customerId);
+        return DBServiceAccount.getCustomerAccounts(customerId);
     }
 
     /**
@@ -49,7 +46,7 @@ public class RequestMapAccount {
     @RequestMapping(value = "/user/all/account/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Account> getAllAccounts() {
-        return getAllAccounts();
+        return DBServiceAccount.getAllAccounts();
     }
 
     /**
@@ -63,7 +60,7 @@ public class RequestMapAccount {
     public boolean createAccount(
             @PathVariable(value = "id") int customerId,
             @PathVariable(value = "accounttype") String accountType) {
-        return addAccount(customerId, accountType);
+        return DBServiceAccount.addAccount(customerId, accountType);
 
     }
 
@@ -77,7 +74,7 @@ public class RequestMapAccount {
     @ResponseBody
     public boolean updateAccountMain(@PathVariable(value = "accountid") String accountId,
                                      @PathVariable(value = "main") int main) {
-       return updateMain(accountId, main);
+       return DBServiceAccount.updateMain(accountId, main);
     }
 
     /**
@@ -90,7 +87,7 @@ public class RequestMapAccount {
     @ResponseBody
     public boolean updateAccountName(@PathVariable(value = "accountid") String accountId,
                                      @PathVariable(value = "accountname") String accountname) {
-        return updateAccountname(accountId, accountname);
+        return DBServiceAccount.updateAccountname(accountId, accountname);
     }
 
     /**
@@ -101,6 +98,6 @@ public class RequestMapAccount {
     @RequestMapping(value = "/deleteaccount/{accountid}")
     @ResponseBody
     public boolean deleteAccount(@PathVariable(value = "accountid") String accountId) {
-        return deleteAccount(accountId);
+        return DBServiceAccount.deleteAccount(accountId);
     }
 }

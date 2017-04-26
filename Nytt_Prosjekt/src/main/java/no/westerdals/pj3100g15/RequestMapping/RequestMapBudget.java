@@ -105,7 +105,7 @@ public class RequestMapBudget {
     @RequestMapping(value = "/budgetcategory/all/{id}")
     @ResponseBody
     public List<BudgetCategory> getAllBudgetCategories(@PathVariable(value = "id") int id) {
-        return getAllCategories(id);
+        return DBServiceBudget.getAllCategories(id);
     }
 
     /**
