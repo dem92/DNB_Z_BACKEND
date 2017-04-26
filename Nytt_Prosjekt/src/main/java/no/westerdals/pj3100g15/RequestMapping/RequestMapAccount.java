@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+import static no.westerdals.pj3100g15.DBService.DBServiceAccount.*;
+
 @Controller
 public class RequestMapAccount {
 
@@ -26,9 +28,7 @@ public class RequestMapAccount {
     @RequestMapping(value = "/user/account/{accountID}", method = RequestMethod.GET)
     @ResponseBody
     public Account getAccount(@PathVariable(value = "accountID") String account) {
-        Account account1 = DBServiceAccount.getAccount(account);
-        //DBServiceConnection.closeConnection();
-        return account1;
+        return getAccount(account);
     }
 
     /**
@@ -39,9 +39,7 @@ public class RequestMapAccount {
     @RequestMapping(value = "/user/{id}/account/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Account> getAccounts(@PathVariable(value = "id") int customerId) {
-        List<Account> accounts = DBServiceAccount.getCustomerAccounts(customerId);
-        //DBServiceConnection.closeConnection();
-        return accounts;
+        return getCustomerAccounts(customerId);
     }
 
     /**
@@ -51,9 +49,7 @@ public class RequestMapAccount {
     @RequestMapping(value = "/user/all/account/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Account> getAllAccounts() {
-        List<Account> accounts = DBServiceAccount.getAllAccounts();
-        //DBServiceConnection.closeConnection();
-        return accounts;
+        return getAllAccounts();
     }
 
     /**
@@ -67,15 +63,9 @@ public class RequestMapAccount {
     public boolean createAccount(
             @PathVariable(value = "id") int customerId,
             @PathVariable(value = "accounttype") String accountType) {
-        if (DBServiceAccount.addAccount(customerId, accountType)) {
-            //DBServiceConnection.closeConnection();
-            return true;
-        }
-        DBServiceConnection.closeConnection();
-        return false;
-    }
+        return addAccount(customerId, accountType);
 
-    // --------------------    oppdatering av konto under denne streken    -------------------
+    }
 
     /**
      * This request map runs a method to update whether an account is a main account or not
@@ -87,14 +77,7 @@ public class RequestMapAccount {
     @ResponseBody
     public boolean updateAccountMain(@PathVariable(value = "accountid") String accountId,
                                      @PathVariable(value = "main") int main) {
-
-        if (DBServiceAccount.updateMain(accountId, main)) {
-            //DBServiceConnection.closeConnection();
-            return true;
-        } else {
-            //DBServiceConnection.closeConnection();
-            return false;
-        }
+       return updateMain(accountId, main);
     }
 
     /**
@@ -107,14 +90,7 @@ public class RequestMapAccount {
     @ResponseBody
     public boolean updateAccountName(@PathVariable(value = "accountid") String accountId,
                                      @PathVariable(value = "accountname") String accountname) {
-
-        if (DBServiceAccount.updateAccountname(accountId, accountname)) {
-            //DBServiceConnection.closeConnection();
-            return true;
-        } else {
-            //DBServiceConnection.closeConnection();
-            return false;
-        }
+        return updateAccountname(accountId, accountname);
     }
 
     /**
@@ -125,11 +101,6 @@ public class RequestMapAccount {
     @RequestMapping(value = "/deleteaccount/{accountid}")
     @ResponseBody
     public boolean deleteAccount(@PathVariable(value = "accountid") String accountId) {
-        if (DBServiceAccount.deleteAccount(accountId)) {
-            //DBServiceConnection.closeConnection();
-            return true;
-        }
-        //DBServiceConnection.closeConnection();
-        return false;
+        return deleteAccount(accountId);
     }
 }
