@@ -5,7 +5,6 @@
 package no.westerdals.pj3100g15.RequestMapping;
 
 import no.westerdals.pj3100g15.DBService.DBServiceBudget;
-import no.westerdals.pj3100g15.DBService.DBServiceConnection;
 import no.westerdals.pj3100g15.ORM.Budget;
 import no.westerdals.pj3100g15.ORM.BudgetCategory;
 import org.springframework.stereotype.Controller;
