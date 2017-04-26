@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-import static no.westerdals.pj3100g15.DBService.DBServiceBudget.getAllCategories;
-
 @Controller
 public class RequestMapBudget {
     /**
