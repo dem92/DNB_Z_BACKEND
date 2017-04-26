@@ -28,7 +28,7 @@ public class RequestMapRecurringTransfers {
     @ResponseBody
     public List<RecurringTransfer> getAllRecurringTransfersForAccount(
             @PathVariable(value = "accountNumber") String accountNumber) {
-        return getAllRecurringTransfersForAccount(accountNumber);
+        return DBServiceRecurringTransfer.getAllRecurringTransfersForAccount(accountNumber);
     }
 
     /**
