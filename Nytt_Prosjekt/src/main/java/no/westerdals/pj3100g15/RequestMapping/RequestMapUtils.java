@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RequestMapUtils {
 
     /**
-     * This request map runs a method that checks if there is an open connection to the database
+     * This request map just returns true. It is just a short URL to check if the server is still running.
      * @return a boolean that returns true if the connection is open or false if it's closed
      */
     @RequestMapping(value = "/check")
