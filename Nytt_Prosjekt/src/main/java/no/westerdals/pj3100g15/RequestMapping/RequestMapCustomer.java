@@ -4,7 +4,6 @@
 
 package no.westerdals.pj3100g15.RequestMapping;
 
-import no.westerdals.pj3100g15.DBService.DBServiceConnection;
 import no.westerdals.pj3100g15.DBService.DBServiceCustomer;
 import no.westerdals.pj3100g15.ORM.Customer;
 import org.springframework.stereotype.Controller;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-
-import static no.westerdals.pj3100g15.DBService.DBServiceCustomer.*;
 
 @Controller
 public class RequestMapCustomer {
@@ -29,7 +26,7 @@ public class RequestMapCustomer {
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Customer getCustomer(@PathVariable(value = "id") int customerId) {
-        return getCustomer(customerId);
+        return DBServiceCustomer.getCustomer(customerId);
     }
 
     /**
@@ -40,7 +37,7 @@ public class RequestMapCustomer {
     @RequestMapping(value = "/user/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Customer> getAllCustomers() {
-        return getAllCustomers();
+        return DBServiceCustomer.getAllCustomers();
     }
 
     /**
@@ -59,7 +56,7 @@ public class RequestMapCustomer {
             @PathVariable(value = "surname") String surName,
             @PathVariable(value = "birthdaynumber") String birthdaynumber,
             @PathVariable(value = "email") String email) {
-        return addCustomer(firstName, surName, birthdaynumber, email);
+        return DBServiceCustomer.addCustomer(firstName, surName, birthdaynumber, email);
     }
 
     /**
@@ -73,7 +70,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean updateCustomerSurname(@PathVariable(value = "customerid") int customerId,
                                          @PathVariable(value = "surname") String surname) {
-        return updateSurname(customerId, surname);
+        return DBServiceCustomer.updateSurname(customerId, surname);
     }
 
     /**
@@ -87,7 +84,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean updateCustomerFirstName(@PathVariable(value = "customerid") int customerId,
                                            @PathVariable(value = "firstname") String firstName) {
-        return updateFirstname(customerId, firstName);
+        return DBServiceCustomer.updateFirstname(customerId, firstName);
     }
 
     /**
@@ -101,7 +98,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean updateCustomerAddress(@PathVariable(value = "customerid") int customerId,
                                          @PathVariable(value = "address") String address) {
-        return updateAddress(customerId, address);
+        return DBServiceCustomer.updateAddress(customerId, address);
     }
 
     /**
@@ -115,7 +112,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean updateCustomerPostalCode(@PathVariable(value = "customerid") int customerId,
                                             @PathVariable(value = "postalcode") int postalCode) {
-        return updatePostalcode(customerId, postalCode);
+        return DBServiceCustomer.updatePostalcode(customerId, postalCode);
     }
 
     /**
@@ -129,7 +126,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean updateCustomerEmail(@PathVariable(value = "customerid") int customerId,
                                        @PathVariable(value = "email") String email) {
-        return updateEmail(customerId, email);
+        return DBServiceCustomer.updateEmail(customerId, email);
     }
 
     /**
@@ -143,7 +140,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean updateCustomerPhone(@PathVariable(value = "customerid") int customerId,
                                        @PathVariable(value = "phone") int phone) {
-        return updatePhone(customerId, phone);
+        return DBServiceCustomer.updatePhone(customerId, phone);
     }
 
     /**
@@ -155,6 +152,6 @@ public class RequestMapCustomer {
     @RequestMapping(value = "/deleteuser/{customerid}")
     @ResponseBody
     public boolean deleteCustomer(@PathVariable(value = "customerid") int customerId) {
-        return deleteUser(customerId);
+        return DBServiceCustomer.deleteUser(customerId);
     }
 }
