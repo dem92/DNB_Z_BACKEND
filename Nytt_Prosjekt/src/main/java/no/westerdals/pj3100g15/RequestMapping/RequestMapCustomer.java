@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+import static no.westerdals.pj3100g15.DBService.DBServiceCustomer.*;
+
 @Controller
 public class RequestMapCustomer {
 
@@ -27,7 +29,7 @@ public class RequestMapCustomer {
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Customer getCustomer(@PathVariable(value = "id") int customerId) {
-        return DBServiceCustomer.getCustomer(customerId);
+        return getCustomer(customerId);
     }
 
     /**
@@ -38,7 +40,7 @@ public class RequestMapCustomer {
     @RequestMapping(value = "/user/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Customer> getAllCustomers() {
-        return DBServiceCustomer.getAllCustomers();
+        return getAllCustomers();
     }
 
     /**
@@ -57,7 +59,7 @@ public class RequestMapCustomer {
             @PathVariable(value = "surname") String surName,
             @PathVariable(value = "birthdaynumber") String birthdaynumber,
             @PathVariable(value = "email") String email) {
-        return DBServiceCustomer.addCustomer(firstName, surName, birthdaynumber, email);
+        return addCustomer(firstName, surName, birthdaynumber, email);
     }
 
     /**
@@ -71,7 +73,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean updateCustomerSurname(@PathVariable(value = "customerid") int customerId,
                                          @PathVariable(value = "surname") String surname) {
-        return DBServiceCustomer.updateSurname(customerId, surname);
+        return updateSurname(customerId, surname);
     }
 
     /**
@@ -85,7 +87,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean updateCustomerFirstName(@PathVariable(value = "customerid") int customerId,
                                            @PathVariable(value = "firstname") String firstName) {
-        return DBServiceCustomer.updateFirstname(customerId, firstName);
+        return updateFirstname(customerId, firstName);
     }
 
     /**
@@ -99,7 +101,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean updateCustomerAddress(@PathVariable(value = "customerid") int customerId,
                                          @PathVariable(value = "address") String address) {
-        return DBServiceCustomer.updateAddress(customerId, address);
+        return updateAddress(customerId, address);
     }
 
     /**
@@ -113,7 +115,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean updateCustomerPostalCode(@PathVariable(value = "customerid") int customerId,
                                             @PathVariable(value = "postalcode") int postalCode) {
-        return DBServiceCustomer.updatePostalcode(customerId, postalCode);
+        return updatePostalcode(customerId, postalCode);
     }
 
     /**
@@ -127,7 +129,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean updateCustomerEmail(@PathVariable(value = "customerid") int customerId,
                                        @PathVariable(value = "email") String email) {
-        return DBServiceCustomer.updateEmail(customerId, email);
+        return updateEmail(customerId, email);
     }
 
     /**
@@ -141,7 +143,7 @@ public class RequestMapCustomer {
     @ResponseBody
     public boolean updateCustomerPhone(@PathVariable(value = "customerid") int customerId,
                                        @PathVariable(value = "phone") int phone) {
-        return DBServiceCustomer.updatePhone(customerId, phone);
+        return updatePhone(customerId, phone);
     }
 
     /**
@@ -153,6 +155,6 @@ public class RequestMapCustomer {
     @RequestMapping(value = "/deleteuser/{customerid}")
     @ResponseBody
     public boolean deleteCustomer(@PathVariable(value = "customerid") int customerId) {
-        return DBServiceCustomer.deleteUser(customerId);
+        return deleteUser(customerId);
     }
 }
